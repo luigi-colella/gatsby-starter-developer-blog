@@ -13,9 +13,13 @@ const Layout = ({ children }) => (
       query SiteTitleQuery {
         site {
           siteMetadata {
-            title,
-            description,
-            pages { home, about, archive }
+            title
+            description
+            pages {
+              home
+              about
+              archive
+            }
           }
         }
       }
@@ -27,9 +31,7 @@ const Layout = ({ children }) => (
           description={data.site.siteMetadata.description}
           links={data.site.siteMetadata.pages}
         />
-        <div className={container}>
-          {children}
-        </div>
+        <div className={container}>{children}</div>
       </>
     )}
   />

@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import React from 'react'
 import PropTypes from 'prop-types'
 /* App imports */
-import { container, title, list } from './header.module.less';
+import { container, title, list } from './header.module.less'
 
 const Header = ({ siteTitle, description, links }) => (
   <div className={container}>
@@ -13,25 +13,30 @@ const Header = ({ siteTitle, description, links }) => (
     </div>
     <div className={list}>
       <ul>
-        <li><Link to={links.home}>Home</Link></li>
-        <li><Link to={links.about}>About</Link></li>
-        <li><Link to={links.archive}>Archive</Link></li>
+        <li>
+          <Link to={links.home}>Home</Link>
+        </li>
+        <li>
+          <Link to={links.about}>About</Link>
+        </li>
+        <li>
+          <Link to={links.archive}>Archive</Link>
+        </li>
       </ul>
     </div>
   </div>
 )
 
-
 Header.propTypes = {
   siteTitle: PropTypes.string.isRequired,
   description: PropTypes.string,
-  links: PropTypes.object
+  links: PropTypes.object,
 }
 
 Header.defaultProps = {
   siteTitle: '',
   description: '',
-  links: {}
+  links: {},
 }
 
 export default Header

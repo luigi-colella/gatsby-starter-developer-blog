@@ -14,9 +14,9 @@ const IndexPage = () => (
           edges {
             node {
               frontmatter {
-                title,
-                image,
-                tags,
+                title
+                image
+                tags
                 date
               }
               excerpt
@@ -26,7 +26,7 @@ const IndexPage = () => (
       }
     `}
     render={data => {
-      const articles = data.allMarkdownRemark.edges.map(edge => edge.node);
+      const articles = data.allMarkdownRemark.edges.map(edge => edge.node)
       return (
         <Layout>
           <SEO title="Home" keywords={['gatsby', 'application', 'react']} />
@@ -49,9 +49,9 @@ const IndexPage = () => (
             </section>
           </div>
         </Layout>
-      );
+      )
     }}
-  ></StaticQuery>
+  />
 )
 
 export default IndexPage
