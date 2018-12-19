@@ -1,0 +1,34 @@
+@import '../style/variables.less';
+
+.post {
+    padding: @padding-medium;
+    margin: @margin-medium 0;
+    display: flex;
+    flex-direction: column;
+    color: @color-text-secondary;
+    h2 {
+        margin: @margin-small / 2 0;
+        color: @color-secondary;
+    }
+    p, label {
+        margin: 0;
+    }
+}
+
+.tags {
+    margin-top: @margin-small;
+    label {
+        margin-right: @margin-small;
+        &::before {
+            content: '{ ';
+        }
+        &::after {
+            content: ' }'
+        }
+        &:hover {
+            color: @color-secondary;
+            cursor: pointer;
+            transition: @transition-time color;
+        }
+    }
+}

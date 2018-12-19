@@ -1,0 +1,69 @@
+@import '../../style/variables';
+
+.container {
+    margin: 0 @margin-medium @margin-medium @margin-medium;
+    padding: @padding-medium;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid @color-text-secondary;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media @mobile {
+        flex-direction: column;
+    }
+    text-align: center;
+    color: @color-text-secondary;
+    h1 {
+        font-size: @font-size * 1.75;
+        margin: 0;
+        padding: 0 @padding-small;
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+    p {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.list {
+    ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        @media @mobile-small {
+            flex-direction: column;
+        }
+        li {
+            margin: 0 @margin-small;
+            a {
+                color: @color-text-secondary;
+                text-decoration: none;
+                text-transform: uppercase;
+                transition: @transition-time color;
+                &::before {
+                    content: '{ ';
+                    color: transparent;
+                }
+                &::after {
+                    content: ' }';
+                    color: transparent;
+                }
+                &:hover {
+                    color: @color-secondary;
+                    &::before, &::after {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
