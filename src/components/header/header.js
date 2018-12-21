@@ -3,15 +3,15 @@ import { Link } from 'gatsby'
 import React from 'react'
 import PropTypes from 'prop-types'
 /* App imports */
-import { container, title, list } from './header.module.less'
+import * as style from './header.module.less'
 
 const Header = ({ siteTitle, description, links }) => (
-  <div className={container}>
-    <div className={title}>
+  <div className={style.container}>
+    <div className={style.title}>
       <h1>{siteTitle}</h1>
       <p>{description}</p>
     </div>
-    <div className={list}>
+    <div className={style.list}>
       <ul>
         <li>
           <Link to={links.home}>Home</Link>

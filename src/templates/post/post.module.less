@@ -1,0 +1,35 @@
+@import '../../style/variables.less';
+
+.header {
+    padding: @padding-medium;
+    text-align: center;
+    color: @color-text-secondary;
+}
+
+.tags {
+    a {
+        text-decoration: none;
+        color: @color-text-secondary;
+        .link()
+    }
+    label {
+        margin-right: @margin-medium;
+    }
+}
+
+.content {
+    margin-top: @margin-medium;
+    padding: @padding-medium;
+    background-color: @color-text-secondary;
+    h1, h2 {
+        padding-bottom: @padding-small;
+        border-bottom: 1px solid @color-ternary;
+    }
+    code {
+        padding: @padding-small / 2;
+        background-color: @color-ternary-dark;
+    }
+    pre code {
+        line-height: @text-size-medium * 1.25;
+    }
+}

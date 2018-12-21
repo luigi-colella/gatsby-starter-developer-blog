@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 /* App imports */
+import Constants from '../../constants'
 import Header from '../header/header'
 import '../../style/global.less'
 import { container } from './layout.module.less'
@@ -15,11 +16,6 @@ const Layout = ({ children }) => (
           siteMetadata {
             title
             description
-            pages {
-              home
-              about
-              archive
-            }
           }
         }
       }
@@ -29,7 +25,7 @@ const Layout = ({ children }) => (
         <Header
           siteTitle={data.site.siteMetadata.title}
           description={data.site.siteMetadata.description}
-          links={data.site.siteMetadata.pages}
+          links={Constants.pages}
         />
         <div className={container}>{children}</div>
       </>

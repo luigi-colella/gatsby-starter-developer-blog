@@ -1,0 +1,31 @@
+@import '../../style/variables.less';
+
+.header {
+    text-align: center;
+    color: @color-text-secondary;
+}
+
+.content {
+    padding: @padding-small;
+    margin: @margin-small;
+    text-align: center;
+}
+
+.post {
+    padding: @padding-small;
+    margin: @margin-small @margin-small @margin-medium @margin-small;
+    color: @color-text-secondary;
+    h2 {
+        margin: @margin-small 0;
+        color: @color-secondary;
+    }
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    a {
+        .link()
+    }
+}

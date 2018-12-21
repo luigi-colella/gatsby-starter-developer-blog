@@ -1,10 +1,19 @@
 @import './variables.less';
 
+/* Font */
 @font-face {
     font-family: "Roboto";
     font-weight: normal;
-    src: url("./Roboto/Roboto-Regular.ttf") format("opentype");
+    src: url("./Roboto-Mono/RobotoMono-Regular.ttf") format("opentype");
 }
+
+@font-face {
+    font-family: "Roboto";
+    font-weight: bold;
+    src: url("./Roboto/Roboto-Light.ttf") format("opentype");
+}
+
+/* Basic elements */
 
 html, body, h1, p {
     font-family: "Roboto" !important;
@@ -14,4 +23,11 @@ body {
     background-color: @color-primary;
     background-image: @gradient-primary;
     margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 }

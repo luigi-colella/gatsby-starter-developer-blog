@@ -1,7 +1,8 @@
 ---
 title: "Test article 1"
 date: "2018-11-12"
-tags: ["animals", "Chicago", "zoos"]
+tags: ["animals", "Chicago", "zoos", "react"]
+path: "blog/test-article-1"
 ---
 
 # gatsby-cli

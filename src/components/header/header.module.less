@@ -48,21 +48,7 @@
                 color: @color-text-secondary;
                 text-decoration: none;
                 text-transform: uppercase;
-                transition: @transition-time color;
-                &::before {
-                    content: '{ ';
-                    color: transparent;
-                }
-                &::after {
-                    content: ' }';
-                    color: transparent;
-                }
-                &:hover {
-                    color: @color-secondary;
-                    &::before, &::after {
-                        color: inherit;
-                    }
-                }
+                .link()
             }
         }
     }

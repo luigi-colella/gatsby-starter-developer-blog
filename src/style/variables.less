@@ -1,7 +1,8 @@
 
 // Colors
-@white: #fff;
-@gray: #F8E9D5;
+@white: #f4f4f5;
+@gray: #adadad; 
+@gray-dark: #e0e0e6;
 @black: #333333;
 @blue: #0C2744;
 @blue-1: #031C34;
@@ -13,11 +14,13 @@
 @color-primary: @blue;
 @color-secondary: @red;
 @color-ternary: @gray;
+@color-ternary-dark: @gray-dark;
 @color-text-primary: @black;
 @color-text-secondary: @white;
 
 // Gradients
 @gradient-primary: linear-gradient(to bottom, #0f2027, @color-primary, #031c27);
+@gradient-secondary: linear-gradient(to bottom, #c31432, #240b36);
 
 // Device breakpoints
 @mobile-small: ~'only screen and (max-width : 480px)';
@@ -38,3 +41,31 @@
 
 // Transition
 @transition-time: .5s;
+
+// Text
+@text-size-medium: 1em;
+
+// Mixins
+
+.link {
+    text-decoration: none;
+    color: @color-text-secondary;
+    transition: @transition-time color;
+    &::before {
+        content: '{ ';
+        color: transparent;
+    }
+    &::after {
+        content: ' }';
+        color: transparent;
+    }
+    &:hover {
+        color: @color-secondary;
+        * {
+            cursor: pointer;
+        }
+        &::before, &::after {
+            color: @color-secondary;
+        }
+    }
+}
