@@ -13,6 +13,7 @@
     padding: @padding-medium;
     background-color: @color-text-secondary;
     color: @color-text-primary;
+    word-break: break-all;
     h1, h2 {
         padding-bottom: @padding-small;
         border-bottom: 1px solid @color-ternary;
@@ -21,7 +22,10 @@
         padding: @padding-small / 2;
         background-color: @color-ternary-dark;
     }
-    pre code {
-        line-height: @text-size-medium * 1.25;
+    pre {
+        overflow: scroll;
+        code {
+            line-height: @text-size-medium * 1.25;
+        }
     }
 }
