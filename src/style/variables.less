@@ -30,9 +30,8 @@
 @gradient-secondary: linear-gradient(to bottom, #c31432, #240b36);
 
 // Device breakpoints
-@mobile-small: ~'only screen and (max-width : 480px)';
-@mobile: ~'only screen and (min-width : 481px) and (max-width : 767px)';
-@tablet: ~'screen and (min-device-width : 768px) and (max-device-width : 1024px)';
+@mobile: ~'only screen and (max-width : 480px)';
+@tablet: ~'screen and (min-device-width : 481px) and (max-device-width : 1024px)';
 @desktop: ~'only screen and (min-device-width : 1025px)';
 
 // Typographhy
@@ -60,21 +59,23 @@
     text-decoration: none;
     color: @color-text-secondary;
     transition: @transition-time color;
-    &::before {
-        content: '{ ';
-        color: transparent;
-    }
-    &::after {
-        content: ' }';
-        color: transparent;
-    }
-    &:hover {
-        color: @color-secondary;
-        * {
-            cursor: pointer;
+    @media @desktop {
+        &::before {
+            content: '{ ';
+            color: transparent;
         }
-        &::before, &::after {
+        &::after {
+            content: ' }';
+            color: transparent;
+        }
+        &:hover {
             color: @color-secondary;
+            * {
+                cursor: pointer;
+            }
+            &::before, &::after {
+                color: @color-secondary;
+            }
         }
     }
 }

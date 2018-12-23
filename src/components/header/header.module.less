@@ -1,21 +1,23 @@
 @import '../../style/variables';
 
 .container {
-    margin: 0 @margin-medium @margin-medium @margin-medium;
+    margin: @padding-zero @margin-medium @margin-medium @margin-medium;
     padding: @padding-medium;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid @color-text-secondary;
+    @media @mobile {
+        margin: @padding-zero @margin-small @margin-zero @margin-small;
+        padding: @padding-small;
+        flex-direction: column;
+    }
 }
 
 .title {
     display: flex;
     align-items: center;
     justify-content: center;
-    @media @mobile {
-        flex-direction: column;
-    }
     text-align: center;
     h1 {
         font-size: @font-size * 1.75;
@@ -26,6 +28,9 @@
         margin: 0;
         padding: 0;
     }
+    @media @mobile {
+        flex-direction: column;
+    }
 }
 
 .list {
@@ -34,8 +39,8 @@
         display: flex;
         margin: 0;
         padding: 0;
-        @media @mobile-small {
-            flex-direction: column;
+        @media @mobile {
+            margin-top: @margin-small;
         }
         li {
             margin: 0 @margin-small;

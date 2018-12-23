@@ -8,13 +8,14 @@
 .post {
     display: flex;
     margin: @margin-medium @margin-zero;
-    padding: @padding-medium;
+    padding: @padding-small @padding-medium;
     background-color: @color-transparent;
     transition: @transition-time background-color;
     &:hover {
         background-color: @color-transparent-darker;
     }
-    @media @mobile-small {
+    @media @mobile {
+        padding: @padding-medium;
         flex-direction: column;
     }
 }
