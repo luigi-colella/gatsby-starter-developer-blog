@@ -1,8 +1,9 @@
 ---
 title: "Bottender 0.15"
 date: "2018-08-03"
-tags: [chentsulin, react]
+tags: [vuejs, react]
 path: "blog/bottender-015"
+cover: "./preview.jpg"
 ---
 
 After half an year of our open source journey, we are thrilled to finally introduce our latest work - Bottender v0.15. With the release this time, not only did we make tremendous progress from our experiences previously, we also benefited quite a lot by the feedback from the whole community, which we are highly appreciative of. Thanks to your support and feedback for us to get here today.

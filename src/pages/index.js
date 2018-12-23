@@ -1,11 +1,12 @@
 /* Vendor imports */
 import React from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 /* App imports */
-import Constants from '../constants'
+import * as style from './index.module.less'
 import Layout from '../components/layout/layout'
-import SEO from '../components/seo'
-import { post, tags } from './index.module.less'
+import SEO from '../components/seo/seo'
+import TagList from '../components/tag-list/tag-list'
 
 const IndexPage = () => (
   <StaticQuery
@@ -15,13 +16,21 @@ const IndexPage = () => (
           edges {
             node {
               frontmatter {
+                path
                 title
                 image
                 tags
                 date(formatString: "MMMM DD, YYYY")
-                path
+                cover {
+                  childImageSharp {
+                    fixed (height: 125) {
+                      ...GatsbyImageSharpFixed_tracedSVG
+                    }
+                  }
+                }
               }
               excerpt
+              fileAbsolutePath
             }
           }
         }
@@ -29,31 +38,32 @@ const IndexPage = () => (
     `}
     render={data => {
       const articles = data.allMarkdownRemark.edges.map(edge => edge.node)
-      const tagPath = Constants.pages.tag
       return (
         <Layout>
           <SEO title="Home" keywords={['gatsby', 'application', 'react']} />
           <div>
             <section>
               <div>
-                {articles.map(article => (
-                  <div key={article.frontmatter.date} className={post}>
-                    <label>{article.frontmatter.date}</label>
-                    <h2>
-                      <Link to={article.frontmatter.path}>
-                        {article.frontmatter.title}
-                      </Link>
-                    </h2>
-                    <p>{article.excerpt}</p>
-                    <div className={tags}>
-                      {article.frontmatter.tags.map(tag => (
-                        <Link to={tagPath + '/' + tag} key={tag}>
-                          <label>{tag}</label>
+                {articles.map(article => {
+                  const { title, date, path, tags, cover } = article.frontmatter;
+                  return (
+                    <div key={date} className={style.post}>
+                      <div className={style.preview}>
+                        <Link to={path}>
+                          <Img fixed={cover.childImageSharp.fixed} />
                         </Link>
-                      ))}
+                      </div>
+                      <div className={style.postContent}>
+                        <Link to={path}>
+                          <label>{date}</label>
+                          <h2>{title}</h2>
+                          <p>{article.excerpt}</p>
+                        </Link>
+                        <TagList tags={tags} />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </section>
           </div>

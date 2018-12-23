@@ -4,35 +4,39 @@
     padding: @padding-medium;
     margin: @margin-medium 0;
     display: flex;
-    flex-direction: column;
-    color: @color-text-secondary;
+    background-color: @color-transparent;
+    transition: @transition-time background-color;
+    &:hover {
+        background-color: @color-transparent-darker;
+    }
     h2 {
         margin: @margin-small / 2 0;
         color: @color-secondary;
+        font-size: @font-size * 1.5;
+        text-transform: uppercase;
     }
-    p, label {
+    p {
         margin: 0;
     }
 }
 
-.tags {
-    margin-top: @margin-small;
-    a {
-        text-decoration: none;
-        color: @color-text-secondary;
-    }
-    label {
-        margin-right: @margin-small;
-        &::before {
-            content: '{ ';
-        }
-        &::after {
-            content: ' }'
-        }
-        &:hover {
-            color: @color-secondary;
-            cursor: pointer;
-            transition: @transition-time color;
+.preview {
+    display: flex;
+    align-items: center;
+    margin-right: @margin-medium;
+    transition: @transition-time;
+    > a {
+        overflow: hidden;
+        & > div {
+            transition: @transition-time;
+            &:hover {
+                transform: scale(1.1);
+            }
         }
     }
+}
+
+.postContent {
+    display: flex;
+    flex-direction: column;
 }

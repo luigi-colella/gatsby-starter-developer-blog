@@ -1,0 +1,22 @@
+@import '../../style/variables.less';
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    a {
+        padding: 0 @padding-medium;
+        margin-top: @margin-small;
+        margin-right: @margin-small;
+        border: 2px solid @color-text-secondary;
+        border-radius: 20px;
+        text-transform: lowercase;
+        transition: @transition-time background-color;
+        &:hover {
+            cursor: pointer;
+            font-weight: bold;
+            border-color: @color-secondary;
+            background-color: @color-secondary-darker;
+            color: @color-text-primary;
+        }
+    }
+}

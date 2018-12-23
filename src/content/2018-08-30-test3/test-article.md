@@ -1,8 +1,9 @@
 ---
-title: "Test article 1"
+title: "The Death of Google+ Is Tearing Its Die Hard Communities Apart"
 date: "2018-11-12"
-tags: ["animals", "Chicago", "zoos", "react"]
+tags: ["animals", "vuejs", "zoos", "react", "angular"]
 path: "blog/test-article-1"
+cover: "./preview.png"
 ---
 
 # gatsby-cli

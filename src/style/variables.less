@@ -3,16 +3,23 @@
 @white: #f4f4f5;
 @gray: #adadad; 
 @gray-dark: #e0e0e6;
-@black: #333333;
+@black: #20232a;
 @blue: #0C2744;
 @blue-1: #031C34;
+@cyan: #61dafb;
+@cyan-darker: #0694b8;
 @turquoise: #0A6FC2;
 @orange: #FF6611;
 @red: #EC1E31;
 
+// Transparent colors
+@color-transparent: rgba(0,0,0,.2);
+@color-transparent-darker: rgba(0,0,0,.5);
+
 // Colors palette
 @color-primary: @blue;
-@color-secondary: @red;
+@color-secondary: @cyan;
+@color-secondary-darker: @cyan-darker;
 @color-ternary: @gray;
 @color-ternary-dark: @gray-dark;
 @color-text-primary: @black;
@@ -32,10 +39,12 @@
 @font-size: 1em;
 
 // Margin
+@margin-zero: 0em;
 @margin-small: .5em;
 @margin-medium: 1em;
 
 // Padding
+@padding-zero: 0em;
 @padding-small: .5em;
 @padding-medium: 1em;
 
@@ -47,7 +56,7 @@
 
 // Mixins
 
-.link {
+.link () {
     text-decoration: none;
     color: @color-text-secondary;
     transition: @transition-time color;

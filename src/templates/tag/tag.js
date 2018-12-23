@@ -1,10 +1,10 @@
 /* Vendor imports */
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 /* App imports */
-import Constants from '../../constants'
 import Layout from '../../components/layout/layout'
-import SEO from '../../components/seo'
+import SEO from '../../components/seo/seo'
+import PostList from '../../components/post-list/post-list'
 import * as style from './tag.module.less'
 
 const TagPage = ({ pageContext, data }) => {
@@ -17,26 +17,7 @@ const TagPage = ({ pageContext, data }) => {
         <h1>{tagName}</h1>
         <label>{posts.length} Posts</label>
       </div>
-      <div className={style.content}>
-        {posts.map(post => {
-          const { title, date, path, tags } = post.node.frontmatter
-          return (
-            <div key={title} className={style.post}>
-              <label>{date}</label>
-              <h2>
-                <Link to={path}>{title}</Link>
-              </h2>
-              <div className={style.tags}>
-                {tags.map(tag => (
-                  <label key={tag}>
-                    <Link to={Constants.pages.tag + '/' + tag}>{tag}</Link>
-                  </label>
-                ))}
-              </div>
-            </div>
-          )
-        })}
-      </div>
+      <PostList posts={posts}/>
     </Layout>
   )
 }
@@ -56,7 +37,15 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             path
             tags
+            cover {
+              childImageSharp {
+                fixed (height: 125 width: 222 cropFocus: CENTER) {
+                  ...GatsbyImageSharpFixed_tracedSVG
+                }
+              }
+            }
           }
+          excerpt
         }
       }
     }
