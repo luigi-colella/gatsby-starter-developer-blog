@@ -1,6 +1,7 @@
 /* Vendor imports */
 import React from 'react'
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 /* App imports */
 import * as style from './post.module.less'
 import Layout from '../../components/layout/layout'
@@ -8,16 +9,22 @@ import SEO from '../../components/seo/seo'
 import TagList from '../../components/tag-list/tag-list'
 
 const Post = ({ data }) => {
-  const { title, date, tags } = data.markdownRemark.frontmatter
+  const { title, date, tags, cover } = data.markdownRemark.frontmatter
   const html = data.markdownRemark.html
+  console.log(cover)
   return (
     <Layout>
       <SEO title={title} keywords={tags} />
       <div className={style.container}>
         <div className={style.header}>
-          <label>{date}</label>
-          <h1>{title}</h1>
-          <TagList tags={tags} position="center"/>
+          <div className={style.title}>
+            <label>{date}</label>
+            <h1>{title}</h1>
+            <TagList tags={tags} position="center"/>
+          </div>
+          <div className={style.cover}>
+            <Img fluid={cover.childImageSharp.fluid} />
+          </div>
         </div>
         <div className={style.content}>
           <div dangerouslySetInnerHTML={{ __html: html }} />
@@ -35,9 +42,16 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
+        date (formatString: "MMMM DD, YYYY")
         path
         tags
+        cover {
+          childImageSharp {
+            fluid (maxWidth: 600) {
+              ...GatsbyImageSharpFluid_tracedSVG
+            }
+          }
+        }
       }
     }
   }

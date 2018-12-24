@@ -5,10 +5,33 @@
 }
 
 .header {
-    padding: @padding-zero @padding-medium @padding-small @padding-medium;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    @media @mobile {
+        flex-direction: column-reverse;
+    }
+}
+
+.title {
+    margin: auto;
+    padding: @padding-zero @padding-small;
     h1 {
         color: @color-secondary;
+    }
+    @media @mobile {
+        margin-top: @margin-medium;
+        h1 {
+            margin: @margin-small @margin-zero;
+        }
+    }
+}
+
+.cover {
+    min-width: 40%;
+    margin: auto @margin-zero auto auto;
+    @media @mobile {
+        width: 100%;
     }
 }
 
@@ -27,7 +50,8 @@
         background-color: @color-ternary-dark;
     }
     pre {
-        overflow: scroll;
+        overflow-x: scroll;
+        overflow-y: hidden;
         code {
             line-height: @text-size-medium * 1.25;
         }
