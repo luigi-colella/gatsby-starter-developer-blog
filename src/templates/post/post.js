@@ -13,7 +13,7 @@ const Post = ({ data }) => {
   return (
     <Layout>
       <SEO title={title} keywords={tags} />
-      <div>
+      <div className={style.container}>
         <div className={style.header}>
           <label>{date}</label>
           <h1>{title}</h1>

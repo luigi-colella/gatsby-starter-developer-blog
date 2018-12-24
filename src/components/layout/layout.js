@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 /* App imports */
 import Constants from '../../constants'
 import Header from '../header/header'
+import Footer from '../footer/footer'
 import '../../style/global.less'
 import { container } from './layout.module.less'
 
@@ -28,6 +29,7 @@ const Layout = ({ children }) => (
           links={Constants.pages}
         />
         <div className={container}>{children}</div>
+        <Footer />
       </>
     )}
   />
