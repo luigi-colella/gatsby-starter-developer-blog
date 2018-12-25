@@ -4,12 +4,8 @@ const Constants = {
     home: '/',
     archive: 'archive',
     tag: 'tag',
-  },
-  graphql: {
-    format: {
-      date: 'MMMM DD, YYYY',
-    },
-  },
+    blog: 'blog/'
+  }
 }
 
 module.exports = Constants

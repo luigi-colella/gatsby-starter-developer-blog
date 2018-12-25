@@ -12,7 +12,6 @@ import TagList from '../../components/tag-list/tag-list'
 const Post = ({ data }) => {
   const { title, date, tags, cover } = data.markdownRemark.frontmatter
   const html = data.markdownRemark.html
-  console.log(cover)
   return (
     <Layout>
       <SEO title={title} keywords={tags} />
