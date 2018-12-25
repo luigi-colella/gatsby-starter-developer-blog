@@ -8,8 +8,10 @@ import * as style from './header.module.less'
 const Header = ({ siteTitle, description, links }) => (
   <div className={style.container}>
     <div className={style.title}>
-      <h1>{siteTitle}</h1>
-      <p>{description}</p>
+      <Link to={links.home}>
+        <h1>{siteTitle}</h1>
+        <p>{description}</p>
+      </Link>
     </div>
     <div className={style.list}>
       <ul>
