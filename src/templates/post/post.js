@@ -2,6 +2,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
+import 'prismjs/themes/prism-solarizedlight.css';
 /* App imports */
 import * as style from './post.module.less'
 import Layout from '../../components/layout/layout'

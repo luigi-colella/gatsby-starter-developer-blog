@@ -45,15 +45,23 @@
         padding-bottom: @padding-small;
         border-bottom: 1px solid @color-ternary;
     }
-    code {
-        padding: @padding-small / 2;
-        background-color: @color-ternary-dark;
-    }
     pre {
-        overflow-x: scroll;
+        font-family: 'Roboto-Mono';
+        overflow-x: auto;
         overflow-y: hidden;
+        background-color: @color-text-primary;
+        border-radius: 0px;
         code {
+            font-family: inherit;
             line-height: @text-size-medium * 1.25;
+            background-color: inherit;
         }
+    }
+    :not(pre) > code[class*="language-"] {
+        font-family: 'Roboto-Mono';
+        padding: .1em;
+        border-radius: 0px;
+        background-color: @color-ternary-dark;
+        color: inherit;
     }
 }

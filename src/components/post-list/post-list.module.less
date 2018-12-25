@@ -13,6 +13,9 @@
     transition: @transition-time background-color;
     &:hover {
         background-color: @color-transparent-darker;
+        .preview > a > div {
+            transform: scale(1.1) !important
+        }
     }
     @media @mobile {
         padding: @padding-medium;
@@ -28,9 +31,6 @@
         overflow: hidden;
         & > div {
             transition: @transition-time transform;
-            &:hover {
-                transform: scale(1.1) !important
-            }
         }
     }
 }
