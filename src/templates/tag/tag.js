@@ -2,9 +2,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 /* App imports */
-import Layout from '../../components/layout/layout'
-import SEO from '../../components/seo/seo'
-import PostList from '../../components/post-list/post-list'
+import Layout from '../../components/layout'
+import SEO from '../../components/seo'
+import PostList from '../../components/post-list'
 import * as style from './tag.module.less'
 
 const TagPage = ({ pageContext, data }) => {

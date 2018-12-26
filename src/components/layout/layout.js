@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 /* App imports */
 import Constants from '../../constants'
-import Header from '../header/header'
-import Footer from '../footer/footer'
+import Header from '../header'
+import Footer from '../footer'
 import '../../style/global.less'
 import { container } from './layout.module.less'
 

@@ -5,9 +5,9 @@ import Img from 'gatsby-image'
 import 'prismjs/themes/prism-solarizedlight.css';
 /* App imports */
 import * as style from './post.module.less'
-import Layout from '../../components/layout/layout'
-import SEO from '../../components/seo/seo'
-import TagList from '../../components/tag-list/tag-list'
+import Layout from '../../components/layout'
+import TagList from '../../components/tag-list'
+import SEO from '../../components/seo'
 
 const Post = ({ data }) => {
   const { title, date, tags, cover } = data.markdownRemark.frontmatter

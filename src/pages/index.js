@@ -2,9 +2,9 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 /* App imports */
-import Layout from '../components/layout/layout'
-import SEO from '../components/seo/seo'
-import PostList from '../components/post-list/post-list'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import PostList from '../components/post-list'
 
 const IndexPage = () => (
   <StaticQuery

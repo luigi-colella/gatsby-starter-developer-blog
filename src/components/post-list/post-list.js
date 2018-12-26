@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 /* App imports */
 import * as style from './post-list.module.less'
-import TagList from '../tag-list/tag-list'
+import TagList from '../tag-list'
 
 const PostList = ({ posts }) => (
   <div className={style.container}>
