@@ -42,6 +42,15 @@ DEBUG=bottender:request
 DEBUG=bottender:session:read
 DEBUG=bottender:session:write
 ```
+```css
+@supports (shape-outside: circle(50%)) {
+  img {
+    /* Only round the image if we can float around it too, otherwise leave it square. */
+    shape-outside: circle(50%);
+    border-radius: 50%;
+  }
+}
+```
 
 Monitoring the incoming requests and session read/write makes it easy to trace unexpected errors and it, at the same time, gives you a fuller understanding of how the whole program works.
 

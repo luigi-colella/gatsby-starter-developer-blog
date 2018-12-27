@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostList from '../components/post-list'
+import * as style from './index.module.less'
 
 const IndexPage = () => (
   <StaticQuery
@@ -39,6 +40,9 @@ const IndexPage = () => (
         <SEO title="Home" keywords={['gatsby', 'application', 'react']} />
         <div>
           <section>
+            <div className={style.header}>
+              <h1>Last posts</h1>
+            </div>
             <PostList posts={data.allMarkdownRemark.edges} />
           </section>
         </div>

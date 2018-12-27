@@ -5,6 +5,7 @@ import Img from 'gatsby-image'
 import 'prismjs/themes/prism-solarizedlight.css';
 /* App imports */
 import * as style from './post.module.less'
+import './highlight-syntax.less'
 import Layout from '../../components/layout'
 import TagList from '../../components/tag-list'
 import SEO from '../../components/seo'

@@ -1,0 +1,51 @@
+
+@import '../../style/variables.less';
+
+.language-label-colors (@language, @background, @text: @color-text-secondary) {
+    @selector: ~'.gatsby-highlight[data-language=@{language}]::before';
+    @{selector} {
+        background-color: @background;
+        color: @text;
+    }
+}
+
+.gatsby-highlight {
+    position: relative;
+    &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: @padding-small / 2 @padding-zero;
+        color: @color-text-primary;
+        background: @color-secondary-darker;
+        content: attr(data-language);
+        text-indent: 15px;
+    }
+    &[data-language="text"] {
+        &::before {
+            display: none;
+        }
+        pre {
+            padding-top: @padding-medium;
+        }
+    }
+    pre {
+        font-family: 'Roboto-Mono';
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-top: @padding-medium * 2;
+        background-color: @color-text-primary;
+        border-radius: 0px;
+        code {
+            font-family: inherit;
+            line-height: @text-size-medium * 1.25;
+            background-color: inherit;
+        }
+    }
+}
+
+.language-label-colors('html', #e34c26);
+.language-label-colors('css', #563d7c);
+.language-label-colors('js', #efbb35, @color-text-primary);
+.language-label-colors('typescript', #2b7489);
