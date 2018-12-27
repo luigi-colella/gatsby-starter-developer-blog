@@ -1,0 +1,33 @@
+@import '../style/variables.less';
+
+.container {
+    padding: @padding-medium @padding-zero;
+    display: flex;
+}
+
+.image {
+    max-width: 450px;
+    width: 100%;
+    margin: auto;
+}
+
+.message {
+    margin: auto;
+    text-align: center;
+    a {
+        display: block;
+        margin: @margin-medium;
+        padding: @padding-medium;
+        border: 2px solid @color-text-secondary;
+        transition: @transition-time;
+        box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+        &:hover {
+            background-color: @color-secondary;
+            color: @color-text-primary;
+            border-color: @color-secondary;
+            font-weight: bold;
+            text-shadow: 4px 4px 25px @color-text-primary;
+            box-shadow: 20px 20px 20px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+        }
+    }
+}
