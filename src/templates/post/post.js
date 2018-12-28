@@ -11,11 +11,19 @@ import TagList from '../../components/tag-list'
 import SEO from '../../components/seo'
 
 const Post = ({ data }) => {
-  const { title, date, tags, cover } = data.markdownRemark.frontmatter
-  const html = data.markdownRemark.html
+  const { html, excerpt, frontmatter } = data.markdownRemark
+  const { title, date, tags, cover, coverAlt, path } = frontmatter
+  const img = cover.childImageSharp.fluid
   return (
     <Layout>
-      <SEO title={title} keywords={tags} />
+      <SEO
+        title={title}
+        description={excerpt}
+        path={path}
+        contentType={'article'}
+        image={{url: img.src, alt: coverAlt}}
+        keywords={tags}
+      />
       <div className={style.container}>
         <div className={style.header}>
           <div className={style.title}>
@@ -24,7 +32,7 @@ const Post = ({ data }) => {
             <TagList tags={tags} position="center"/>
           </div>
           <div className={style.cover}>
-            <Img fluid={cover.childImageSharp.fluid} />
+            <Img fluid={img} title={title}/>
           </div>
         </div>
         <div className={style.content}>
@@ -41,11 +49,12 @@ export const pageQuery = graphql`
   query($postPath: String!) {
     markdownRemark(frontmatter: { path: { eq: $postPath } }) {
       html
+      excerpt
       frontmatter {
         title
         date (formatString: "MMMM DD, YYYY")
-        path
         tags
+        path
         cover {
           childImageSharp {
             fluid (maxWidth: 600) {
@@ -53,6 +62,7 @@ export const pageQuery = graphql`
             }
           }
         }
+        coverAlt
       }
     }
   }

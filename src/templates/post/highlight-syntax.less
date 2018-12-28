@@ -17,12 +17,12 @@
         left: 0;
         width: 100%;
         padding: @padding-small / 2 @padding-zero;
-        color: @color-text-primary;
-        background: @color-secondary-darker;
         content: attr(data-language);
         text-indent: 15px;
+        color: @color-text-secondary;
+        background: @color-secondary-darker;
     }
-    &[data-language="text"] {
+    &[data-language="text"], &[data-language="none"] {
         &::before {
             display: none;
         }

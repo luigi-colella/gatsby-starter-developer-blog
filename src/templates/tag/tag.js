@@ -12,7 +12,12 @@ const TagPage = ({ pageContext, data }) => {
   const tagName = pageContext.tag
   return (
     <Layout>
-      <SEO title={tagName} keywords={[tagName]} />
+      <SEO
+        title={tagName}
+        description={`All post about ${tagName}`}
+        path={'tag/' + tagName}
+        keywords={[tagName]}
+      />
       <div className={style.header}>
         <h1>{tagName}</h1>
         <label>{posts.length} Posts</label>

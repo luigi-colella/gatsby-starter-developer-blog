@@ -12,8 +12,12 @@ const NotFoundPage = ({ data }) => {
   console.log(data)
   return (
     <Layout>
-      <SEO title="404: Not found" />
-      
+      <SEO
+        title="404: Page not found"
+        description="404 Page"
+        path='404'
+        keywords={['javascript', 'frontend', 'blog']}
+      />
       <div className={style.container}>
         <div className={style.image}>
           <Image fluid={data.file.childImageSharp.fluid} />

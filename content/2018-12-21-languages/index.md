@@ -3,6 +3,7 @@ title: Languages exaples
 path: blog/markdown-languages
 tags: [vuejs, markdown]
 cover: ./preview.jpeg
+coverAlt: most used programming languages
 date: 2018-12-21
 ---
 ## Links

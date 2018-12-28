@@ -4,6 +4,7 @@ date: "2018-11-12"
 tags: ["animals", "vuejs", "zoos", "react", "angular"]
 path: "blog/test-article-1"
 cover: "./preview.png"
+coverAlt: 'test cover alt'
 ---
 
 # gatsby-cli

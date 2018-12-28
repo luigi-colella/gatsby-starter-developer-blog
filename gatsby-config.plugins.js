@@ -13,13 +13,14 @@ module.exports = [
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'Luigi Colella Blog',
+        short_name: 'Luigi Colella',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        background_color: '#0C2744',
+        theme_color: '#0C2744',
+        display: 'standalone',
+        icon: 'src/images/icon.png', // This path is relative to the root of the site.
+        legacy: true, // this will add apple-touch-icon links to <head>. Required for versions prior to iOS 11.3.
       },
     },
     'gatsby-plugin-less',

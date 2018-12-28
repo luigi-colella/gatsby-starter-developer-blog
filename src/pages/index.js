@@ -11,13 +11,18 @@ const IndexPage = () => (
   <StaticQuery
     query={graphql`
       {
+        site {
+          siteMetadata {
+            title
+            description
+          }
+        }
         allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
               frontmatter {
                 path
                 title
-                image
                 tags
                 date(formatString: "MMMM DD, YYYY")
                 cover {
@@ -37,7 +42,12 @@ const IndexPage = () => (
     `}
     render={data => (
       <Layout>
-        <SEO title="Home" keywords={['gatsby', 'application', 'react']} />
+        <SEO
+          title={data.site.siteMetadata.title}
+          description={data.site.siteMetadata.description}
+          path=''
+          keywords={['javascript', 'frontend', 'blog']}
+        />
         <div>
           <section>
             <div className={style.header}>
