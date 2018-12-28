@@ -3,6 +3,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+/* App imports */
+import Utils from '../../utils'
 
 function SEO({ title, description, path, lang, keywords, contentType, image, meta }) {
   return (
@@ -12,9 +14,10 @@ function SEO({ title, description, path, lang, keywords, contentType, image, met
 
         const metaDescription = description || data.site.siteMetadata.description
         const metaKeywords = (keywords && keywords.length > 0) ? { name: 'keywords', content: keywords.join(', ') } : []
-        const pageUrl = data.site.siteMetadata.hostname + data.site.pathPrefix + '/' + path
-        const metaImageUrl = data.site.siteMetadata.hostname + (image ? image.url : data.file.childImageSharp.fixed.src)
+        const pageUrl = Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)
+        const metaImageUrl = Utils.resolveUrl(data.site.siteMetadata.hostname, (image ? image.url : data.file.childImageSharp.fixed.src))
         const metaImageAlt = image ? image.alt : metaDescription
+        console.log(metaImageUrl)
 
         return (
           <Helmet

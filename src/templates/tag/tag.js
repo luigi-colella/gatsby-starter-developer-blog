@@ -6,6 +6,8 @@ import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
 import * as style from './tag.module.less'
+import Constants from '../../constants'
+import Utils from '../../utils'
 
 const TagPage = ({ pageContext, data }) => {
   const posts = data.allMarkdownRemark.edges
@@ -15,7 +17,7 @@ const TagPage = ({ pageContext, data }) => {
       <SEO
         title={tagName}
         description={`All post about ${tagName}`}
-        path={'tag/' + tagName}
+        path={Utils.resolvePageUrl(Constants.pages.tag, tagName)}
         keywords={[tagName]}
       />
       <div className={style.header}>

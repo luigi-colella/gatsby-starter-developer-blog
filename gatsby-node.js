@@ -2,6 +2,7 @@
 const path = require('path');
 /* App imports */
 const Constants = require('./src/constants');
+const Utils = require('./src/utils');
 
 exports.createPages = ({ actions, graphql }) => {
 
@@ -47,7 +48,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     allTags.forEach(tag => {
       createPage({
-        path: Constants.pages.tag + '/' + tag,
+        path: Utils.resolvePageUrl(Constants.pages.tag, tag),
         component: path.resolve('src/templates/tag/tag.js'),
         context: {
           tag: tag

@@ -7,6 +7,7 @@ import Layout from '../components/layout/layout'
 import SEO from '../components/seo/seo'
 import Constants from '../constants'
 import * as style from './404.module.less'
+import Utils from '../utils'
 
 const NotFoundPage = ({ data }) => {
   console.log(data)
@@ -24,7 +25,7 @@ const NotFoundPage = ({ data }) => {
         </div>
         <div className={style.message}>
           <h1>Page not found</h1>
-          <Link to={Constants.pages.home}>Return to homepage</Link>
+          <Link to={Utils.resolvePageUrl(Constants.pages.home)}>Return to homepage</Link>
         </div>
       </div>
   
