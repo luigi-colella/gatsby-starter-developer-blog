@@ -4,11 +4,13 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import 'prismjs/themes/prism-solarizedlight.css';
 /* App imports */
+import Comments from './comments'
 import * as style from './post.module.less'
 import './highlight-syntax.less'
 import Layout from '../../components/layout'
 import TagList from '../../components/tag-list'
 import SEO from '../../components/seo'
+import Utils from '../../utils'
 
 const Post = ({ data }) => {
   const { html, excerpt, frontmatter } = data.markdownRemark
@@ -38,6 +40,10 @@ const Post = ({ data }) => {
         <div className={style.content}>
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </div>
+        <Comments
+          pageCanonicalUrl={Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)}
+          pageId={title}
+        />
       </div>
     </Layout>
   )
@@ -64,6 +70,12 @@ export const pageQuery = graphql`
         }
         coverAlt
       }
+    }
+    site {
+      siteMetadata {
+        hostname
+      }
+      pathPrefix
     }
   }
 `
