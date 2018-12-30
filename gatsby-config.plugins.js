@@ -1,6 +1,10 @@
+const feedPlugin = require('./gatsby-config.plugins.feed')
 
 module.exports = [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-less',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -8,8 +12,6 @@ module.exports = [
         path: `${__dirname}/src/images`,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -23,7 +25,6 @@ module.exports = [
         legacy: true, // this will add apple-touch-icon links to <head>. Required for versions prior to iOS 11.3.
       },
     },
-    'gatsby-plugin-less',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -38,7 +39,8 @@ module.exports = [
           'gatsby-remark-prismjs'
         ]
       }
-    }
+    },
+    feedPlugin
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
