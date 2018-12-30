@@ -1,5 +1,5 @@
 ---
-title: Languages exaples
+title: Languages examples
 path: blog/markdown-languages
 tags: [vuejs, markdown]
 cover: ./preview.jpeg

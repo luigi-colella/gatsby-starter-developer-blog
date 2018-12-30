@@ -6,7 +6,6 @@ import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
 import * as style from './tag.module.less'
-import Constants from '../../constants'
 import Utils from '../../utils'
 
 const TagPage = ({ pageContext, data }) => {
@@ -17,7 +16,7 @@ const TagPage = ({ pageContext, data }) => {
       <SEO
         title={tagName}
         description={`All post about ${tagName}`}
-        path={Utils.resolvePageUrl(Constants.pages.tag, tagName)}
+        path={Utils.resolvePageUrl(data.site.siteMetadata.pages.tag, tagName)}
         keywords={[tagName]}
       />
       <div className={style.header}>
@@ -53,6 +52,13 @@ export const pageQuery = graphql`
             }
           }
           excerpt
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        pages {
+          tag
         }
       }
     }

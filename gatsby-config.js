@@ -6,7 +6,14 @@ module.exports = {
     hostname: 'https://lgcolella.github.io',
     title: 'Luigi Colella',
     description: 'Logbook of a software developer',
-    author: 'lcolella'
+    author: 'lcolella',
+    pages: {
+      home: '/',
+      blog: 'blog/',
+      tag: 'tag',
+      about: 'about',
+      archive: 'archive'
+    }
   },
   plugins,
 }

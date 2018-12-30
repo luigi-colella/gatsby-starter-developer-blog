@@ -1,7 +1,6 @@
 /* Vendor imports */
 const path = require('path');
 /* App imports */
-const Constants = require('./src/constants');
 const Utils = require('./src/utils');
 
 exports.createPages = ({ actions, graphql }) => {
@@ -10,6 +9,14 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
+      site {
+        siteMetadata {
+          pages {
+            blog
+            tag
+          }
+        }
+      }
       allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
         edges {
           node {
@@ -24,10 +31,12 @@ exports.createPages = ({ actions, graphql }) => {
   `).then(result => {
     if (result.errors) return Promise.reject(result.errors);
 
+    const { site, allMarkdownRemark } = result.data
+
     /* Post pages */
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    allMarkdownRemark.edges.forEach(({ node }) => {
       // Check path prefix of post
-      if (node.frontmatter.path.indexOf(Constants.pages.blog) !== 0) throw `Invalid path prefix: ${node.frontmatter.path}`
+      if (node.frontmatter.path.indexOf(site.siteMetadata.pages.blog) !== 0) throw `Invalid path prefix: ${node.frontmatter.path}`
       
       createPage({
         path: node.frontmatter.path,
@@ -40,7 +49,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     /* Tag pages */
     const allTags = [];
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    allMarkdownRemark.edges.forEach(({ node }) => {
       node.frontmatter.tags.forEach(tag => {
         if (allTags.indexOf(tag) === -1) allTags.push(tag)
       })
@@ -48,7 +57,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     allTags.forEach(tag => {
       createPage({
-        path: Utils.resolvePageUrl(Constants.pages.tag, tag),
+        path: Utils.resolvePageUrl(site.siteMetadata.pages.tag, tag),
         component: path.resolve('src/templates/tag/tag.js'),
         context: {
           tag: tag
