@@ -43,11 +43,50 @@
     line-height: 1.6;
     font-size: @font-size * 1.1;
     h1, h2 {
+        text-align: center;
         border-bottom: 1px solid @color-ternary;
+    }
+    h2 {
+        font-size: @font-size * 2;
     }
     a {
         color: @color-secondary-darker;
         text-decoration: underline;
+    }
+    table {
+        margin: auto;
+        border-spacing: 0px;
+        display: block;
+        overflow-x: auto;
+        td, th {
+            padding: @padding-small @padding-medium;
+            border: 1px solid @color-ternary;
+        }
+        th {
+            text-align: center;
+        }
+        thead {
+            background-color: @color-ternary-dark;
+            th, td {
+                border-width: 1px 1px 0px 0px;
+                &:first-child {
+                    border-left-width: 1px;
+                }
+            }
+        }
+        tbody {
+            tr {
+                th, td {
+                    border-width: 1px 1px 0px 0px;
+                    &:first-child {
+                        border-left-width: 1px;
+                    }
+                }
+                &:last-child th, &:last-child td {
+                    border-bottom-width: 1px;
+                }
+            }
+        }
     }
     :not(pre) > code[class*="language-"] {
         font-family: 'Roboto-Mono';
@@ -57,14 +96,10 @@
         color: inherit;
     }
     @media @desktop {
-        padding: @padding-medium @padding-medium * 3;
+        padding: @padding-medium;
         article > * {
-            padding-right: @padding-medium * 3;
-            padding-left: @padding-medium * 3;
-        }
-        h1, h2 {
-            padding-right: @padding-zero;
-            padding-left: @padding-zero;
+            margin-right: @padding-medium * 3;
+            margin-left: @padding-medium * 3;
         }
     }
 }

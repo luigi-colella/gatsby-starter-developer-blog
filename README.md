@@ -10,6 +10,7 @@
 ## 🔌 Features
 
 * Content in Markdown files
+* Syntax highlighting
 * Tags
 * Meta tags for social sharing via link (Open Graph & Twitter)
 * Social share buttons
