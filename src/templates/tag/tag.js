@@ -11,19 +11,20 @@ import Utils from '../../utils'
 const TagPage = ({ pageContext, data }) => {
   const posts = data.allMarkdownRemark.edges
   const tagName = pageContext.tag
+  const tagPagePath = data.site.siteMetadata.pages.tag;
   return (
     <Layout>
       <SEO
         title={tagName}
         description={`All post about ${tagName}`}
-        path={Utils.resolvePageUrl(data.site.siteMetadata.pages.tag, tagName)}
+        path={Utils.resolvePageUrl(tagPagePath, tagName)}
         keywords={[tagName]}
       />
       <div className={style.header}>
         <h1>{tagName}</h1>
         <label>{posts.length} Posts</label>
       </div>
-      <PostList posts={posts}/>
+      <PostList posts={posts} tagPagePath={tagPagePath}/>
     </Layout>
   )
 }

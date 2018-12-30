@@ -8,7 +8,7 @@ import * as style from './post-list.module.less'
 import TagList from '../tag-list'
 import Utils from '../../utils'
 
-const PostList = ({ posts }) => (
+const PostList = ({ posts, tagPagePath }) => (
   <div className={style.container}>
     {posts.map(post => {
       const { title, date, path, tags, cover } = post.node.frontmatter
@@ -24,7 +24,7 @@ const PostList = ({ posts }) => (
               <h2>{title}</h2>
               <p>{excerpt}</p>
             </Link>
-            <TagList tags={tags} />
+            <TagList tags={tags} tagPagePath={tagPagePath}/>
           </div>
         </div>
       )
@@ -48,5 +48,6 @@ PostList.propTypes = {
         }).isRequired
       })
     })
-  }))
+  })),
+  tagPagePath: PropTypes.string.isRequired
 }

@@ -16,6 +16,11 @@ const Layout = ({ children }) => (
           siteMetadata {
             title
             description
+            pages {
+              home
+              about
+              archive
+            }
           }
         }
       }
@@ -25,6 +30,7 @@ const Layout = ({ children }) => (
         <Header
           siteTitle={data.site.siteMetadata.title}
           description={data.site.siteMetadata.description}
+          pages={data.site.siteMetadata.pages}
         />
         <div className={container}>{children}</div>
         <Footer />

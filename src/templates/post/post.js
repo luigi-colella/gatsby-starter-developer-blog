@@ -34,7 +34,11 @@ const Post = ({ data }) => {
           <div className={style.title}>
             <label>{date}</label>
             <h1>{title}</h1>
-            <TagList tags={tags} position="center"/>
+            <TagList
+              tags={tags}
+              tagPagePath={data.site.siteMetadata.pages.tag}
+              position="center"
+            />
           </div>
           <div className={style.cover}>
             <Img fluid={img} title={title}/>
@@ -83,6 +87,9 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         hostname
+        pages {
+          tag
+        }
       }
       pathPrefix
     }

@@ -15,6 +15,9 @@ const IndexPage = () => (
           siteMetadata {
             title
             description
+            pages {
+              tag
+            }
           }
         }
         allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
@@ -53,7 +56,7 @@ const IndexPage = () => (
             <div className={style.header}>
               <h1>Last posts</h1>
             </div>
-            <PostList posts={data.allMarkdownRemark.edges} />
+            <PostList posts={data.allMarkdownRemark.edges} tagPagePath={data.site.siteMetadata.pages.tag} />
           </section>
         </div>
       </Layout>
