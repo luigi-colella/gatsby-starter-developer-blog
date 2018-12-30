@@ -40,9 +40,9 @@
     padding: @padding-medium;
     background-color: @color-text-secondary;
     color: @color-text-primary;
-    word-break: break-all;
+    line-height: 1.6;
+    font-size: @font-size * 1.1;
     h1, h2 {
-        padding-bottom: @padding-small;
         border-bottom: 1px solid @color-ternary;
     }
     a {
@@ -55,5 +55,16 @@
         border-radius: 0px;
         background-color: @color-ternary-dark;
         color: inherit;
+    }
+    @media @desktop {
+        padding: @padding-medium @padding-medium * 3;
+        article > * {
+            padding-right: @padding-medium * 3;
+            padding-left: @padding-medium * 3;
+        }
+        h1, h2 {
+            padding-right: @padding-zero;
+            padding-left: @padding-zero;
+        }
     }
 }

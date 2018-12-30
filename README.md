@@ -12,6 +12,7 @@
 * Content in Markdown files
 * Tags
 * Meta tags for social sharing via link (Open Graph & Twitter)
+* Social share buttons
 * Comment (Disqus)
 * RSS Feed
 * Favicon

@@ -22,7 +22,8 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
-    "react-icons": "^3.2.2"
+    "react-icons": "^3.2.2",
+    "react-share": "^2.4.0"
   },
   "keywords": [
     "gatsby"

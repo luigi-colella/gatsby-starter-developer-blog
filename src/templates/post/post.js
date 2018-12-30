@@ -5,6 +5,7 @@ import Img from 'gatsby-image'
 import 'prismjs/themes/prism-solarizedlight.css';
 /* App imports */
 import Comments from './comments'
+import Share from './share'
 import * as style from './post.module.less'
 import './highlight-syntax.less'
 import Layout from '../../components/layout'
@@ -16,6 +17,8 @@ const Post = ({ data }) => {
   const { html, excerpt, frontmatter } = data.markdownRemark
   const { title, date, tags, cover, coverAlt, path } = frontmatter
   const img = cover.childImageSharp.fluid
+  const canonicalUrl = Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)
+  const coverUrl = Utils.resolveUrl(data.site.siteMetadata.hostname, img.src)
   return (
     <Layout>
       <SEO
@@ -38,10 +41,16 @@ const Post = ({ data }) => {
           </div>
         </div>
         <div className={style.content}>
-          <div dangerouslySetInnerHTML={{ __html: html }} />
+          <article dangerouslySetInnerHTML={{ __html: html }} />
+          <Share
+            pageCanonicalUrl={canonicalUrl}
+            title={title}
+            description={excerpt}
+            coverUrl={coverUrl}
+          />
         </div>
         <Comments
-          pageCanonicalUrl={Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)}
+          pageCanonicalUrl={canonicalUrl}
           pageId={title}
         />
       </div>
