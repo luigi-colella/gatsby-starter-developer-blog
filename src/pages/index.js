@@ -54,7 +54,7 @@ const IndexPage = () => (
         <div>
           <section>
             <div className={style.header}>
-              <h1>Last posts</h1>
+              <h2>Last posts</h2>
             </div>
             <PostList posts={data.allMarkdownRemark.edges} tagPagePath={data.site.siteMetadata.pages.tag} />
           </section>

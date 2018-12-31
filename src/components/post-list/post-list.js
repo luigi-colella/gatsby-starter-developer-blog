@@ -9,7 +9,7 @@ import TagList from '../tag-list'
 import Utils from '../../utils'
 
 const PostList = ({ posts, tagPagePath }) => (
-  <div className={style.container}>
+  <div>
     {posts.map(post => {
       const { title, date, path, tags, cover } = post.node.frontmatter
       const { excerpt } = post.node

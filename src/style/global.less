@@ -1,41 +1,56 @@
 @import './variables.less';
 
+.font (@font-family, @font-weight, @font-filename, @font-size) {
+    @font-face {
+        font-family: @font-family;
+        font-weight: @font-weight;
+        src: url("./@{font-filename}/@{font-filename}-@{font-size}.ttf") format("opentype");
+    }
+}
+
 /* Font */
-@font-face {
-    font-family: "Roboto";
-    font-weight: normal;
-    src: url("./Roboto/Roboto-Regular.ttf") format("opentype");
-}
 
-@font-face {
-    font-family: "Roboto";
-    font-weight: bold;
-    src: url("./Roboto/Roboto-Bold.ttf") format("opentype");
-}
-
-@font-face {
-    font-family: "Roboto-Mono";
-    font-weight: normal;
-    src: url("./RobotoMono/RobotoMono-Regular.ttf") format("opentype");
-}
+.font('Roboto', normal, 'Roboto', 'Regular');
+.font('Roboto', bold, 'Roboto', 'Bold');
+.font('Roboto-Mono', normal, 'RobotoMono', 'Regular');
+.font('Roboto', 200, 'Montserrat', 'Light');
 
 /* Basic elements */
 
-html, body {
-    font-family: "Roboto" !important;
-    color: @color-text-secondary;
-}
-
 body {
+    font-family: "Roboto", sans-serif !important;
     background-color: @color-primary;
     background-image: url('../images/texture-otis-redding.png');
-    margin: 0;
+    color: @color-text-secondary;
+    margin: @margin-zero;
 }
 
 h1, h2, h3, h4, h5, h6 {
     a {
         text-decoration: none;
         color: inherit;
+    }
+}
+
+h1 {
+    font-size: @font-size * 3;
+    font-weight: 200;
+    @media @mobile {
+        font-size: @font-size * 2;
+    }
+}
+h2 {
+    font-size: @font-size * 2;
+    font-weight: 200;
+    @media @mobile {
+        font-size: @font-size * 1.6;
+    }
+}
+h3 {
+    font-size: @font-size * 1.5;
+    font-weight: 200;
+    @media @mobile {
+        font-size: @font-size;
     }
 }
 

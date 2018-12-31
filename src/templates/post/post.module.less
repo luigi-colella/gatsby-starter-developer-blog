@@ -8,29 +8,30 @@
     text-align: center;
     display: flex;
     justify-content: space-between;
-    @media @mobile {
-        flex-direction: column-reverse;
+    background-color: @color-transparent-darker;
+    @media @mobile, @tablet {
+        flex-direction: column;
     }
 }
 
 .title {
     margin: auto;
-    padding: @padding-zero @padding-small;
+    padding: @padding-small;
     h1 {
         color: @color-secondary;
     }
-    @media @mobile {
-        margin-top: @margin-medium;
+    @media @mobile, @tablet {
+        padding: @padding-medium @padding-small;
         h1 {
-            margin: @margin-small @margin-zero;
+            margin: @margin-small / 2 @margin-zero;
         }
     }
 }
 
 .cover {
-    min-width: 40%;
+    min-width: 50%;
     margin: auto @margin-zero auto auto;
-    @media @mobile {
+    @media @mobile, @tablet {
         width: 100%;
     }
 }
@@ -38,19 +39,19 @@
 .content {
     margin-top: @margin-medium;
     padding: @padding-medium;
-    background-color: @color-text-secondary;
+    background-color: @color-ternary;
     color: @color-text-primary;
     line-height: 1.6;
     font-size: @font-size * 1.1;
     h1, h2 {
         text-align: center;
-        border-bottom: 1px solid @color-ternary;
+        border-bottom: 1px solid @color-quinquennary;
     }
     h2 {
         font-size: @font-size * 2;
     }
     a {
-        color: @color-secondary-darker;
+        color: @color-quaternary;
         text-decoration: underline;
     }
     table {
@@ -60,13 +61,13 @@
         overflow-x: auto;
         td, th {
             padding: @padding-small @padding-medium;
-            border: 1px solid @color-ternary;
+            border: 1px solid @color-quinquennary;
         }
         th {
             text-align: center;
         }
         thead {
-            background-color: @color-ternary-dark;
+            background-color: @color-quinquennary;
             th, td {
                 border-width: 1px 1px 0px 0px;
                 &:first-child {
@@ -92,7 +93,7 @@
         font-family: 'Roboto-Mono';
         padding: .1em;
         border-radius: 0px;
-        background-color: @color-ternary-dark;
+        background-color: @color-quinquennary;
         color: inherit;
     }
     @media @desktop {

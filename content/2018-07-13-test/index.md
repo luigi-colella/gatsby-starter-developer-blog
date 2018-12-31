@@ -1,5 +1,5 @@
 ---
-title: "Bottender 0.15"
+title: What I Learned About Writing After a Summer Alone in the Woods
 date: "2018-08-03"
 tags: [vuejs, react]
 path: "blog/bottender-015"

@@ -76,7 +76,7 @@ export const pageQuery = graphql`
         path
         cover {
           childImageSharp {
-            fluid (maxWidth: 600) {
+            fluid (maxWidth: 700) {
               ...GatsbyImageSharpFluid_tracedSVG
             }
           }
