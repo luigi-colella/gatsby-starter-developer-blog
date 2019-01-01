@@ -1,4 +1,4 @@
-@import '../../style/variables';
+@import '../../../style/variables';
 
 .container {
     margin: @margin-zero @margin-medium;
@@ -21,12 +21,12 @@
     text-align: center;
     h1 {
         font-size: @font-size * 1.75;
-        margin: 0;
-        padding: 0 @padding-small;
+        margin: @margin-zero;
+        padding: @padding-zero @padding-small;
+        color: @color-text;
     }
     p {
-        margin: 0;
-        padding: 0;
+        margin: @margin-zero;
     }
 }
 
@@ -34,17 +34,25 @@
     ul {
         list-style: none;
         display: flex;
-        margin: 0;
-        padding: 0;
+        margin: @margin-zero;
+        padding: @padding-zero;
         @media @mobile {
             margin-top: @margin-small;
         }
         li {
-            margin: 0 @margin-small;
+            margin: @margin-zero @margin-small;
             a {
-                text-decoration: none;
                 text-transform: uppercase;
-                .link()
+                transition: @transition-time color;
+                @media @desktop {
+                    &::before { content: '{ '; color: transparent; }
+                    &::after  { content: ' }'; color: transparent; }
+                    &:hover {
+                        color: @color-title;
+                        * { cursor: pointer }
+                        &::before, &::after { color: @color-title; }
+                    }
+                }
             }
         }
     }

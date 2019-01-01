@@ -1,14 +1,14 @@
 @import '../../style/variables.less';
 
 .container {
-    margin: @margin-medium @margin-zero @margin-medium * 2 @margin-zero;
+    margin: @margin-medium @margin-zero;
 }
 
 .header {
-    text-align: center;
     display: flex;
     justify-content: space-between;
     background-color: @color-transparent-darker;
+    text-align: center;
     @media @mobile, @tablet {
         flex-direction: column;
     }
@@ -17,14 +17,8 @@
 .title {
     margin: auto;
     padding: @padding-small;
-    h1 {
-        color: @color-secondary;
-    }
     @media @mobile, @tablet {
         padding: @padding-medium @padding-small;
-        h1 {
-            margin: @margin-small / 2 @margin-zero;
-        }
     }
 }
 
@@ -37,37 +31,35 @@
 }
 
 .content {
-    margin-top: @margin-medium;
     padding: @padding-medium;
-    background-color: @color-ternary;
-    color: @color-text-primary;
+    background-color: @color-text;
+    color: @color-post-text;
     line-height: 1.6;
     font-size: @font-size * 1.1;
+    h1, h2, h3, h4, h5, h6 {
+        color: @color-post-text;
+    }
     h1, h2 {
         text-align: center;
-        border-bottom: 1px solid @color-quinquennary;
-    }
-    h2 {
-        font-size: @font-size * 2;
+        border-bottom: 1px solid @color-post-line;
     }
     a {
-        color: @color-quaternary;
+        color: @color-label;
         text-decoration: underline;
     }
     table {
         margin: auto;
         border-spacing: 0px;
-        display: block;
         overflow-x: auto;
         td, th {
             padding: @padding-small @padding-medium;
-            border: 1px solid @color-quinquennary;
+            border: 1px solid @color-post-line;
         }
         th {
             text-align: center;
         }
         thead {
-            background-color: @color-quinquennary;
+            background-color: @color-post-line;
             th, td {
                 border-width: 1px 1px 0px 0px;
                 &:first-child {
@@ -93,14 +85,10 @@
         font-family: 'Roboto-Mono';
         padding: .1em;
         border-radius: 0px;
-        background-color: @color-quinquennary;
+        background-color: @color-post-line;
         color: inherit;
     }
     @media @desktop {
-        padding: @padding-medium;
-        article > * {
-            margin-right: @padding-medium * 3;
-            margin-left: @padding-medium * 3;
-        }
+        padding: @padding-medium @padding-medium * 5;
     }
 }

@@ -7,7 +7,7 @@
 @black: #20232a;
 @blue: #0C2744;
 @blue-1: #031C34;
-@cyan: #61dafb;
+@cyan: #4889b8;
 @cyan-darker: #0694b8;
 @cyan-gray: #336f7d;
 @turquoise: #0A6FC2;
@@ -20,16 +20,15 @@
 @color-transparent-darker: rgba(0,0,0,.5);
 
 // Colors palette
-@color-primary: @blue;
-@color-secondary: @cyan-gray;
-@color-ternary: @gray;
-@color-quaternary: @cyan-darker;
-@color-quinquennary: @gray-light;
-@color-text-primary: @black;
-@color-text-secondary: @gray;
+@color-theme: @blue;
+@color-title: @cyan;
+@color-text: @gray;
+@color-label: @cyan-darker;
+@color-post-text: @black;
+@color-post-line: @gray-light;
 
 // Gradients
-@gradient-primary: linear-gradient(to bottom, #0f2027, @color-primary, #031c27);
+@gradient-primary: linear-gradient(to bottom, #0f2027, @color-theme, #031c27);
 @gradient-secondary: linear-gradient(to bottom, #c31432, #240b36);
 
 // Device breakpoints
@@ -57,28 +56,3 @@
 @text-size-medium: 1em;
 
 // Mixins
-
-.link () {
-    text-decoration: none;
-    color: @color-text-secondary;
-    transition: @transition-time color;
-    @media @desktop {
-        &::before {
-            content: '{ ';
-            color: transparent;
-        }
-        &::after {
-            content: ' }';
-            color: transparent;
-        }
-        &:hover {
-            color: @color-secondary;
-            * {
-                cursor: pointer;
-            }
-            &::before, &::after {
-                color: @color-secondary;
-            }
-        }
-    }
-}

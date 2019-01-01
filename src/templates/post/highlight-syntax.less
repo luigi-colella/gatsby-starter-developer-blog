@@ -1,7 +1,7 @@
 
 @import '../../style/variables.less';
 
-.language-label-colors (@language, @background, @text: @color-text-secondary) {
+.language-label-colors (@language, @background, @text: @color-text) {
     @selector: ~'.gatsby-highlight[data-language=@{language}]::before';
     @{selector} {
         background-color: @background;
@@ -19,8 +19,8 @@
         padding: @padding-small / 2 @padding-zero;
         content: attr(data-language);
         text-indent: 15px;
-        color: @color-text-secondary;
-        background: @color-quaternary;
+        color: @color-text;
+        background: @color-label;
     }
     &[data-language="text"], &[data-language="none"] {
         &::before {
@@ -35,7 +35,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         padding-top: @padding-medium * 2.5;
-        background-color: @color-text-primary;
+        background-color: @color-post-text;
         border-radius: 0px;
         code {
             font-family: inherit;
@@ -47,5 +47,5 @@
 
 .language-label-colors('html', #e34c26);
 .language-label-colors('css', #563d7c);
-.language-label-colors('js', #efbb35, @color-text-primary);
+.language-label-colors('js', #efbb35, @color-post-text);
 .language-label-colors('typescript', #2b7489);

@@ -7,7 +7,7 @@
     margin-top: @margin-medium * 2;
     margin-bottom: @margin-medium;
     padding: @padding-medium;
-    border-top: 1px solid @color-ternary;
+    border-top: 1px solid @color-post-line;
     > div:focus {
         outline: none;
     }
@@ -21,9 +21,8 @@
     height: 40px;
     width: 40px;
     margin: @margin-zero @margin-small;
-    transition: @transition-time opacity, @transition-time transform;
-    box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
     outline-color: transparent;
+    transition: @transition-time opacity, @transition-time transform;
     &:hover {
         cursor: pointer;
         opacity: .8;

@@ -4,19 +4,18 @@
     display: flex;
     flex-wrap: wrap;
     a {
-        padding: 0 @padding-medium;
-        margin-top: @margin-small;
-        margin-right: @margin-small;
-        border: 2px solid @color-text-secondary;
+        margin: @margin-small @margin-small @margin-zero @margin-zero;
+        border: 2px solid @color-text;
         border-radius: 20px;
+        padding: @padding-zero @padding-medium;
         text-transform: lowercase;
         transition: @transition-time background-color;
         &:hover {
             cursor: pointer;
+            border-color: @color-title;
+            background-color: @color-label;
+            color: @color-post-text;
             font-weight: bold;
-            border-color: @color-secondary;
-            background-color: @color-quaternary;
-            color: @color-text-primary;
         }
     }
 }

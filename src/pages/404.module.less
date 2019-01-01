@@ -1,8 +1,10 @@
 @import '../style/variables.less';
 
 .container {
-    padding: @padding-medium @padding-zero;
     display: flex;
+    @media @mobile {
+        flex-direction: column;
+    }
 }
 
 .image {
@@ -16,18 +18,19 @@
     text-align: center;
     a {
         display: block;
-        margin: @margin-medium;
-        padding: @padding-medium;
-        border: 2px solid @color-text-secondary;
-        transition: @transition-time;
         box-shadow: 10px 10px 10px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+        margin: @margin-medium;
+        border: 2px solid @color-text;
+        padding: @padding-medium;
+        font-size: @font-size * 1.3;
+        transition: @transition-time;
         &:hover {
-            background-color: @color-secondary;
-            color: @color-text-primary;
-            border-color: @color-secondary;
-            font-weight: bold;
-            text-shadow: 4px 4px 25px @color-text-primary;
             box-shadow: 20px 20px 20px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+            border-color: @color-title;
+            background-color: @color-title;
+            color: @color-post-text;
+            font-weight: bold;
+            text-shadow: 4px 4px 25px @color-post-text;
         }
     }
 }

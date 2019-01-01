@@ -4,7 +4,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 /* App imports */
 import * as style from './header.module.less'
-import Utils from '../../utils'
+import Utils from '../../../utils'
 
 const Header = ({ siteTitle, description, pages }) => (
   <div className={style.container}>

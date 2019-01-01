@@ -3,7 +3,7 @@
 .post {
     display: flex;
     margin: @margin-medium @margin-zero;
-    padding: @padding-small @padding-medium;
+    padding: @padding-small;
     background-color: @color-transparent;
     transition: @transition-time background-color;
     &:hover {
@@ -13,7 +13,6 @@
         }
     }
     @media @mobile {
-        padding: @padding-medium;
         flex-direction: column;
     }
 }
@@ -31,14 +30,11 @@
 }
 
 .content {
-    margin: @margin-zero @margin-small @margin-small @margin-medium;
-    padding: @padding-small @padding-zero;
+    margin: @margin-small;
     h2 {
         margin: @margin-small / 2 @margin-zero;
-        color: @color-secondary;
     }
     p {
         margin: @margin-zero;
-        word-break: break-all;
     }
 }

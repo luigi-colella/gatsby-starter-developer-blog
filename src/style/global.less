@@ -15,42 +15,39 @@
 .font('Roboto-Mono', normal, 'RobotoMono', 'Regular');
 .font('Roboto', 200, 'Montserrat', 'Light');
 
-/* Basic elements */
+/* Body */
 
 body {
     font-family: "Roboto", sans-serif !important;
-    background-color: @color-primary;
+    background-color: @color-theme;
     background-image: url('../images/texture-otis-redding.png');
-    color: @color-text-secondary;
+    color: @color-text;
     margin: @margin-zero;
 }
+
+/* Headings */
+
+.heading (@selector, @size, @weight, @color: @color-title) {
+    @{selector} {
+        font-size: @size;
+        font-weight: @weight;
+        color: @color;
+        @media @mobile {
+            font-size: @size / 1.5;
+        }
+    }
+}
+
+.heading(h1, @font-size * 3, 200);
+.heading(h2, @font-size * 2, 200);
+.heading(h3, @font-size * 1.5, 200);
+
+/* Links */
 
 h1, h2, h3, h4, h5, h6 {
     a {
         text-decoration: none;
         color: inherit;
-    }
-}
-
-h1 {
-    font-size: @font-size * 3;
-    font-weight: 200;
-    @media @mobile {
-        font-size: @font-size * 2;
-    }
-}
-h2 {
-    font-size: @font-size * 2;
-    font-weight: 200;
-    @media @mobile {
-        font-size: @font-size * 1.6;
-    }
-}
-h3 {
-    font-size: @font-size * 1.5;
-    font-weight: 200;
-    @media @mobile {
-        font-size: @font-size;
     }
 }
 
