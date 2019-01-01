@@ -8,15 +8,16 @@ import * as style from './post-list.module.less'
 import TagList from '../tag-list'
 import Utils from '../../utils'
 
-const PostList = ({ posts, tagPagePath }) => (
+const PostList = ({ posts, tagPagePath, highlightFirstItem }) => (
   <div>
-    {posts.map(post => {
+    {posts.map((post, index) => {
       const { title, date, path, tags, cover } = post.node.frontmatter
       const { excerpt } = post.node
+      const isHighlighted = highlightFirstItem && index === 0;
       return (
         <div key={title} className={style.post}>
-          <div className={style.preview}>
-            <Link to={Utils.resolvePageUrl(path)}><Img fixed={cover.childImageSharp.fixed} /></Link>
+          <div className={isHighlighted ? style.coverHighlighted : style.cover}>
+            <Link to={Utils.resolvePageUrl(path)}><Img fluid={cover.childImageSharp.fluid} /></Link>
           </div>
           <div className={style.content}>
             <Link to={Utils.resolvePageUrl(path)}>
@@ -49,5 +50,6 @@ PostList.propTypes = {
       })
     })
   })),
-  tagPagePath: PropTypes.string.isRequired
+  tagPagePath: PropTypes.string.isRequired,
+  highlightFirstItem: PropTypes.bool
 }

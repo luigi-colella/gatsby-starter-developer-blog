@@ -9,9 +9,11 @@
 
 ## 🔌 Features
 
-* Content in Markdown files
-* Syntax highlighting
+* File-Driven blog
+* Content in Markdown syntax
+* Styled using Less
 * Tags
+* Syntax highlighting
 * Meta tags for social sharing via link (Open Graph & Twitter)
 * Social share buttons
 * Comment (Disqus)

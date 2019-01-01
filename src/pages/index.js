@@ -30,8 +30,8 @@ const IndexPage = () => (
                 date(formatString: "MMMM DD, YYYY")
                 cover {
                   childImageSharp {
-                    fixed (height: 125 width: 222 cropFocus: CENTER) {
-                      ...GatsbyImageSharpFixed_tracedSVG
+                    fluid (maxWidth: 600) {
+                      ...GatsbyImageSharpFluid_tracedSVG
                     }
                   }
                 }
@@ -56,7 +56,11 @@ const IndexPage = () => (
             <div className={style.header}>
               <label>Last posts</label>
             </div>
-            <PostList posts={data.allMarkdownRemark.edges} tagPagePath={data.site.siteMetadata.pages.tag} />
+            <PostList
+              posts={data.allMarkdownRemark.edges}
+              tagPagePath={data.site.siteMetadata.pages.tag}
+              highlightFirstItem={true}
+            />
           </section>
         </div>
       </Layout>

@@ -46,8 +46,8 @@ export const pageQuery = graphql`
             tags
             cover {
               childImageSharp {
-                fixed (height: 125 width: 222 cropFocus: CENTER) {
-                  ...GatsbyImageSharpFixed_tracedSVG
+                fluid (maxWidth: 600) {
+                  ...GatsbyImageSharpFluid_tracedSVG
                 }
               }
             }

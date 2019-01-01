@@ -8,7 +8,7 @@
     transition: @transition-time background-color;
     &:hover {
         background-color: @color-transparent-darker;
-        .preview > a > div {
+        > div:first-child > a > div {
             transform: scale(1.1) !important
         }
     }
@@ -17,24 +17,39 @@
     }
 }
 
-.preview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    & > a {
-        overflow: hidden;
-        & > div {
-            transition: @transition-time transform;
-        }
+.cover {
+    overflow: hidden;
+    max-width: 30%;
+    width: 100%;
+    margin: auto;
+    & > a > div {
+        transition: @transition-time transform;
+    }
+    @media @mobile {
+        max-width: 100%;
+    }
+    @media @tablet {
+        max-width: 40%;
+    }
+}
+
+.coverHighlighted {
+    .cover();
+    max-width: 45%;
+    @media @tablet {
+        min-width: 65%;
     }
 }
 
 .content {
-    margin: @margin-small;
+    margin: auto @margin-small auto @margin-medium;
     h2 {
         margin: @margin-small / 2 @margin-zero;
     }
     p {
         margin: @margin-zero;
+    }
+    @media @mobile {
+        margin: @margin-small;
     }
 }
