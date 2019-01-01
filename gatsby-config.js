@@ -1,7 +1,7 @@
 const plugins = require('./gatsby-config.plugins');
 
 module.exports = {
-  pathPrefix: '/PersonalSite', // Prefix for GitHub Pages deployment
+  pathPrefix: '/gatsby-starter-blog', // Prefix for GitHub Pages deployment
   siteMetadata: {
     hostname: 'https://lgcolella.github.io',
     title: 'Luigi Colella',
