@@ -21,11 +21,15 @@ $ yarn add bottender@latest
 
 As we cannot stress enough the importance of a smooth process when it comes to developing, we try to avoid any sorts of breaking changes when updating to a new version. With that being said, developers should find it easy when making updates.
 
-You can find the full change log [on GitHub Realease Page](https://github.com/Yoctol/bottender/releases/tag/v0.15.0).
+You can find the full change log [on GitHub Realease Page](https://github.com/Yoctol/bottender/releases/tag/v0.15.0 "Release page").
 
 ## Improving Developer Experience
 
+![A screenshot of Google+](./image-1.png "Google+ window")
+
 Developer experience has alwasys been our top priority. With the latest version v0.15, we launch two new features that will better the developing process significantly. They will not only speed up your developing process, they also make debugging much simpler than you can ever imagine.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/XZmGGAbHqa0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### ConsoleBot
 
