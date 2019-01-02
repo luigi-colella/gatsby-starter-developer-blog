@@ -21,6 +21,10 @@ const Layout = ({ children }) => (
               about
               archive
             }
+            social {
+              github
+              linkedin
+            }
           }
         }
       }
@@ -31,6 +35,7 @@ const Layout = ({ children }) => (
           siteTitle={data.site.siteMetadata.title}
           description={data.site.siteMetadata.description}
           pages={data.site.siteMetadata.pages}
+          social={data.site.siteMetadata.social}
         />
         <div className={container}>{children}</div>
         <Footer />

@@ -25,6 +25,7 @@
     - Syntax highlighting
     - Images optimized for fast loading
     - Tags
+    - Various available icon sets: Material Design, Font Awesome, Ionicons, Typicons, Github Octicons, Feather
     - Social share buttons
     - Comments (Disqus)
     - RSS Feed

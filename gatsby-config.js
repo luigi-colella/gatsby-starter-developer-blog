@@ -13,6 +13,10 @@ module.exports = {
       tag: 'tag',
       about: 'about',
       archive: 'archive'
+    },
+    social: {
+      github: 'https://github.com/lgcolella',
+      linkedin: ''
     }
   },
   plugins,
