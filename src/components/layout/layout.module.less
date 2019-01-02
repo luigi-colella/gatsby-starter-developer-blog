@@ -2,6 +2,9 @@
 
 .container {
     width: 90%;
-    margin: auto;
+    margin: @margin-medium * 5 auto auto auto;
     padding: @padding-small;
+    @media @mobile {
+        margin-top: @margin-medium * 6;
+    }
 }

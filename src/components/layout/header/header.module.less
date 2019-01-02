@@ -1,14 +1,21 @@
 @import '../../../style/variables';
 
 .container {
-    margin: @margin-zero @margin-medium;
-    padding: @padding-medium;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 4px 3px rgba(0,0,0,.5);
+    z-index: 2;
+    padding: @padding-small @padding-medium;
+    background-color: @color-theme;
+    background-image: @texture;
     @media @mobile {
-        margin: @margin-zero @margin-small;
-        padding: @padding-small;
+        padding: @padding-small @padding-zero;
         flex-direction: column;
     }
 }
@@ -24,9 +31,19 @@
         margin: @margin-zero;
         padding: @padding-zero @padding-small;
         color: @color-text;
+        transition: @transition-time color;
     }
     p {
         margin: @margin-zero;
+        transition: @transition-time color;
+    }
+    &:hover {
+        h1 {
+            color: @color-title;
+        }
+        p {
+            color: @color-title;
+        }
     }
 }
 
