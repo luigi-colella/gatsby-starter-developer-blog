@@ -1,5 +1,12 @@
 @import '../../style/variables.less';
 
+.containerMosaic {
+    @media @desktop {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 .post {
     display: flex;
     margin: @margin-medium @margin-zero;
@@ -14,6 +21,14 @@
     }
     @media @mobile {
         flex-direction: column;
+    }
+}
+
+.postMosaic {
+    .post();
+    @media @desktop {
+        flex-direction: column;
+        flex: 0 1 50%;
     }
 }
 
@@ -41,6 +56,14 @@
     }
 }
 
+.coverMosaic {
+    .cover();
+    @media @desktop {
+        max-width: 100%;
+        margin: @margin-zero;
+    }
+}
+
 .content {
     margin: auto @margin-small auto @margin-medium;
     h2 {
@@ -51,5 +74,12 @@
     }
     @media @mobile {
         margin: @margin-small;
+    }
+}
+
+.contentMosaic {
+    .content();
+    @media @desktop {
+        margin: @margin-small @margin-zero;
     }
 }

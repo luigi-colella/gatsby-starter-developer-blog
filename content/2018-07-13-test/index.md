@@ -1,7 +1,7 @@
 ---
 title: What I Learned About Writing After a Summer Alone in the Woods
 date: "2018-08-03"
-tags: [vuejs, react]
+tags: [vuejs, react, angular]
 path: "blog/bottender-015"
 cover: "./preview.jpg"
 coverAlt: bottender cover image

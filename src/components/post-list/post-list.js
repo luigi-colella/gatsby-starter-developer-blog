@@ -8,18 +8,31 @@ import * as style from './post-list.module.less'
 import TagList from '../tag-list'
 import Utils from '../../utils'
 
-const PostList = ({ posts, tagPagePath, highlightFirstItem }) => (
-  <div>
+const PostList = ({ posts, tagPagePath, highlightFirstItem, mosaicView }) => (
+  <div className={mosaicView ? style.containerMosaic : null}>
     {posts.map((post, index) => {
+      
       const { title, date, path, tags, cover } = post.node.frontmatter
       const { excerpt } = post.node
-      const isHighlighted = highlightFirstItem && index === 0;
+      /* Style classes */
+      const postStyle = mosaicView ? style.postMosaic : style.post
+      let coverStyle;
+      if (highlightFirstItem && index === 0) {
+        coverStyle = style.coverHighlighted;
+      } else if (mosaicView) {
+        coverStyle = style.coverMosaic;
+      } else {
+        coverStyle = style.cover;
+      }
+      const contentStyle = mosaicView ? style.contentMosaic : style.content;
+      /* * */
+      
       return (
-        <div key={title} className={style.post}>
-          <div className={isHighlighted ? style.coverHighlighted : style.cover}>
+        <div key={title} className={postStyle}>
+          <div className={coverStyle}>
             <Link to={Utils.resolvePageUrl(path)}><Img fluid={cover.childImageSharp.fluid} /></Link>
           </div>
-          <div className={style.content}>
+          <div className={contentStyle}>
             <Link to={Utils.resolvePageUrl(path)}>
               <label>{date}</label>
               <h2>{title}</h2>
@@ -51,5 +64,6 @@ PostList.propTypes = {
     })
   })),
   tagPagePath: PropTypes.string.isRequired,
-  highlightFirstItem: PropTypes.bool
+  highlightFirstItem: PropTypes.bool,
+  mosaicView: PropTypes.bool
 }

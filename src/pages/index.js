@@ -37,7 +37,6 @@ const IndexPage = () => (
                 }
               }
               excerpt
-              fileAbsolutePath
             }
           }
         }

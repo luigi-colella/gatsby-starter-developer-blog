@@ -11,14 +11,19 @@ import './highlight-syntax.less'
 import Layout from '../../components/layout'
 import TagList from '../../components/tag-list'
 import SEO from '../../components/seo'
+import PostList from '../../components/post-list'
 import Utils from '../../utils'
 
 const Post = ({ data }) => {
+
   const { html, excerpt, frontmatter } = data.markdownRemark
   const { title, date, tags, cover, coverAlt, path } = frontmatter
   const img = cover.childImageSharp.fluid
   const canonicalUrl = Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)
   const coverUrl = Utils.resolveUrl(data.site.siteMetadata.hostname, img.src)
+  const tagPagePath = data.site.siteMetadata.pages.tag;
+  const suggestedPosts = Utils.getSuggestedPosts(data.markdownRemark, data.allMarkdownRemark, 3)
+
   return (
     <Layout>
       <SEO
@@ -34,11 +39,7 @@ const Post = ({ data }) => {
           <div className={style.title}>
             <label>{date}</label>
             <h1>{title}</h1>
-            <TagList
-              tags={tags}
-              tagPagePath={data.site.siteMetadata.pages.tag}
-              position="center"
-            />
+            <TagList tags={tags} tagPagePath={tagPagePath} position="center" />
           </div>
           <div className={style.cover}>
             <Img fluid={img} title={title}/>
@@ -53,10 +54,11 @@ const Post = ({ data }) => {
             coverUrl={coverUrl}
           />
         </div>
-        <Comments
-          pageCanonicalUrl={canonicalUrl}
-          pageId={title}
-        />
+        <div className={style.suggestedPosts}>
+          <h3>Did you like it? Why don't you try also...</h3>
+          <PostList posts={suggestedPosts} tagPagePath={tagPagePath} mosaicView={true} />
+        </div>
+        <Comments pageCanonicalUrl={canonicalUrl} pageId={title} />
       </div>
     </Layout>
   )
@@ -92,6 +94,28 @@ export const pageQuery = graphql`
         }
       }
       pathPrefix
+    }
+    allMarkdownRemark (
+      filter: { frontmatter: { path: { ne: $postPath } } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            path
+            title
+            tags
+            date(formatString: "MMMM DD, YYYY")
+            cover {
+              childImageSharp {
+                fluid (maxWidth: 600) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
+              }
+            }
+          }
+          excerpt
+        }
+      }
     }
   }
 `
