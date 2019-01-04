@@ -19,11 +19,12 @@ const Layout = ({ children }) => (
             pages {
               home
               about
-              archive
+              tag
             }
             social {
               github
               linkedin
+              rss
             }
           }
         }

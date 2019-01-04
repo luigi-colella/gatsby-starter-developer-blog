@@ -8,11 +8,16 @@ import Utils from '../../utils'
 
 const TagList = ({ tags, tagPagePath, position }) => (
   <div className={style.tags} style={{ justifyContent: position === 'center' ? 'center' : null }}>
-    {tags.map(tag => (
-      <Link to={Utils.resolvePageUrl(tagPagePath, tag)} key={tag}>
-        {tag}
-      </Link>
-    ))}
+    {
+      tags
+      .filter((tag, index) => index === tags.indexOf(tag)) // Remove duplicate values
+      .sort()
+      .map(tag => (
+        <Link to={Utils.resolvePageUrl(tagPagePath, tag)} key={tag}>
+          {tag}
+        </Link>
+      ))
+    }
   </div>
 )
 

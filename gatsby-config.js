@@ -10,13 +10,13 @@ module.exports = {
     pages: {
       home: '/',
       blog: 'blog/',
-      tag: 'tag',
       about: 'about',
-      archive: 'archive'
+      tag: 'tag',
     },
     social: {
       github: 'https://github.com/lgcolella',
-      linkedin: ''
+      linkedin: '',
+      rss: '/rss.xml'
     }
   },
   plugins,

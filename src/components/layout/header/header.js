@@ -2,7 +2,7 @@
 import { Link } from 'gatsby'
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FaGithub, FaLinkedin, FaBars } from 'react-icons/fa'
+import { FaBars, FaGithub, FaLinkedin, FaRss } from 'react-icons/fa'
 /* App imports */
 import * as style from './header.module.less'
 import Utils from '../../../utils'
@@ -33,11 +33,12 @@ const Header = ({ siteTitle, description, pages, social }) => {
         <ul>
           <li><Link to={Utils.resolvePageUrl(pages.home)}>Home</Link></li>
           <li><Link to={Utils.resolvePageUrl(pages.about)}>About</Link></li>
-          <li><Link to={Utils.resolvePageUrl(pages.archive)}>Archive</Link></li>
+          <li><Link to={Utils.resolvePageUrl(pages.tag)}>Tags</Link></li>
         </ul>
         <ul>
           <li><a rel="nofollow" href={social.github}><FaGithub size="30"/></a></li>
           <li><a rel="nofollow" href={social.linkedin}><FaLinkedin size="30"/></a></li>
+          <li><Link to={Utils.resolveUrl(social.rss)}><FaRss size="30" /></Link></li>
         </ul>
       </div>
     </div>
@@ -50,11 +51,12 @@ Header.propTypes = {
   pages: PropTypes.shape({
     home: PropTypes.string.isRequired,
     about: PropTypes.string.isRequired,
-    archive: PropTypes.string.isRequired
+    tag: PropTypes.string.isRequired
   }).isRequired,
   social: PropTypes.shape({
     github: PropTypes.string,
-    linkedin: PropTypes.string
+    linkedin: PropTypes.string,
+    rss: PropTypes.string
   })
 }
 

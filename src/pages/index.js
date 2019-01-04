@@ -20,7 +20,9 @@ const IndexPage = () => (
             }
           }
         }
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(
+          sort: { fields: [frontmatter___date], order: DESC }
+        ) {
           edges {
             node {
               frontmatter {
@@ -53,7 +55,7 @@ const IndexPage = () => (
         <div>
           <section>
             <div className={style.header}>
-              <label>Last posts</label>
+              <h1>Last posts</h1>
             </div>
             <PostList
               posts={data.allMarkdownRemark.edges}

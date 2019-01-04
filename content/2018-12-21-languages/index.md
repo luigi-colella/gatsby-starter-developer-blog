@@ -1,7 +1,7 @@
 ---
 title: Languages examples
 path: blog/markdown-languages
-tags: [vuejs, markdown]
+tags: [vuejs, travis]
 cover: ./preview.jpeg
 coverAlt: most used programming languages
 date: 2018-12-21
