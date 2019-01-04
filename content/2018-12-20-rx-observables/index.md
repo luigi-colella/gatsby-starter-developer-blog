@@ -1,11 +1,10 @@
 ---
-title: Top 7 RxJS patterns
-tags: ["typescript", "vuejs", "angular"]
+title: What are and how to use Observables in RxJS
+tags: [typescript, javascript, rxjs]
 date: 2018-12-30T05:25:44.226Z
-description: Learn how to rotate an actor every frame.
-path: "blog/top-7-rxjs-patterns"
-cover: "./preview.png"
-coverAlt: 'learn observables'
+path: blog/top-7-rxjs-patterns
+cover: ./preview.png
+coverAlt: learn observables in RxJS
 ---
 
 Observables are lazy Push collections of multiple values. They fill the missing spot in the following table:
