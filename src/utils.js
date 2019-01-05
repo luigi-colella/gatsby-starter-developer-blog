@@ -2,7 +2,7 @@
 const Utils = {
   resolveUrl: (...paths) => {
     return paths.reduce((resolvedUrl, path) => {
-        let urlPath = path.trim()
+        let urlPath = path.toString().trim()
         if (urlPath) resolvedUrl += (resolvedUrl === '' ? '' : '/') + urlPath.replace(/^\/|\/$/g, '')
         return resolvedUrl;
     }, '')

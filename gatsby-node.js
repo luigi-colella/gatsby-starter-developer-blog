@@ -14,7 +14,9 @@ exports.createPages = ({ actions, graphql }) => {
           pages {
             blog
             tag
+            archive
           }
+          postsForArchivePage
         }
       }
       allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
@@ -64,6 +66,26 @@ exports.createPages = ({ actions, graphql }) => {
         }
       })
     })
+
+    /* Archive pages */
+    const postsForPage = site.siteMetadata.postsForArchivePage;
+    const archivePages = Math.ceil(allMarkdownRemark.edges.length / postsForPage);
+    for (let i = 0; i < archivePages; i++) {
+
+      let posts = allMarkdownRemark.edges.slice(i * postsForPage, i * postsForPage + postsForPage);
+      let archivePage = i + 1;
+
+      createPage({
+        path: Utils.resolvePageUrl(site.siteMetadata.pages.archive, archivePage),
+        component: path.resolve('src/templates/archive/archive.js'),
+        context: {
+          postPaths: posts.map(edge => edge.node.frontmatter.path),
+          archivePage: archivePage,
+          lastArchivePage: archivePages
+        }
+      })
+
+    }
 
   })
 

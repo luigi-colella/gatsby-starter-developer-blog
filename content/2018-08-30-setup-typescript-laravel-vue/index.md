@@ -64,7 +64,7 @@ npm install
 
 Tweak the resources/views/welcome.blade.php template file to add Vue support and to render your component like so:
 
-```php
+```html
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>

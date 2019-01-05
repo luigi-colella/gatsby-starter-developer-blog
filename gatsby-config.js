@@ -9,10 +9,12 @@ module.exports = {
     author: 'lcolella',
     pages: {
       home: '/',
-      blog: 'blog/',
+      blog: 'blog',
       about: 'about',
       tag: 'tag',
+      archive: 'archive'
     },
+    postsForArchivePage: 3,
     social: {
       github: 'https://github.com/lgcolella',
       linkedin: '',

@@ -5,6 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostList from '../components/post-list'
+import ArchivePagination from '../components/archive-pagination'
 import * as style from './index.module.less'
 
 const IndexPage = () => (
@@ -62,6 +63,7 @@ const IndexPage = () => (
               tagPagePath={data.site.siteMetadata.pages.tag}
               highlightFirstItem={true}
             />
+            <ArchivePagination nextPage={2} />
           </section>
         </div>
       </Layout>

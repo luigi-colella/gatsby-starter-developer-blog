@@ -1,10 +1,11 @@
 /* Vendor imports */
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 /* App imports */
-import Layout from '../components/layout/layout'
-import SEO from '../components/seo/seo'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import Button from '../components/button'
 import * as style from './404.module.less'
 import Utils from '../utils'
 
@@ -22,7 +23,7 @@ const NotFoundPage = ({ data }) => (
       </div>
       <div className={style.message}>
         <h1>Page not found</h1>
-        <Link to={Utils.resolvePageUrl(data.site.siteMetadata.pages.home)}>Return to homepage</Link>
+        <Button to={Utils.resolvePageUrl(data.site.siteMetadata.pages.home)}>Return to homepage</Button>
       </div>
     </div>
   </Layout>
