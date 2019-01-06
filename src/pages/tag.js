@@ -9,16 +9,17 @@ import Utils from '../utils'
 import * as style from './tag.module.less'
 
 const Tag = ({ data }) => {
+
   const rawTags = data.allMarkdownRemark.edges.map(edge => edge.node.frontmatter.tags).reduce((prev, curr) => prev.concat(curr));
   const tags = rawTags.filter((tag, index) => index === rawTags.indexOf(tag)).sort() // Remove duplicates and sort values
   const tagPage = data.site.siteMetadata.pages.tag
+
   return (
     <Layout title="Tags">
       <SEO
         title="Tags"
         description="All present tags in the site"
         path={tagPage}
-        keywords={tags}
       />
       <div className={style.container}>
         {tags.map(tag => (

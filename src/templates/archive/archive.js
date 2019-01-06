@@ -19,7 +19,6 @@ const Archive = ({ data, pageContext }) => {
         title={`Archive | Page ${archivePage}`}
         description="Old posts"
         path={data.site.siteMetadata.pages.archive}
-        keywords={['archive']}
       />
       <PostList posts={data.allMarkdownRemark.edges} tagPagePath={data.site.siteMetadata.pages.tag}/>
       <ArchivePagination prevPage={prevPage} nextPage={nextPage} />

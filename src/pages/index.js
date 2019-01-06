@@ -50,7 +50,6 @@ const IndexPage = () => (
           title={data.site.siteMetadata.title}
           description={data.site.siteMetadata.description}
           path=''
-          keywords={['javascript', 'frontend', 'blog']}
         />
         <div>
           <section>

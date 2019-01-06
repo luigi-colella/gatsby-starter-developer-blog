@@ -32,8 +32,8 @@ const Header = ({ siteTitle, description, pages, social }) => {
       <div id={idMenu} className={style.list}>
         <ul>
           <li><Link to={Utils.resolvePageUrl(pages.home)}>Home</Link></li>
-          <li><Link to={Utils.resolvePageUrl(pages.about)}>About</Link></li>
           <li><Link to={Utils.resolvePageUrl(pages.tag)}>Tags</Link></li>
+          <li><Link to={Utils.resolvePageUrl(pages.about)}>About</Link></li>
         </ul>
         <ul>
           <li><a rel="nofollow" href={social.github}><FaGithub size="30"/></a></li>

@@ -65,7 +65,7 @@ SEO.propTypes = {
     url: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired
   }),
-  keywords: PropTypes.arrayOf(PropTypes.string).isRequired,
+  keywords: PropTypes.arrayOf(PropTypes.string),
   meta: PropTypes.arrayOf(PropTypes.shape({
     property: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired
