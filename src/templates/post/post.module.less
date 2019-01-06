@@ -1,16 +1,13 @@
 @import '../../style/variables.less';
 
-.container {
-    margin: @margin-medium @margin-zero;
-}
-
 .header {
     display: flex;
     justify-content: space-between;
-    background-color: @color-transparent-darker;
+    margin-bottom: @margin-large;
     text-align: center;
     @media @mobile, @tablet {
-        flex-direction: column;
+        flex-direction: column-reverse;
+        margin-bottom: @margin-zero;
     }
 }
 
@@ -24,7 +21,9 @@
 
 .cover {
     min-width: 50%;
+    box-shadow: 7px 7px 11px 3px rgba(0, 0, 0, 0.6);
     margin: auto @margin-zero auto auto;
+    border: 1px solid @color-post-text;
     @media @mobile, @tablet {
         width: 100%;
     }
@@ -36,81 +35,7 @@
     color: @color-post-text;
     line-height: 1.6;
     font-size: @font-size * 1.1;
-    article {
-        overflow-x: hidden;
-    }
-    h1, h2, h3, h4, h5, h6 {
-        color: @color-post-text;
-    }
-    h1, h2 {
-        text-align: center;
-        border-bottom: 1px solid @color-post-line;
-    }
-    a {
-        color: @color-label;
-        text-decoration: underline;
-    }
-    figcaption {
-        max-width: 800px;
-        margin: auto;
-    }
-    iframe {
-        display: block;
-        margin: auto;
-        @media @mobile {
-            max-width: 300px;
-        }
-    }
-    table {
-        margin: auto;
-        border-spacing: 0px;
-        overflow-x: auto;
-        td, th {
-            padding: @padding-small @padding-medium;
-            border: 1px solid @color-post-line;
-        }
-        th {
-            text-align: center;
-        }
-        thead {
-            background-color: @color-post-line;
-            th, td {
-                border-width: 1px 1px 0px 0px;
-                &:first-child {
-                    border-left-width: 1px;
-                }
-            }
-        }
-        tbody {
-            tr {
-                th, td {
-                    border-width: 1px 1px 0px 0px;
-                    &:first-child {
-                        border-left-width: 1px;
-                    }
-                }
-                &:last-child th, &:last-child td {
-                    border-bottom-width: 1px;
-                }
-            }
-        }
-    }
-    :not(pre) > code[class*="language-"] {
-        font-family: 'Roboto-Mono';
-        padding: .1em;
-        border-radius: 0px;
-        background-color: @color-post-line;
-        color: inherit;
-    }
     @media @desktop {
         padding: @padding-medium @padding-medium * 5;
-    }
-}
-
-.suggestedPosts {
-    h3 {
-        margin-bottom: @margin-zero;
-        color: @color-text;
-        text-align: center;
     }
 }

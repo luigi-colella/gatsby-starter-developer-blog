@@ -2,17 +2,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
-import 'prismjs/themes/prism-solarizedlight.css';
 /* App imports */
+import Layout from '../../components/layout'
+import SEO from '../../components/seo'
+import TagList from '../../components/tag-list'
+import Article from './article'
 import Comments from './comments'
 import Share from './share'
-import * as style from './post.module.less'
-import './highlight-syntax.less'
-import Layout from '../../components/layout'
-import TagList from '../../components/tag-list'
-import SEO from '../../components/seo'
-import PostList from '../../components/post-list'
+import SuggestedPosts from './suggested-posts'
 import Utils from '../../utils'
+import * as style from './post.module.less'
 
 const Post = ({ data }) => {
 
@@ -34,7 +33,7 @@ const Post = ({ data }) => {
         image={{url: img.src, alt: coverAlt}}
         keywords={tags}
       />
-      <div className={style.container}>
+      <div>
         <div className={style.header}>
           <div className={style.title}>
             <label>{date}</label>
@@ -46,7 +45,7 @@ const Post = ({ data }) => {
           </div>
         </div>
         <div className={style.content}>
-          <article dangerouslySetInnerHTML={{ __html: html }} />
+          <Article html={html} />
           <Share
             pageCanonicalUrl={canonicalUrl}
             title={title}
@@ -54,10 +53,7 @@ const Post = ({ data }) => {
             coverUrl={coverUrl}
           />
         </div>
-        <div className={style.suggestedPosts}>
-          <h3>Did you like it? Why don't you try also...</h3>
-          <PostList posts={suggestedPosts} tagPagePath={tagPagePath} mosaicView={true} />
-        </div>
+        <SuggestedPosts posts={suggestedPosts} tagPagePath={tagPagePath} />
         <Comments pageCanonicalUrl={canonicalUrl} pageId={title} />
       </div>
     </Layout>

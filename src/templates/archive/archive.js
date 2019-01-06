@@ -6,7 +6,6 @@ import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
 import ArchivePagination from '../../components/archive-pagination'
-import * as style from './archive.module.less'
 
 const Archive = ({ data, pageContext }) => {
 
@@ -15,14 +14,13 @@ const Archive = ({ data, pageContext }) => {
   const nextPage = archivePage < lastArchivePage ? archivePage + 1 : null;
 
   return (
-    <Layout>
+    <Layout title="Archive">
       <SEO
         title={`Archive | Page ${archivePage}`}
         description="Old posts"
         path={data.site.siteMetadata.pages.archive}
         keywords={['archive']}
       />
-      <h1 className={style.title}>Archive</h1>
       <PostList posts={data.allMarkdownRemark.edges} tagPagePath={data.site.siteMetadata.pages.tag}/>
       <ArchivePagination prevPage={prevPage} nextPage={nextPage} />
     </Layout>

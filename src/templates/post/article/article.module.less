@@ -1,0 +1,70 @@
+@import '../../../style/variables.less';
+
+.container {
+  article {
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: @color-post-text;
+  }
+  h1, h2 {
+    text-align: center;
+    border-bottom: 1px solid @color-post-line;
+  }
+  a {
+    color: @color-label;
+    text-decoration: underline;
+  }
+  figcaption {
+    max-width: 800px;
+    margin: auto;
+  }
+  iframe {
+    display: block;
+    margin: auto;
+    @media @mobile {
+      max-width: 300px;
+    }
+  }
+  table {
+    margin: auto;
+    border-spacing: 0px;
+    overflow-x: auto;
+    td, th {
+      padding: @padding-small @padding-medium;
+      border: 1px solid @color-post-line;
+    }
+    th {
+      text-align: center;
+    }
+    thead {
+      background-color: @color-post-line;
+      th, td {
+        border-width: 1px 1px 0px 0px;
+        &:first-child {
+          border-left-width: 1px;
+        }
+      }
+    }
+    tbody {
+      tr {
+        th, td {
+          border-width: 1px 1px 0px 0px;
+          &:first-child {
+            border-left-width: 1px;
+          }
+        }
+        &:last-child th, &:last-child td {
+          border-bottom-width: 1px;
+        }
+      }
+    }
+  }
+  :not(pre) > code[class*="language-"] {
+    font-family: 'Roboto-Mono';
+    padding: .1em;
+    border-radius: 0px;
+    background-color: @color-post-line;
+    color: inherit;
+  }
+}

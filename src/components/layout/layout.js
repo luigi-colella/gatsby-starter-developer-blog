@@ -6,9 +6,9 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './header'
 import Footer from './footer'
 import '../../style/global.less'
-import { container } from './layout.module.less'
+import * as style from './layout.module.less'
 
-const Layout = ({ children }) => (
+const Layout = ({ children, title }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -38,7 +38,10 @@ const Layout = ({ children }) => (
           pages={data.site.siteMetadata.pages}
           social={data.site.siteMetadata.social}
         />
-        <div className={container}>{children}</div>
+        <div className={style.container}>
+          { title ? <div className={style.title}><h1>{title}</h1></div> : null }
+          {children}
+        </div>
         <Footer />
       </>
     )}
@@ -47,6 +50,11 @@ const Layout = ({ children }) => (
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  title: PropTypes.string
+}
+
+Layout.defaultProps = {
+  title: ''
 }
 
 export default Layout

@@ -6,7 +6,6 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostList from '../components/post-list'
 import ArchivePagination from '../components/archive-pagination'
-import * as style from './index.module.less'
 
 const IndexPage = () => (
   <StaticQuery
@@ -46,7 +45,7 @@ const IndexPage = () => (
       }
     `}
     render={data => (
-      <Layout>
+      <Layout title="Last posts">
         <SEO
           title={data.site.siteMetadata.title}
           description={data.site.siteMetadata.description}
@@ -55,9 +54,6 @@ const IndexPage = () => (
         />
         <div>
           <section>
-            <div className={style.header}>
-              <h1>Last posts</h1>
-            </div>
             <PostList
               posts={data.allMarkdownRemark.edges}
               tagPagePath={data.site.siteMetadata.pages.tag}

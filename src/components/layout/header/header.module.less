@@ -33,10 +33,6 @@
 }
 
 .title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
     h1 {
         font-size: @font-size * 1.75;
@@ -50,10 +46,7 @@
         transition: @transition-time color;
     }
     &:hover {
-        h1 {
-            color: @color-title;
-        }
-        p {
+        h1, p {
             color: @color-title;
         }
     }

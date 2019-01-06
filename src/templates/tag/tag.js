@@ -5,25 +5,22 @@ import { graphql } from 'gatsby'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
-import * as style from './tag.module.less'
 import Utils from '../../utils'
 
 const TagPage = ({ pageContext, data }) => {
+
   const posts = data.allMarkdownRemark.edges
   const tagName = pageContext.tag
   const tagPagePath = data.site.siteMetadata.pages.tag;
+  
   return (
-    <Layout>
+    <Layout title={tagName}>
       <SEO
         title={tagName}
         description={`All post about ${tagName}`}
         path={Utils.resolvePageUrl(tagPagePath, tagName)}
         keywords={[tagName]}
       />
-      <div className={style.header}>
-        <h1>{tagName}</h1>
-        <label>{posts.length} Posts</label>
-      </div>
       <PostList posts={posts} tagPagePath={tagPagePath}/>
     </Layout>
   )
