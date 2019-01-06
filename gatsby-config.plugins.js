@@ -47,8 +47,6 @@ module.exports = [
         ]
       }
     },
-    feedPlugin
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    feedPlugin,
+    `gatsby-plugin-sitemap`
 ]

@@ -14,8 +14,8 @@ function SEO({ title, description, path, lang, keywords, contentType, image, met
 
         const metaDescription = description || data.site.siteMetadata.description
         const metaKeywords = (keywords && keywords.length > 0) ? { name: 'keywords', content: keywords.join(', ') } : []
-        const pageUrl = Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)
-        const metaImageUrl = Utils.resolveUrl(data.site.siteMetadata.hostname, (image ? image.url : data.file.childImageSharp.fixed.src))
+        const pageUrl = Utils.resolvePageUrl(data.site.siteMetadata.siteUrl, data.site.pathPrefix, path)
+        const metaImageUrl = Utils.resolveUrl(data.site.siteMetadata.siteUrl, (image ? image.url : data.file.childImageSharp.fixed.src))
         const metaImageAlt = image ? image.alt : metaDescription
 
         return (
@@ -78,7 +78,7 @@ const detailsQuery = graphql`
   query DefaultSEOQuery {
     site {
       siteMetadata {
-        hostname
+        siteUrl
         title
         description
         author

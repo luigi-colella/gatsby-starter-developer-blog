@@ -25,10 +25,12 @@
     - Syntax highlighting
     - Images optimized for fast loading
     - Tags
+    - Archive
     - Various available icon sets: Material Design, Font Awesome, Ionicons, Typicons, Github Octicons, Feather
     - Social share buttons
     - Comments (Disqus)
     - RSS Feed
+    - Sitemap
     - Favicon
     - Web App Manifest (manifest.json)
 * Style

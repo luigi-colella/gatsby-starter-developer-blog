@@ -18,8 +18,8 @@ const Post = ({ data }) => {
   const { html, excerpt, frontmatter } = data.markdownRemark
   const { title, date, tags, cover, coverAlt, path } = frontmatter
   const img = cover.childImageSharp.fluid
-  const canonicalUrl = Utils.resolvePageUrl(data.site.siteMetadata.hostname, data.site.pathPrefix, path)
-  const coverUrl = Utils.resolveUrl(data.site.siteMetadata.hostname, img.src)
+  const canonicalUrl = Utils.resolvePageUrl(data.site.siteMetadata.siteUrl, data.site.pathPrefix, path)
+  const coverUrl = Utils.resolveUrl(data.site.siteMetadata.siteUrl, img.src)
   const tagPagePath = data.site.siteMetadata.pages.tag;
   const suggestedPosts = Utils.getSuggestedPosts(data.markdownRemark, data.allMarkdownRemark, 3)
 
@@ -84,7 +84,7 @@ export const pageQuery = graphql`
     }
     site {
       siteMetadata {
-        hostname
+        siteUrl
         pages {
           tag
         }

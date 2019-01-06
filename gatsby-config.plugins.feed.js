@@ -8,7 +8,7 @@ module.exports = {
         site {
           pathPrefix
           siteMetadata {
-            hostname
+            siteUrl
             title
             description
             author
@@ -20,13 +20,13 @@ module.exports = {
       {
         serialize: ({ query: { site, allMarkdownRemark } }) => {
           return allMarkdownRemark.edges.map(({ node }) => {
-            const { hostname, author } = site.siteMetadata
+            const { siteUrl, author } = site.siteMetadata
             const { title, date, path } = node.frontmatter
             return Object.assign({}, node.frontmatter, {
               title: title,
               description: node.excerpt,
-              url: Utils.resolveUrl(hostname, site.pathPrefix, path),
-              guid: hostname + path + title,
+              url: Utils.resolveUrl(siteUrl, site.pathPrefix, path),
+              guid: siteUrl + path + title,
               date: date,
               author: author,
               custom_elements: [
