@@ -6,14 +6,14 @@ module.exports = {
   options: {
     feeds: [
       {
-        serialize: () => {
+        serialize: ({ query: { allMarkdownRemark } }) => {
           return allMarkdownRemark.edges.map(({ node }) => {
-            const { siteUrl, author } = config
+            const { siteUrl, pathPrefix, author } = config
             const { title, date, path } = node.frontmatter
             return Object.assign({}, node.frontmatter, {
               title: title,
               description: node.excerpt,
-              url: utils.resolveUrl(siteUrl, site.pathPrefix, path),
+              url: utils.resolveUrl(siteUrl, pathPrefix, path),
               guid: siteUrl + path + title,
               date: date,
               author: author,

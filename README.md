@@ -39,6 +39,7 @@
 * SEO
     - OpenGraph Tags
     - Twitter Tags for Twitter Cards
+    - Roboto.txt file
 * Development tools
     - ESlint for linting
     - Prettier for code style

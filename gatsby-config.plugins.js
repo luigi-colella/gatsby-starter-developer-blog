@@ -48,5 +48,6 @@ module.exports = [
       }
     },
     feedPlugin,
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-robots-txt`
 ]
