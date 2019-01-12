@@ -31,7 +31,6 @@
     - Social share buttons
     - Comments (Disqus)
     - RSS Feed
-    - Sitemap
     - Favicon
     - Web App Manifest (manifest.json)
 * Style
@@ -40,6 +39,7 @@
 * SEO
     - OpenGraph Tags
     - Twitter Tags for Twitter Cards
+    - Sitemap
     - Roboto.txt file
 * Development tools
     - ESlint for linting
