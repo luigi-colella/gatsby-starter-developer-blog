@@ -1,35 +1,40 @@
 /* Vendor imports */
+import React, { Component } from 'react'
 import { Link } from 'gatsby'
-import React from 'react'
 import { FaBars, FaGithub, FaLinkedin, FaRss } from 'react-icons/fa'
 /* App imports */
 import * as style from './header.module.less'
 import Config from '../../../../config'
 import Utils from '../../../utils'
 
-const Header = () => {
-  const idMenu = 'collapsable--menu'
-  const openMenu = () => {
-    if (openMenu.opened) {
-      document.getElementById(idMenu).style.display = "none";
-      openMenu.opened = false;
-    } else {
-      document.getElementById(idMenu).style.display = "flex";
-      openMenu.opened = true;
+class Header extends Component {
+
+  constructor () {
+    super()
+    this.state = {
+      collapsedMenu: true
     }
+    this.toggleMenu = this.toggleMenu.bind(this)
   }
-  return (
+
+  toggleMenu = () => {
+    this.setState({
+      collapsedMenu: !this.state.collapsedMenu
+    })
+  }
+
+  render = () => (
     <div className={style.container}>
       <div className={style.titleContainer}>
         <div className={style.title}>
           <Link to={Utils.resolvePageUrl(Config.pages.home)}>
-            <h1>{Config.siteTitle}</h1>
+            <h1>{Config.siteTitle} {this.state.ver}</h1>
             <p>{Config.siteDescription}</p>
           </Link>
         </div>
-        <div className={style.menuButton}><FaBars size="30" onClick={openMenu}/></div>
+        <div className={style.menuButton}><FaBars size="30" onClick={this.toggleMenu}/></div>
       </div>
-      <div id={idMenu} className={style.list}>
+      <div className={[style.list, ( this.state.collapsedMenu ? style.collapsedMenu : style.expandedMenu )].join(' ')}>
         <ul>
           <li><Link to={Utils.resolvePageUrl(Config.pages.home)}>Home</Link></li>
           <li><Link to={Utils.resolvePageUrl(Config.pages.tag)}>Tags</Link></li>
