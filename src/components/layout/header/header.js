@@ -1,7 +1,7 @@
 /* Vendor imports */
 import React, { Component } from 'react'
 import { Link } from 'gatsby'
-import { FaBars, FaGithub, FaLinkedin, FaRss } from 'react-icons/fa'
+import { FaBars, FaTimes, FaGithub, FaLinkedin, FaRss } from 'react-icons/fa'
 /* App imports */
 import * as style from './header.module.less'
 import Config from '../../../../config'
@@ -12,12 +12,35 @@ class Header extends Component {
   constructor () {
     super()
     this.state = {
+      lastScrollY: 0,
+      fixedHeader: false,
       collapsedMenu: true
     }
+    this.toggleFixedHeader = this.toggleFixedHeader.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  toggleMenu = () => {
+  componentDidMount () {
+    window.addEventListener('scroll', this.toggleFixedHeader)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.toggleFixedHeader)
+  }
+
+  toggleFixedHeader () {
+    if (!this.toggleFixedHeader.animationInProgress) {
+      this.toggleFixedHeader.animationInProgress = true;
+      setTimeout(() => {
+        this.setState({
+          lastScrollY: window.scrollY,
+          fixedHeader: window.scrollY > 50 && this.state.lastScrollY < window.scrollY
+        }, () => this.toggleFixedHeader.animationInProgress = false )
+      }, 200)
+    }
+  }
+
+  toggleMenu () {
     this.setState({
       collapsedMenu: !this.state.collapsedMenu
     })
@@ -29,10 +52,14 @@ class Header extends Component {
         <div className={style.title}>
           <Link to={Utils.resolvePageUrl(Config.pages.home)}>
             <h1>{Config.siteTitle} {this.state.ver}</h1>
-            <p>{Config.siteDescription}</p>
+            <p className={this.state.fixedHeader ? style.hiddenDescription : style.visibleDescription}>{Config.siteDescription}</p>
           </Link>
         </div>
-        <div className={style.menuButton}><FaBars size="30" onClick={this.toggleMenu}/></div>
+        <div className={style.menuButton}>
+          {this.state.collapsedMenu ? 
+            <FaBars size="30" onClick={this.toggleMenu}/> : <FaTimes size="30" onClick={this.toggleMenu}/>
+          }
+        </div>
       </div>
       <div className={[style.list, ( this.state.collapsedMenu ? style.collapsedMenu : style.expandedMenu )].join(' ')}>
         <ul>
