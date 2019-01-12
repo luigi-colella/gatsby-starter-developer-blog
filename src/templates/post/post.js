@@ -6,6 +6,7 @@ import Img from 'gatsby-image'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import TagList from '../../components/tag-list'
+import ArticleHeading from './article-heading'
 import Article from './article'
 import Comments from './comments'
 import Share from './share'
@@ -16,7 +17,7 @@ import * as style from './post.module.less'
 
 const Post = ({ data }) => {
 
-  const { html, excerpt, frontmatter } = data.markdownRemark
+  const { html, frontmatter, excerpt, timeToRead } = data.markdownRemark
   const { title, date, tags, cover, coverAlt, path } = frontmatter
   const img = cover.childImageSharp.fluid
   const canonicalUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
@@ -29,22 +30,22 @@ const Post = ({ data }) => {
         title={title}
         description={excerpt}
         path={path}
-        contentType={'article'}
+        contentType="article"
         image={{url: img.src, alt: coverAlt}}
         keywords={tags}
       />
       <div>
         <div className={style.header}>
           <div className={style.title}>
-            <label>{date}</label>
             <h1>{title}</h1>
-            <TagList tags={tags} position="center" />
+            <TagList tags={tags} />
           </div>
           <div className={style.cover}>
             <Img fluid={img} title={title}/>
           </div>
         </div>
         <div className={style.content}>
+          <ArticleHeading date={date} time={timeToRead}/>
           <Article html={html} />
           <Share
             pageCanonicalUrl={canonicalUrl}
@@ -67,9 +68,10 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { path: { eq: $postPath } }) {
       html
       excerpt
+      timeToRead
       frontmatter {
         title
-        date (formatString: "MMMM DD, YYYY")
+        date (formatString: "DD MMM YYYY")
         tags
         path
         cover {

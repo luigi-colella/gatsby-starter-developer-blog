@@ -13,15 +13,20 @@
 
 .title {
     margin: auto;
-    padding: @padding-small;
+    padding: @padding-small @padding-medium * 2 @padding-small @padding-small;
+    text-align: left;
     @media @mobile, @tablet {
         padding: @padding-medium @padding-small;
+        h1 {
+            margin-top: @margin-zero;
+            margin-bottom: @margin-small;
+        }
     }
 }
 
 .cover {
     min-width: 50%;
-    box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 8px 3px rgba(0, 0, 0, 0.3);
     margin: auto @margin-zero auto auto;
     border: 1px solid @color-post-text;
     @media @mobile, @tablet {
@@ -36,6 +41,6 @@
     line-height: 1.6;
     font-size: @font-size * 1.1;
     @media @desktop {
-        padding: @padding-medium @padding-medium * 5;
+        padding: @padding-medium @padding-medium * 3;
     }
 }

@@ -9,13 +9,13 @@
         border-radius: 20px;
         padding: @padding-zero @padding-medium;
         text-transform: lowercase;
-        transition: @transition-time background-color;
+        transition: @transition-time / 2;
         &:hover {
             cursor: pointer;
             border-color: @color-title;
             background-color: @color-label;
             color: @color-post-text;
-            font-weight: bold;
+            transform: scale(1.1);
         }
     }
 }

@@ -7,8 +7,8 @@ import * as style from './tag-list.module.less'
 import Config from '../../../config'
 import Utils from '../../utils'
 
-const TagList = ({ tags, position }) => (
-  <div className={style.tags} style={{ justifyContent: position === 'center' ? 'center' : null }}>
+const TagList = ({ tags }) => (
+  <div className={style.tags}>
     {
       tags
       .filter((tag, index) => index === tags.indexOf(tag)) // Remove duplicate values
@@ -25,6 +25,5 @@ const TagList = ({ tags, position }) => (
 export default TagList;
 
 TagList.propTypes = {
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    position: PropTypes.oneOf(['center'])
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired
 }
