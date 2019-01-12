@@ -10,6 +10,7 @@ import Article from './article'
 import Comments from './comments'
 import Share from './share'
 import SuggestedPosts from './suggested-posts'
+import Config from '../../../config'
 import Utils from '../../utils'
 import * as style from './post.module.less'
 
@@ -18,9 +19,8 @@ const Post = ({ data }) => {
   const { html, excerpt, frontmatter } = data.markdownRemark
   const { title, date, tags, cover, coverAlt, path } = frontmatter
   const img = cover.childImageSharp.fluid
-  const canonicalUrl = Utils.resolvePageUrl(data.site.siteMetadata.siteUrl, data.site.pathPrefix, path)
-  const coverUrl = Utils.resolveUrl(data.site.siteMetadata.siteUrl, img.src)
-  const tagPagePath = data.site.siteMetadata.pages.tag;
+  const canonicalUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
+  const coverUrl = Utils.resolveUrl(Config.siteUrl, img.src)
   const suggestedPosts = Utils.getSuggestedPosts(data.markdownRemark, data.allMarkdownRemark, 3)
 
   return (
@@ -38,7 +38,7 @@ const Post = ({ data }) => {
           <div className={style.title}>
             <label>{date}</label>
             <h1>{title}</h1>
-            <TagList tags={tags} tagPagePath={tagPagePath} position="center" />
+            <TagList tags={tags} position="center" />
           </div>
           <div className={style.cover}>
             <Img fluid={img} title={title}/>
@@ -53,7 +53,7 @@ const Post = ({ data }) => {
             coverUrl={coverUrl}
           />
         </div>
-        <SuggestedPosts posts={suggestedPosts} tagPagePath={tagPagePath} />
+        <SuggestedPosts posts={suggestedPosts} />
         <Comments pageCanonicalUrl={canonicalUrl} pageId={title} />
       </div>
     </Layout>
@@ -81,15 +81,6 @@ export const pageQuery = graphql`
         }
         coverAlt
       }
-    }
-    site {
-      siteMetadata {
-        siteUrl
-        pages {
-          tag
-        }
-      }
-      pathPrefix
     }
     allMarkdownRemark (
       filter: { frontmatter: { path: { ne: $postPath } } }

@@ -1,31 +1,19 @@
-const Utils = require('./src/utils');
+const config = require('./config');
+const utils = require('./src/utils');
 
 module.exports = {
   resolve: `gatsby-plugin-feed`,
   options: {
-    query: `
-      {
-        site {
-          pathPrefix
-          siteMetadata {
-            siteUrl
-            title
-            description
-            author
-          }
-        }
-      }
-    `,
     feeds: [
       {
-        serialize: ({ query: { site, allMarkdownRemark } }) => {
+        serialize: () => {
           return allMarkdownRemark.edges.map(({ node }) => {
-            const { siteUrl, author } = site.siteMetadata
+            const { siteUrl, author } = config
             const { title, date, path } = node.frontmatter
             return Object.assign({}, node.frontmatter, {
               title: title,
               description: node.excerpt,
-              url: Utils.resolveUrl(siteUrl, site.pathPrefix, path),
+              url: utils.resolveUrl(siteUrl, site.pathPrefix, path),
               guid: siteUrl + path + title,
               date: date,
               author: author,

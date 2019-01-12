@@ -6,20 +6,12 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostList from '../components/post-list'
 import ArchivePagination from '../components/archive-pagination'
+import Config from '../../config'
 
 const IndexPage = () => (
   <StaticQuery
     query={graphql`
       {
-        site {
-          siteMetadata {
-            title
-            description
-            pages {
-              tag
-            }
-          }
-        }
         allMarkdownRemark(
           sort: { fields: [frontmatter___date], order: DESC }
         ) {
@@ -47,15 +39,14 @@ const IndexPage = () => (
     render={data => (
       <Layout title="Last posts">
         <SEO
-          title={data.site.siteMetadata.title}
-          description={data.site.siteMetadata.description}
+          title="Home"
+          description={Config.siteDescription}
           path=''
         />
         <div>
           <section>
             <PostList
               posts={data.allMarkdownRemark.edges}
-              tagPagePath={data.site.siteMetadata.pages.tag}
               highlightFirstItem={true}
             />
             <ArchivePagination nextPage={2} />

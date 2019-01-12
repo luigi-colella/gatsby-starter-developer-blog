@@ -1,25 +1,10 @@
+const config = require('./config');
 const plugins = require('./gatsby-config.plugins');
 
 module.exports = {
-  pathPrefix: '/gatsby-starter-blog', // Prefix for GitHub Pages deployment
+  pathPrefix: config.pathPrefix, // Prefix for GitHub Pages deployment
   siteMetadata: {
-    siteUrl: 'https://lgcolella.github.io',
-    title: 'Luigi Colella',
-    description: 'Logbook of a software developer',
-    author: 'lcolella',
-    pages: {
-      home: '/',
-      blog: 'blog',
-      about: 'about',
-      tag: 'tag',
-      archive: 'archive'
-    },
-    postsForArchivePage: 3,
-    social: {
-      github: 'https://github.com/lgcolella',
-      linkedin: '',
-      rss: '/rss.xml'
-    }
+    siteUrl: config.siteUrl // Needed for `gatsby-plugin-sitemap`
   },
   plugins,
 }

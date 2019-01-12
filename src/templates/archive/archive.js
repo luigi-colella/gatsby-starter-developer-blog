@@ -6,6 +6,7 @@ import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
 import ArchivePagination from '../../components/archive-pagination'
+import Config from '../../../config'
 
 const Archive = ({ data, pageContext }) => {
 
@@ -18,9 +19,9 @@ const Archive = ({ data, pageContext }) => {
       <SEO
         title={`Archive | Page ${archivePage}`}
         description="Old posts"
-        path={data.site.siteMetadata.pages.archive}
+        path={Config.pages.archive}
       />
-      <PostList posts={data.allMarkdownRemark.edges} tagPagePath={data.site.siteMetadata.pages.tag}/>
+      <PostList posts={data.allMarkdownRemark.edges} />
       <ArchivePagination prevPage={prevPage} nextPage={nextPage} />
     </Layout>
   )
@@ -50,14 +51,6 @@ query ($postPaths: [String!]) {
           }
         }
         excerpt
-      }
-    }
-  }
-  site {
-    siteMetadata {
-      pages {
-        tag
-        archive
       }
     }
   }

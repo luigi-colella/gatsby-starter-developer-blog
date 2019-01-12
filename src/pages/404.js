@@ -7,6 +7,7 @@ import Layout from '../components/layout'
 import SEO from '../components/seo'
 import Button from '../components/button'
 import * as style from './404.module.less'
+import Config from '../../config'
 import Utils from '../utils'
 
 const NotFoundPage = ({ data }) => (
@@ -23,7 +24,7 @@ const NotFoundPage = ({ data }) => (
       </div>
       <div className={style.message}>
         <h1>Page not found</h1>
-        <Button to={Utils.resolvePageUrl(data.site.siteMetadata.pages.home)}>Return to homepage</Button>
+        <Button to={Utils.resolvePageUrl(Config.pages.home)}>Return to homepage</Button>
       </div>
     </div>
   </Layout>
@@ -33,13 +34,6 @@ export default NotFoundPage
 
 export const query = graphql`
 {
-  site {
-    siteMetadata {
-      pages {
-        home
-      }
-    }
-  }
   file (base: { eq: "404.png" }) {
     childImageSharp {
       fluid (maxWidth: 450) {

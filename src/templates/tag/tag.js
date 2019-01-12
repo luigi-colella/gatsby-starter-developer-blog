@@ -5,13 +5,14 @@ import { graphql } from 'gatsby'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
+import Config from '../../../config'
 import Utils from '../../utils'
 
 const TagPage = ({ pageContext, data }) => {
 
   const posts = data.allMarkdownRemark.edges
   const tagName = pageContext.tag
-  const tagPagePath = data.site.siteMetadata.pages.tag;
+  const tagPagePath = Config.pages.tag;
   
   return (
     <Layout title={tagName}>
@@ -21,7 +22,7 @@ const TagPage = ({ pageContext, data }) => {
         path={Utils.resolvePageUrl(tagPagePath, tagName)}
         keywords={[tagName]}
       />
-      <PostList posts={posts} tagPagePath={tagPagePath}/>
+      <PostList posts={posts} />
     </Layout>
   )
 }
@@ -50,13 +51,6 @@ export const pageQuery = graphql`
             }
           }
           excerpt
-        }
-      }
-    }
-    site {
-      siteMetadata {
-        pages {
-          tag
         }
       }
     }

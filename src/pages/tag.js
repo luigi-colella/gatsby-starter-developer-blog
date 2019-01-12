@@ -5,6 +5,7 @@ import Image from 'gatsby-image'
 /* App imports */
 import Layout from '../components/layout'
 import SEO from '../components/seo'
+import Config from '../../config'
 import Utils from '../utils'
 import * as style from './tag.module.less'
 
@@ -12,7 +13,7 @@ const Tag = ({ data }) => {
 
   const rawTags = data.allMarkdownRemark.edges.map(edge => edge.node.frontmatter.tags).reduce((prev, curr) => prev.concat(curr));
   const tags = rawTags.filter((tag, index) => index === rawTags.indexOf(tag)).sort() // Remove duplicates and sort values
-  const tagPage = data.site.siteMetadata.pages.tag
+  const tagPage = Config.pages.tag
 
   return (
     <Layout title="Tags">
@@ -49,13 +50,6 @@ export const query = graphql`
           frontmatter {
             tags
           }
-        }
-      }
-    }
-    site {
-      siteMetadata {
-        pages {
-          tag
         }
       }
     }

@@ -1,7 +1,8 @@
 /* Vendor imports */
 const path = require('path');
 /* App imports */
-const Utils = require('./src/utils');
+const config = require('./config');
+const utils = require('./src/utils');
 
 exports.createPages = ({ actions, graphql }) => {
 
@@ -9,16 +10,6 @@ exports.createPages = ({ actions, graphql }) => {
 
   return graphql(`
     {
-      site {
-        siteMetadata {
-          pages {
-            blog
-            tag
-            archive
-          }
-          postsForArchivePage
-        }
-      }
       allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
         edges {
           node {
@@ -38,7 +29,7 @@ exports.createPages = ({ actions, graphql }) => {
     /* Post pages */
     allMarkdownRemark.edges.forEach(({ node }) => {
       // Check path prefix of post
-      if (node.frontmatter.path.indexOf(site.siteMetadata.pages.blog) !== 0) throw `Invalid path prefix: ${node.frontmatter.path}`
+      if (node.frontmatter.path.indexOf(config.pages.blog) !== 0) throw `Invalid path prefix: ${node.frontmatter.path}`
       
       createPage({
         path: node.frontmatter.path,
@@ -59,7 +50,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     allTags.forEach(tag => {
       createPage({
-        path: Utils.resolvePageUrl(site.siteMetadata.pages.tag, tag),
+        path: utils.resolvePageUrl(config.pages.tag, tag),
         component: path.resolve('src/templates/tag/tag.js'),
         context: {
           tag: tag
@@ -68,7 +59,7 @@ exports.createPages = ({ actions, graphql }) => {
     })
 
     /* Archive pages */
-    const postsForPage = site.siteMetadata.postsForArchivePage;
+    const postsForPage = config.postsForArchivePage;
     const archivePages = Math.ceil(allMarkdownRemark.edges.length / postsForPage);
     for (let i = 0; i < archivePages; i++) {
 
@@ -76,7 +67,7 @@ exports.createPages = ({ actions, graphql }) => {
       let archivePage = i + 1;
 
       createPage({
-        path: Utils.resolvePageUrl(site.siteMetadata.pages.archive, archivePage),
+        path: utils.resolvePageUrl(config.pages.archive, archivePage),
         component: path.resolve('src/templates/archive/archive.js'),
         context: {
           postPaths: posts.map(edge => edge.node.frontmatter.path),

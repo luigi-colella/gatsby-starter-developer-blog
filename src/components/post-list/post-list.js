@@ -8,7 +8,7 @@ import * as style from './post-list.module.less'
 import TagList from '../tag-list'
 import Utils from '../../utils'
 
-const PostList = ({ posts, tagPagePath, highlightFirstItem, mosaicView }) => (
+const PostList = ({ posts, highlightFirstItem, mosaicView }) => (
   <div className={mosaicView ? style.containerMosaic : null}>
     {posts.map((post, index) => {
       
@@ -38,7 +38,7 @@ const PostList = ({ posts, tagPagePath, highlightFirstItem, mosaicView }) => (
               <h2>{title}</h2>
               <p>{excerpt}</p>
             </Link>
-            <TagList tags={tags} tagPagePath={tagPagePath}/>
+            <TagList tags={tags} />
           </div>
         </div>
       )
@@ -63,7 +63,6 @@ PostList.propTypes = {
       })
     })
   })),
-  tagPagePath: PropTypes.string.isRequired,
   highlightFirstItem: PropTypes.bool,
   mosaicView: PropTypes.bool
 }
