@@ -17,5 +17,6 @@ module.exports = {
     github: 'https://github.com/lgcolella',
     linkedin: '',
     rss: '/rss.xml'
-  }
+  },
+  disqusScript: 'https://luigi-colella.disqus.com/embed.js'
 }

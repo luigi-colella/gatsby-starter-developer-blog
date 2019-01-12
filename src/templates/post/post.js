@@ -51,6 +51,7 @@ const Post = ({ data }) => {
             pageCanonicalUrl={canonicalUrl}
             title={title}
             description={excerpt}
+            tags={tags}
             coverUrl={coverUrl}
           />
         </div>

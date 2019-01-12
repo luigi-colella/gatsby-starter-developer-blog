@@ -2,6 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 /* App imports */
+import Config from '../../../../config'
 import * as style from './comments.module.less'
 
 class Comments extends React.Component {
@@ -24,7 +25,7 @@ class Comments extends React.Component {
       };  
       (function() {
         var d = document, s = d.createElement('script');
-        s.src = 'https://luigi-colella.disqus.com/embed.js';
+        s.src = Config.disqusScript;
         s.setAttribute('data-timestamp', + new Date());
         (d.head || d.body).appendChild(s);
       })();
