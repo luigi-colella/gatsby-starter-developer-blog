@@ -7,7 +7,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Config from '../../../config'
 import Utils from '../../utils'
 
-function SEO({ title, description, path, lang, keywords, contentType, image, meta }) {
+function SEO({ title, description, path, lang, keywords, contentType, image, translations, meta }) {
   return (
     <StaticQuery
       query={detailsQuery}
@@ -46,9 +46,20 @@ function SEO({ title, description, path, lang, keywords, contentType, image, met
               .concat(metaKeywords) // Keywords
               .concat(meta || []) // Other provided metadata
             }
-            link={[
-              { rel: 'canonical', href: pageUrl } // Canonical url
-            ]}
+            link={
+              [
+                { rel: 'canonical', href: pageUrl } // Canonical url
+              ]
+                // Translated versions of page
+                .concat(
+                  translations ?
+                  translations.map(obj => ({
+                    rel: 'alternate',
+                    hreflang: obj.hreflang,
+                    href: Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, obj.path)
+                  })) : []
+                )
+            }
           />
         )
       }}
@@ -67,6 +78,10 @@ SEO.propTypes = {
     alt: PropTypes.string.isRequired
   }),
   keywords: PropTypes.arrayOf(PropTypes.string),
+  translations: PropTypes.arrayOf(PropTypes.shape({
+    hreflang: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired
+  })),
   meta: PropTypes.arrayOf(PropTypes.shape({
     property: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired

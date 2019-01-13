@@ -5,6 +5,8 @@ module.exports = {
   siteTitle: 'Luigi Colella',
   siteDescription: 'Logbook of a software developer',
   author: 'lcolella',
+  postsForArchivePage: 3,
+  defaultLanguage: 'en',
   pages: {
     home: '/',
     blog: 'blog',
@@ -12,7 +14,6 @@ module.exports = {
     tag: 'tag',
     archive: 'archive'
   },
-  postsForArchivePage: 3,
   social: {
     github: 'https://github.com/lgcolella',
     linkedin: '',

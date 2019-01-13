@@ -15,10 +15,11 @@ import Config from '../../../config'
 import Utils from '../../utils'
 import * as style from './post.module.less'
 
-const Post = ({ data }) => {
+const Post = ({ data, pageContext }) => {
 
   const { html, frontmatter, excerpt, timeToRead } = data.markdownRemark
   const { title, date, tags, cover, coverAlt, path } = frontmatter
+  const translations = pageContext.translations.length > 1 ? pageContext.translations : null
   const img = cover.childImageSharp.fluid
   const canonicalUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
   const coverUrl = Utils.resolveUrl(Config.siteUrl, img.src)
@@ -33,6 +34,7 @@ const Post = ({ data }) => {
         contentType="article"
         image={{url: img.src, alt: coverAlt}}
         keywords={tags}
+        translations={translations}
       />
       <div>
         <div className={style.header}>
@@ -45,7 +47,7 @@ const Post = ({ data }) => {
           </div>
         </div>
         <div className={style.content}>
-          <ArticleHeading date={date} time={timeToRead}/>
+          <ArticleHeading date={date} time={timeToRead} translations={translations}/>
           <Article html={html} />
           <Share
             pageCanonicalUrl={canonicalUrl}
@@ -75,6 +77,11 @@ export const pageQuery = graphql`
         date (formatString: "DD MMM YYYY")
         tags
         path
+        translations {
+          french
+          english
+          italian
+        }
         cover {
           childImageSharp {
             fluid (maxWidth: 700) {
@@ -86,7 +93,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark (
-      filter: { frontmatter: { path: { ne: $postPath } } }
+      filter: { frontmatter: { path: { ne: $postPath } }, fileAbsolutePath: { regex: "/index.md$/" } }
     ) {
       edges {
         node {

@@ -17,6 +17,7 @@ exports.createPages = ({ actions, graphql }) => {
               path
               tags
             }
+            fileAbsolutePath
           }
         }
       }
@@ -35,20 +36,26 @@ exports.createPages = ({ actions, graphql }) => {
         path: node.frontmatter.path,
         component: path.resolve('src/templates/post/post.js'),
         context: {
-          postPath: node.frontmatter.path
+          postPath: node.frontmatter.path,
+          translations: utils.getRelatedTranslations(node, allMarkdownRemark.edges)
         }
       })
     })
 
+    const regexForIndex = /index\.md$/
+    // Posts in default language, excluded the translated versions
+    const defaultPosts = allMarkdownRemark.edges.filter(({ node: { fileAbsolutePath } }) => fileAbsolutePath.match(regexForIndex))
+
     /* Tag pages */
     const allTags = [];
-    allMarkdownRemark.edges.forEach(({ node }) => {
+    defaultPosts.forEach(({ node }) => {
       node.frontmatter.tags.forEach(tag => {
         if (allTags.indexOf(tag) === -1) allTags.push(tag)
       })
     })
 
-    allTags.forEach(tag => {
+    allTags
+    .forEach(tag => {
       createPage({
         path: utils.resolvePageUrl(config.pages.tag, tag),
         component: path.resolve('src/templates/tag/tag.js'),
@@ -60,10 +67,10 @@ exports.createPages = ({ actions, graphql }) => {
 
     /* Archive pages */
     const postsForPage = config.postsForArchivePage;
-    const archivePages = Math.ceil(allMarkdownRemark.edges.length / postsForPage);
+    const archivePages = Math.ceil(defaultPosts.length / postsForPage);
     for (let i = 0; i < archivePages; i++) {
 
-      let posts = allMarkdownRemark.edges.slice(i * postsForPage, i * postsForPage + postsForPage);
+      let posts = defaultPosts.slice(i * postsForPage, i * postsForPage + postsForPage);
       let archivePage = i + 1;
 
       createPage({

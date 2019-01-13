@@ -5,4 +5,18 @@
     justify-content: space-between;
     flex-wrap: wrap;
     border-bottom: 1px solid @color-post-line;
+    label {
+        width: 50%;
+        @media @mobile {
+            width: 100%;
+        }
+        a {
+            color: @color-title;
+            text-transform: capitalize;
+            transition: @transition-time color;
+            &:hover {
+                color: @color-theme;
+            }
+        }
+    }
 }

@@ -44,7 +44,9 @@ export default Tag
 
 export const query = graphql`
   {
-    allMarkdownRemark {
+    allMarkdownRemark (
+      filter: { fileAbsolutePath: { regex: "/index.md$/" } }
+    ) {
       edges {
         node {
           frontmatter {
@@ -53,7 +55,9 @@ export const query = graphql`
         }
       }
     }
-    allFile ( filter: { relativeDirectory: { eq: "tags" } } ) {
+    allFile (
+      filter: { relativeDirectory: { eq: "tags" } }
+    ) {
       edges {
         node {
           name

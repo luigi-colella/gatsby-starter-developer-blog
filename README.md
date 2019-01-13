@@ -1,6 +1,6 @@
 <p align="center">
     <h1 align="center">Gatsby starter blog</h1>
-    <p align="center">Generator made with Gatsby.js for creating a fast loading, customizable, scalable and SEO-friendly blogs</p>
+    <p align="center">A file-driven generator made with Gatsby.js for creating a fast loading, customizable, scalable and SEO-friendly blogs</p>
 </p>
 
 [![Build Status](https://travis-ci.org/lgcolella/gatsby-starter-blog.svg?branch=master)](https://travis-ci.org/lgcolella/gatsby-starter-blog)
@@ -10,6 +10,7 @@
 
 * [Stack](#-stack)
 * [Features](#-features)
+* [Guide](#-guide)
 * [Credits](#-credits)
 
 ## 🔧 Stack
@@ -25,6 +26,7 @@
     - Posts in Markdown
     - Syntax highlighting
     - Images optimized for fast loading
+    - Support for multi-language posts
     - Tags
     - Archive
     - Various available icon sets: Material Design, Font Awesome, Ionicons, Typicons, Github Octicons, Feather
@@ -39,12 +41,27 @@
 * SEO
     - OpenGraph Tags
     - Twitter Tags for Twitter Cards
+    - HTML hreflang attribute for multi-language versions posts
     - Sitemap
     - Roboto.txt file
 * Development tools
     - ESlint for linting
     - Prettier for code style
     - TravisCI support
+
+## Guide
+
+* [How add a translated version of a post](#How-add-a-translated-version-of-a-post)
+
+### How add a translated version of a post
+
+1. Choose in the ```content``` path the folder of the post to translate.
+2. Place here the translated version of post and rename the file with the [ISO](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code according to its language (ex. ```index.it.md```, ```index.de.md```).
+
+You've finished! Now in your post you'll get a link to translated version and viceversa.
+
+Metatags for [SEO](https://support.google.com/webmasters/answer/189077) are automatically added in each version of post pages using the ISO code choosen for the filename. Tags will only be added for posts with translated versions.
+Note that for ```index.md```, the ISO code used in metatags is taken from the ```config.js```' variable ```defaultLanguage```.
 
 ## 📃 Credits
 

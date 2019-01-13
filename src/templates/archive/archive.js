@@ -32,7 +32,7 @@ export default Archive;
 export const query = graphql`
 query ($postPaths: [String!]) {
   allMarkdownRemark(
-    filter: {frontmatter: {path: {in: $postPaths}}},
+    filter: {frontmatter: {path: {in: $postPaths}}, fileAbsolutePath: { regex: "/index.md$/" }},
     sort: {fields: [frontmatter___date], order: DESC}
   ) {
     edges {

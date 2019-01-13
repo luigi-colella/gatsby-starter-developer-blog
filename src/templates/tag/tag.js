@@ -32,7 +32,7 @@ export default TagPage
 export const pageQuery = graphql`
   query($tag: String!) {
     allMarkdownRemark(
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { in: [$tag] } }, fileAbsolutePath: { regex: "/index.md$/" } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {
