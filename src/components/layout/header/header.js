@@ -34,7 +34,7 @@ class Header extends Component {
       setTimeout(() => {
         this.setState({
           lastScrollY: window.scrollY,
-          fixedHeader: window.scrollY > 50 && this.state.lastScrollY < window.scrollY
+          fixedHeader: window.scrollY > 100 && this.state.lastScrollY < window.scrollY
         }, () => this.toggleFixedHeader.animationInProgress = false )
       }, 200)
     }
@@ -51,7 +51,7 @@ class Header extends Component {
       <div className={style.titleContainer}>
         <div className={style.title}>
           <Link to={Utils.resolvePageUrl(Config.pages.home)}>
-            <h1>{Config.siteTitle} {this.state.ver}</h1>
+            <h1>{Config.siteTitle}</h1>
             <p className={this.state.fixedHeader ? style.hiddenDescription : style.visibleDescription}>{Config.siteDescription}</p>
           </Link>
         </div>

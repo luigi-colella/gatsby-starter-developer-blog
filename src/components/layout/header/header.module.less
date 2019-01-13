@@ -43,7 +43,6 @@
     }
     p {
         margin: @margin-zero;
-        transition: @transition-time color;
     }
     &:hover {
         h1, p {
@@ -54,35 +53,21 @@
 
 .hiddenDescription {
     @media @tablet, @desktop {
-        animation: hide-description @transition-time forwards;
-    }
-}
-
-@keyframes hide-description {
-    0% {
-        max-height: 100px;
-        opacity: 1;
-    }
-    100% {
         max-height: 0px;
         opacity: 0;
+        transition: @transition-time max-height ease,
+                @transition-time opacity ease,
+                @transition-time color ease;   
     }
 }
 
 .visibleDescription {
     @media @tablet, @desktop {
-        animation: show-description @transition-time forwards;
-    }
-}
-
-@keyframes show-description {
-    0% {
-        max-height: 0px;
-        opacity: 0;
-    }
-    100% {
         max-height: 100px;
         opacity: 1;
+        transition: @transition-time max-height ease,
+                @transition-time opacity ease,
+                @transition-time color ease;   
     }
 }
 
@@ -126,41 +111,20 @@
 
 .collapsedMenu {
     @media @mobile {
-        animation: collapse @transition-time forwards;
-    }
-}
-
-@keyframes collapse {
-    0% {
-        max-height: 200px;
-        opacity: .5;
-    }
-    15% {
-        opacity: 0;
-    }
-    100% {
         max-height: 0px;
         margin: 0px;
         opacity: 0;
+        transition: @transition-time max-height ease,
+                    @transition-time margin ease,
+                    @transition-time opacity ease;
     }
 }
 
 .expandedMenu {
     @media @mobile {
-        animation: expand @transition-time forwards;
-    }
-}
-
-@keyframes expand {
-    0% {
-        max-height: 0px;
-        opacity: 0;
-    }
-    85% {
-        opacity: .8;
-    }
-    100% {
         max-height: 200px;
         opacity: 1;
+        transition: @transition-time max-height ease,
+                    @transition-time opacity ease;
     }
 }
