@@ -9,13 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 4px 3px rgba(0,0,0,.5);
+    box-shadow: @box-shadow;
     z-index: 2;
     padding: @padding-small @padding-medium;
     background-color: @color-theme;
     background-image: @texture;
     & + div {
-        margin-top: @margin-medium * 5;
+        margin-top: @margin-medium * 6;
     }
     @media @mobile {
         padding: @padding-small;
@@ -33,7 +33,6 @@
 }
 
 .title {
-    text-align: center;
     h1 {
         font-size: @font-size * 1.75;
         margin: @margin-zero;

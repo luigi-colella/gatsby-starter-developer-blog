@@ -65,4 +65,4 @@ Note that for ```index.md```, the ISO code used in metatags is taken from the ``
 
 ## 📃 Credits
 
-* 404 page's image by [Freepik](https://www.freepik.com/free-vector/404-error-web-template-with-cones-in-flat-style_1988659.htm)
+* 404 page's image by [Freepik](https://www.freepik.com/free-vector/404-error-web-template-with-bored-cat_2234126.htm)

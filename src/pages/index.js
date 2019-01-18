@@ -22,7 +22,6 @@ const IndexPage = () => (
                 path
                 title
                 tags
-                date(formatString: "MMMM DD, YYYY")
                 cover {
                   childImageSharp {
                     fluid (maxWidth: 600) {

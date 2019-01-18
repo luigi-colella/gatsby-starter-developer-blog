@@ -4,18 +4,24 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    border-bottom: 1px solid @color-post-line;
+    border-bottom: 1px solid @color-label;
     label {
         width: 50%;
         @media @mobile {
             width: 100%;
+        }
+        &:nth-child(2) {
+            text-align: right;
+            @media @mobile {
+                text-align: inherit;
+            }
         }
         a {
             color: @color-title;
             text-transform: capitalize;
             transition: @transition-time color;
             &:hover {
-                color: @color-theme;
+                color: @color-text;
             }
         }
     }

@@ -36,7 +36,7 @@ export const query = graphql`
 {
   file (base: { eq: "404.png" }) {
     childImageSharp {
-      fluid (maxWidth: 450) {
+      fluid (maxWidth: 400) {
         ...GatsbyImageSharpFluid_tracedSVG
       }
     }

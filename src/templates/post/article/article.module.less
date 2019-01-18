@@ -5,17 +5,19 @@
   article {
     overflow-x: auto;
   }
-  h1, h2, h3, h4, h5, h6 {
-    color: @color-post-text;
+  h1, h2, h3 {
+    text-align: left;
   }
   h1, h2 {
-    text-align: center;
-    border-bottom: 1px solid @color-post-line;
+    border-bottom: 1px solid @color-title;
   }
   a {
-    color: @color-label;
+    color: @color-title;
     text-decoration: underline;
     word-break: break-all;
+    code {
+      text-decoration: inherit;
+    }
   }
   figcaption {
     max-width: 800px;
@@ -23,7 +25,7 @@
   }
   blockquote {
     font-size: @font-size * 1.6;
-    color: @color-post-quote;
+    color: @color-label;
     font-style: italic;
     font-weight: 200;
     @media @mobile {
@@ -44,13 +46,13 @@
     overflow-x: auto;
     td, th {
       padding: @padding-small @padding-medium;
-      border: 1px solid @color-post-line;
+      border: 1px solid @color-label;
     }
     th {
       text-align: center;
     }
     thead {
-      background-color: @color-post-line;
+      background-color: @color-label;
       th, td {
         border-width: 1px 1px 0px 0px;
         &:first-child {
@@ -76,7 +78,7 @@
     font-family: 'Roboto-Mono';
     padding: .1em;
     border-radius: 0px;
-    background-color: @color-post-line;
-    color: inherit;
+    background-color: @color-label;
+    color: @color-text;
   }
 }

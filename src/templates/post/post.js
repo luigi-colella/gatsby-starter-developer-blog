@@ -49,14 +49,14 @@ const Post = ({ data, pageContext }) => {
         <div className={style.content}>
           <ArticleHeading date={date} time={timeToRead} translations={translations}/>
           <Article html={html} />
-          <Share
-            pageCanonicalUrl={canonicalUrl}
-            title={title}
-            description={excerpt}
-            tags={tags}
-            coverUrl={coverUrl}
-          />
         </div>
+        <Share
+          pageCanonicalUrl={canonicalUrl}
+          title={title}
+          description={excerpt}
+          tags={tags}
+          coverUrl={coverUrl}
+        />
         <SuggestedPosts posts={suggestedPosts} />
         <Comments pageCanonicalUrl={canonicalUrl} pageId={title} />
       </div>

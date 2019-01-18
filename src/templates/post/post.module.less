@@ -4,7 +4,6 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: @margin-large;
-    text-align: center;
     @media @mobile, @tablet {
         flex-direction: column-reverse;
         margin-bottom: @margin-zero;
@@ -26,21 +25,15 @@
 
 .cover {
     min-width: 50%;
-    box-shadow: 5px 5px 8px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: @box-shadow;
     margin: auto @margin-zero auto auto;
-    border: 1px solid @color-post-text;
     @media @mobile, @tablet {
         width: 100%;
     }
 }
 
 .content {
-    padding: @padding-medium;
-    background-color: @color-text;
-    color: @color-post-text;
+    color: @color-text;
     line-height: 1.6;
     font-size: @font-size * 1.1;
-    @media @desktop {
-        padding: @padding-medium @padding-medium * 3;
-    }
 }

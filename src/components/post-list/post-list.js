@@ -34,7 +34,7 @@ const PostList = ({ posts, highlightFirstItem, mosaicView }) => (
           </div>
           <div className={contentStyle}>
             <Link to={Utils.resolvePageUrl(path)}>
-              <label>{date}</label>
+              { date ? <label>{date}</label> : null }
               <h2>{title}</h2>
               <p>{excerpt}</p>
             </Link>
@@ -53,7 +53,7 @@ PostList.propTypes = {
     node: PropTypes.shape({
       frontmatter: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
+        date: PropTypes.string,
         path: PropTypes.string.isRequired,
         tags: PropTypes.arrayOf(PropTypes.string).isRequired,
         cover: PropTypes.shape({

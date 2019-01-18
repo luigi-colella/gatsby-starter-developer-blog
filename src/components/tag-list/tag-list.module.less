@@ -3,19 +3,16 @@
 .tags {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     a {
         margin: @margin-small @margin-small @margin-zero @margin-zero;
-        border: 2px solid @color-text;
-        border-radius: 20px;
-        padding: @padding-zero @padding-medium;
-        text-transform: lowercase;
-        transition: @transition-time / 2;
+        border: 1px solid @color-text;
+        padding: @padding-small / 2 @padding-medium;
+        text-transform: uppercase;
+        transition: @transition-time background-color;
         &:hover {
             cursor: pointer;
-            border-color: @color-title;
             background-color: @color-label;
-            color: @color-post-text;
-            transform: scale(1.1);
         }
     }
 }
