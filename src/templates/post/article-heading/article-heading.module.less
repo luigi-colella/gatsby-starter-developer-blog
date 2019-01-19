@@ -2,20 +2,10 @@
 
 .container {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border-bottom: 1px solid @color-label;
+    flex-direction: column;
+    justify-content: left;
     label {
-        width: 50%;
-        @media @mobile {
-            width: 100%;
-        }
-        &:nth-child(2) {
-            text-align: right;
-            @media @mobile {
-                text-align: inherit;
-            }
-        }
+        width: 100%;
         a {
             color: @color-title;
             text-transform: capitalize;

@@ -3,11 +3,7 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: @margin-medium;
-    border-radius: 20px;
-    padding: @padding-medium;
-    background-color: @color-transparent;
+    justify-content: left;
     > div:focus {
         outline: none;
     }
@@ -20,7 +16,7 @@
 .icon {
     height: 40px;
     width: 40px;
-    margin: @margin-zero @margin-small;
+    margin-right: @margin-medium;
     outline-color: transparent;
     transition: @transition-time opacity, @transition-time transform;
     &:hover {

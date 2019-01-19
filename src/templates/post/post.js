@@ -46,7 +46,7 @@ const Post = ({ data, pageContext }) => {
             <Img fluid={img} title={title}/>
           </div>
         </div>
-        <div className={style.content}>
+        <div>
           <ArticleHeading date={date} time={timeToRead} translations={translations}/>
           <Article html={html} />
         </div>
