@@ -7,7 +7,6 @@
     width: 70%;
     margin: @margin-medium auto @margin-medium @margin-zero;
   }
-
   article {
     overflow-x: auto;
     line-height: 1.6;
@@ -40,6 +39,9 @@
       font-size: @font-size * 1.3;
       margin: @margin-medium @margin-zero;
     }
+    p::before, p::after {
+      content: '"'
+    }
   }
   iframe {
     display: block;
@@ -49,9 +51,7 @@
     }
   }
   table {
-    margin: auto;
     border-spacing: 0px;
-    overflow-x: auto;
     td, th {
       padding: @padding-small @padding-medium;
       border: 1px solid @color-label;
