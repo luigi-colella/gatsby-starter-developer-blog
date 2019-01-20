@@ -17,8 +17,8 @@ import * as style from './post.module.less'
 
 const Post = ({ data, pageContext }) => {
 
-  const { html, frontmatter, excerpt, timeToRead } = data.markdownRemark
-  const { title, date, tags, cover, coverAlt, path } = frontmatter
+  const { html, frontmatter, timeToRead } = data.markdownRemark
+  const { title, date, tags, cover, coverAlt, path, excerpt } = frontmatter
   const translations = pageContext.translations.length > 1 ? pageContext.translations : null
   const img = cover.childImageSharp.fluid
   const canonicalUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
@@ -46,8 +46,8 @@ const Post = ({ data, pageContext }) => {
             <Img fluid={img} title={title}/>
           </div>
         </div>
-        <div>
-          <ArticleHeading date={date} time={timeToRead} translations={translations}/>
+        <div className={style.content}>
+          <ArticleHeading excerpt={excerpt} date={date} time={timeToRead} translations={translations}/>
           <Article html={html} />
         </div>
         <Share
@@ -70,18 +70,13 @@ export const pageQuery = graphql`
   query($postPath: String!) {
     markdownRemark(frontmatter: { path: { eq: $postPath } }) {
       html
-      excerpt
       timeToRead
       frontmatter {
         title
         date (formatString: "DD MMM YYYY")
         tags
         path
-        translations {
-          french
-          english
-          italian
-        }
+        excerpt
         cover {
           childImageSharp {
             fluid (maxWidth: 700) {
@@ -101,6 +96,7 @@ export const pageQuery = graphql`
             path
             title
             tags
+            excerpt
             cover {
               childImageSharp {
                 fluid (maxWidth: 600) {
@@ -109,7 +105,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          excerpt
         }
       }
     }

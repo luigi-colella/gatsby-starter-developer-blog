@@ -7,8 +7,11 @@ import { MdTranslate } from 'react-icons/md'
 /* App imports */
 import * as style from './article-heading.module.less'
 
-const ArticleHeading = ({ date, time, translations }) => (
+const ArticleHeading = ({ excerpt, date, time, translations }) => (
   <div className={style.container}>
+    <div className={style.excerpt}>
+      <p>{excerpt}</p>
+    </div>
     <label><strong><FaRegCalendarAlt /> Date: </strong><span>{date}</span></label>
     <label><strong><FaRegClock /> Time to read: </strong><span>{time}m</span></label>
     {
@@ -29,6 +32,7 @@ const ArticleHeading = ({ date, time, translations }) => (
 )
 
 ArticleHeading.propTypes = {
+  excerpt: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
   translations: PropTypes.arrayOf(PropTypes.shape({

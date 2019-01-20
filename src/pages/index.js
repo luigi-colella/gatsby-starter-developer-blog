@@ -22,6 +22,7 @@ const IndexPage = () => (
                 path
                 title
                 tags
+                excerpt
                 cover {
                   childImageSharp {
                     fluid (maxWidth: 600) {
@@ -30,7 +31,6 @@ const IndexPage = () => (
                   }
                 }
               }
-              excerpt
             }
           }
         }

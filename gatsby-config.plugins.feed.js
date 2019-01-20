@@ -9,10 +9,10 @@ module.exports = {
         serialize: ({ query: { allMarkdownRemark } }) => {
           return allMarkdownRemark.edges.map(({ node }) => {
             const { siteUrl, pathPrefix, author } = config
-            const { title, date, path } = node.frontmatter
+            const { title, date, path, excerpt } = node.frontmatter
             return Object.assign({}, node.frontmatter, {
               title: title,
-              description: node.excerpt,
+              description: excerpt,
               url: utils.resolveUrl(siteUrl, pathPrefix, path),
               guid: siteUrl + path + title,
               date: date,
@@ -31,12 +31,12 @@ module.exports = {
             ) {
               edges {
                 node {
-                  excerpt
                   html
                   frontmatter {
                     title
                     date
                     path
+                    excerpt
                   }
                 }
               }

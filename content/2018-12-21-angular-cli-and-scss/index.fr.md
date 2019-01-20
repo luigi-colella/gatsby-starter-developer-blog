@@ -5,9 +5,7 @@ tags: [javascript, angular, sass]
 cover: ./preview.png
 coverAlt: angular cli and scss
 date: 2018-12-21
-translations:
-  - english: blog/scss-in-angular-cli-6
-  - italian : blog/it/scss-in-angular-cli-6
+excerpt: Configurez SCSS pour votre prochain projet Angular.
 ---
 
 Si vous connaissez déjà SCSS dans Angular CLI 1.x et que vous vous demandez maintenant comment l’utiliser dans la version 6, une toute nouvelle version fournie avec Angular 6, je suis là pour vous aider.

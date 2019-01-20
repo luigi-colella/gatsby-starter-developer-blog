@@ -5,6 +5,7 @@ tags: [javascript, react, electron, nodejs]
 path: blog/build-electron-app-with-react
 cover: ./preview.png
 coverAlt: electron app with create-react-app
+excerpt: Build a fantastic Electron app from scratch using create-react-app.
 ---
 I recently built an [Electron](https://electronjs.org/ "ElectronJS site") app using [create-react-app](https://github.com/facebook/create-react-app "create-react-app repository"). I didn’t need to muck about with Webpack, or “eject” my app, either. I’ll walk you through how I accomplished this.
 

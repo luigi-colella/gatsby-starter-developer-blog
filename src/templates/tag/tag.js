@@ -42,6 +42,7 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             path
             tags
+            excerpt
             cover {
               childImageSharp {
                 fluid (maxWidth: 600) {
@@ -50,7 +51,6 @@ export const pageQuery = graphql`
               }
             }
           }
-          excerpt
         }
       }
     }

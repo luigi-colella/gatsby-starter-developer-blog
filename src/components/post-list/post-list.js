@@ -12,8 +12,7 @@ const PostList = ({ posts, highlightFirstItem, mosaicView }) => (
   <div className={mosaicView ? style.containerMosaic : null}>
     {posts.map((post, index) => {
       
-      const { title, date, path, tags, cover } = post.node.frontmatter
-      const { excerpt } = post.node
+      const { title, date, path, tags, cover, excerpt } = post.node.frontmatter
       /* Style classes */
       const postStyle = mosaicView ? style.postMosaic : style.post
       let coverStyle;

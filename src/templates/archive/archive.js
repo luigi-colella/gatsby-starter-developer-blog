@@ -42,6 +42,7 @@ query ($postPaths: [String!]) {
           title
           tags
           date(formatString: "MMMM DD, YYYY")
+          excerpt
           cover {
             childImageSharp {
               fluid(maxWidth: 600) {
@@ -50,7 +51,6 @@ query ($postPaths: [String!]) {
             }
           }
         }
-        excerpt
       }
     }
   }
