@@ -1,86 +1,49 @@
-@import '../../style/variables.less';
+@import (reference) '../../style/variables.less';
 
-.containerMosaic {
-    @media @desktop {
-        display: flex;
-        justify-content: space-between;
+.container {
+    .flex-center();
+    justify-content: space-between;
+    @media @mobile {
+        flex-direction: column;
     }
 }
 
 .post {
-    display: flex;
-    margin: @margin-medium @margin-zero;
-    padding: @padding-small;
-    background-color: @color-transparent;
-    transition: @transition-time background-color;
+    .flex-center();
+    .frame-small();
+    margin-bottom: auto;
+    flex-direction: column;
+    max-width: 45%;
+    box-sizing: border-box;
+    box-shadow: @box-shadow;
+    background-color: @color-theme;
+    border-radius: @border-radius-small;
     &:hover {
-        background-color: @color-transparent-darker;
         > div:first-child > a > div {
             transform: scale(1.1) !important
         }
     }
     @media @mobile {
-        flex-direction: column;
-    }
-}
-
-.postMosaic {
-    .post();
-    @media @desktop {
-        flex-direction: column;
-        flex: 0 1 50%;
+        width: 100%;
     }
 }
 
 .cover {
     overflow: hidden;
-    max-width: 30%;
     width: 100%;
-    margin: auto auto auto @margin-zero;
+    box-shadow: @box-shadow-cover;
     & > a > div {
         transition: @transition-time transform;
-    }
-    @media @mobile {
-        max-width: 100%;
-    }
-    @media @tablet {
-        max-width: 40%;
-    }
-}
-
-.coverHighlighted {
-    .cover();
-    max-width: 45%;
-    @media @tablet {
-        min-width: 65%;
-    }
-}
-
-.coverMosaic {
-    .cover();
-    @media @desktop {
-        max-width: 100%;
-        margin: @margin-zero;
     }
 }
 
 .content {
-    margin: auto;
+    .frame-small();
     text-align: center;
     h2, p {
         margin: @margin-small @margin-zero @margin-zero @margin-zero;
     }
-    p {
-        word-break: break-all;
-    }
-    @media @mobile {
-        margin: @margin-small;
-    }
-}
-
-.contentMosaic {
-    .content();
-    @media @desktop {
-        margin: @margin-small @margin-zero;
+    h2 {
+        text-shadow: @text-shadow-title;
     }
 }

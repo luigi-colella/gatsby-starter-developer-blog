@@ -1,5 +1,5 @@
 
-@import '../../../style/variables.less';
+@import (reference) '../../../style/variables.less';
 
 .language-label-colors (@language, @background, @text: @color-text) {
     @selector: ~'.gatsby-highlight[data-language=@{language}]::before';
@@ -37,7 +37,7 @@
         overflow-y: hidden;
         padding-top: @padding-medium * 2.5;
         background-color: @color-code-box;
-        border-radius: 0px;
+        border-radius: @border-radius-small;
         code {
             font-family: inherit;
             line-height: @text-size-medium * 1.25;

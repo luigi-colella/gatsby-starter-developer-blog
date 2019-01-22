@@ -37,20 +37,15 @@ const IndexPage = () => (
       }
     `}
     render={data => (
-      <Layout title="Last posts">
+      <Layout>
         <SEO
           title="Home"
           description={Config.siteDescription}
           path=''
         />
         <div>
-          <section>
-            <PostList
-              posts={data.allMarkdownRemark.edges}
-              highlightFirstItem={true}
-            />
-            <ArchivePagination nextPage={2} />
-          </section>
+          <PostList posts={data.allMarkdownRemark.edges} />
+          <ArchivePagination nextPage={2} />
         </div>
       </Layout>
     )}

@@ -1,4 +1,4 @@
-@import '../../style/variables.less';
+@import (reference) '../../style/variables.less';
 
 .container {
   width: 90%;
@@ -7,10 +7,12 @@
 
 .title {
   h1 {
-    border-bottom: 2px solid;
+    .frame-medium();
+    border-right: @border-medium * 2 solid @color-text;
     font-weight: normal;
     color: @color-text;
     text-align: right;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    text-shadow: 7px 7px @color-transparent;
   }
 }

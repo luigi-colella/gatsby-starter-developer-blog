@@ -1,13 +1,10 @@
-@import '../../style/variables.less';
+@import (reference) '../../style/variables.less';
 
 .button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .flex-center();
+  .frame-medium();
   box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
-  margin: @margin-zero;
   border: 2px solid @color-text;
-  padding: @padding-medium;
   font-size: @font-size * 1.3;
   transition: @transition-time;
   & :first-child {

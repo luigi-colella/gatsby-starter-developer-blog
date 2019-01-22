@@ -1,4 +1,4 @@
-@import '../../../style/variables';
+@import (reference) '../../../style/variables';
 
 .container {
     position: fixed;
@@ -9,13 +9,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: @box-shadow;
     z-index: 2;
     padding: @padding-small @padding-medium;
     background-color: @color-theme;
     background-image: @texture;
     & + div {
-        margin-top: @margin-medium * 6;
+        margin-top: @margin-medium * 5;
     }
     @media @mobile {
         padding: @padding-small;
@@ -71,12 +70,12 @@
 }
 
 .list {
-    display: flex;
+    .flex-center();
+    flex-wrap: nowrap;
     ul {
         list-style: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        .flex-center();
+        flex-wrap: nowrap;
         margin: @margin-zero @margin-medium;
         padding: @padding-zero;
         @media @mobile {
@@ -84,6 +83,7 @@
         }
         li {
             margin: @margin-zero @margin-small;
+            font-weight: bold;
             a {
                 text-transform: uppercase;
                 transition: @transition-time color;

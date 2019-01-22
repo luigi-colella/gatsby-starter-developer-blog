@@ -27,6 +27,11 @@
 @margin-small: 9px;
 @margin-medium: 18px;
 
+// Border
+@border-medium: 5px;
+@border-radius-small: 5px;
+@border-radius-large: 20px;
+
 // Padding
 @padding-zero: 0em;
 @padding-small: 9px;
@@ -38,8 +43,31 @@
 // Text
 @text-size-medium: 1em;
 
+// Text shadow
+@text-shadow-title: 5px 5px @color-transparent;
+
 // Box shadow
 @box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+@box-shadow-cover: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
 
 // Texture
 @texture: url('../images/texture-otis-redding.png');
+
+// Mixins
+
+.flex-center () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.frame-small () {
+    padding: @padding-small;
+    margin: @margin-small;
+}
+
+.frame-medium () {
+    padding: @padding-medium;
+    margin: @margin-medium;
+}

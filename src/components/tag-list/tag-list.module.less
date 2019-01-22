@@ -1,14 +1,13 @@
-@import '../../style/variables.less';
+@import (reference) '../../style/variables.less';
 
 .tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    .flex-center();
     a {
         margin: @margin-small @margin-small @margin-zero @margin-zero;
-        border: 1px solid @color-text;
         padding: @padding-small / 2 @padding-medium;
-        text-transform: uppercase;
+        border: @border-medium / 2 solid @color-transparent-darker;
+        border-radius: @border-radius-large;
+        text-transform: capitalize;
         transition: @transition-time background-color;
         &:hover {
             cursor: pointer;

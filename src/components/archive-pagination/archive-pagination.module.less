@@ -1,12 +1,10 @@
-@import '../../style/variables.less';
+@import (reference) '../../style/variables.less';
 
 .container {
-    display: flex;
-    justify-content: space-between;
+    .flex-center();
 }
 
 .buttonLeft {
-    margin-left: @margin-zero;
     margin-right: auto;
     @media @mobile {
         font-size: @font-size;
@@ -15,7 +13,6 @@
 
 .buttonRight {
     margin-left: auto;
-    margin-right: @margin-zero;
     @media @mobile {
         font-size: @font-size;
     }

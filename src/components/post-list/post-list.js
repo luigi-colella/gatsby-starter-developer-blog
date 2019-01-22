@@ -8,30 +8,16 @@ import * as style from './post-list.module.less'
 import TagList from '../tag-list'
 import Utils from '../../utils'
 
-const PostList = ({ posts, highlightFirstItem, mosaicView }) => (
-  <div className={mosaicView ? style.containerMosaic : null}>
+const PostList = ({ posts }) => (
+  <div className={style.container}>
     {posts.map((post, index) => {
-      
       const { title, date, path, tags, cover, excerpt } = post.node.frontmatter
-      /* Style classes */
-      const postStyle = mosaicView ? style.postMosaic : style.post
-      let coverStyle;
-      if (highlightFirstItem && index === 0) {
-        coverStyle = style.coverHighlighted;
-      } else if (mosaicView) {
-        coverStyle = style.coverMosaic;
-      } else {
-        coverStyle = style.cover;
-      }
-      const contentStyle = mosaicView ? style.contentMosaic : style.content;
-      /* * */
-      
       return (
-        <div key={title} className={postStyle}>
-          <div className={coverStyle}>
+        <div key={title} className={style.post}>
+          <div className={style.cover}>
             <Link to={Utils.resolvePageUrl(path)}><Img fluid={cover.childImageSharp.fluid} /></Link>
           </div>
-          <div className={contentStyle}>
+          <div className={style.content}>
             <Link to={Utils.resolvePageUrl(path)}>
               { date ? <label>{date}</label> : null }
               <h2>{title}</h2>
@@ -61,7 +47,5 @@ PostList.propTypes = {
         }).isRequired
       })
     })
-  })),
-  highlightFirstItem: PropTypes.bool,
-  mosaicView: PropTypes.bool
+  }))
 }

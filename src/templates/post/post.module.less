@@ -1,9 +1,9 @@
-@import '../../style/variables.less';
+@import (reference) '../../style/variables.less';
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: @margin-medium * 2;
+    .flex-center();
+    .frame-small();
+    flex-wrap: nowrap;
     @media @mobile, @tablet {
         flex-direction: column-reverse;
         margin-bottom: @margin-zero;
@@ -25,7 +25,7 @@
 
 .cover {
     min-width: 50%;
-    box-shadow: @box-shadow;
+    box-shadow: @box-shadow-cover;
     margin: auto @margin-zero auto auto;
     @media @mobile, @tablet {
         width: 100%;
@@ -33,6 +33,7 @@
 }
 
 .content {
+    .frame-small();
     @media @desktop {
         width: 70%;
         margin: @margin-medium auto @margin-medium @margin-zero;

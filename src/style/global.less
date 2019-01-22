@@ -1,4 +1,4 @@
-@import './variables.less';
+@import (reference) './variables.less';
 
 .font (@font-family, @font-weight, @font-filename, @font-size) {
     @font-face {
@@ -11,9 +11,8 @@
 /* Font */
 
 .font('Roboto', normal, 'Roboto', 'Regular');
-.font('Roboto', bold, 'Roboto', 'Bold');
+.font('Roboto', bold, 'Montserrat', 'Bold');
 .font('Roboto-Mono', normal, 'RobotoMono', 'Regular');
-.font('Roboto', 200, 'Montserrat', 'Light');
 
 /* Body */
 
@@ -27,11 +26,11 @@ body {
 
 /* Headings */
 
-.heading (@selector, @size, @weight, @color: @color-title) {
+.heading (@selector, @size, @color: @color-title) {
     @{selector} {
         text-align: center;
         font-size: @size;
-        font-weight: @weight;
+        font-weight: bold;
         color: @color;
         @media @mobile {
             font-size: @size / 1.5;
@@ -42,9 +41,9 @@ body {
     }
 }
 
-.heading(h1, @font-size * 3, 200);
-.heading(h2, @font-size * 2, 200);
-.heading(h3, @font-size * 1.5, 200);
+.heading(h1, @font-size * 3);
+.heading(h2, @font-size * 2);
+.heading(h3, @font-size * 1.5);
 
 /* Links */
 

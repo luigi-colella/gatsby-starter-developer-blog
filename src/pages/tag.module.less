@@ -1,11 +1,10 @@
-@import '../style/variables.less';
+@import (reference) '../style/variables.less';
 
 .card {
+    .flex-center();
+    .frame-medium();
+    justify-content: left;
     height: auto;
-    display: flex;
-    align-items: center;
-    margin: @margin-medium @margin-zero;
-    padding: @padding-small;
     background-color: @color-transparent;
     transition: @transition-time background-color;
     &:hover {
