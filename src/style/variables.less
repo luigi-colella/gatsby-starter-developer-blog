@@ -1,14 +1,17 @@
 
 // Colors palette
-@color-theme: #f7f5f2;
-@color-title: #284a6d;
-@color-text: #252525;
-@color-label: #99a0d8;
-@color-code-box: #091729;
+@color-theme: #1e065e;
+@color-title: #60a39a;
+@color-text: #cccccc;
+@color-label: #2d5a6b;
+@color-post-theme: #dddddd;
+@color-post-text: #000000;
+@color-post-title: @color-theme;
+@color-post-code: #091729;
 
 // Transparent colors
-@color-transparent: rgba(0,0,0,.1);
-@color-transparent-darker: rgba(0,0,0,.2);
+@color-transparent: rgba(0,0,0,.2);
+@color-transparent-darker: rgba(0,0,0,.4);
 
 // Gradients
 @gradient-primary: linear-gradient(to bottom, #0f2027, @color-theme, #031c27);
@@ -28,7 +31,7 @@
 @margin-medium: 18px;
 
 // Border
-@border-medium: 5px;
+@border-medium: 4px;
 @border-radius-small: 5px;
 @border-radius-large: 20px;
 
@@ -49,6 +52,7 @@
 // Box shadow
 @box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
 @box-shadow-cover: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+@box-shadow-post: 15px 0px 20px 4px @color-transparent, -15px 0px 20px 4px @color-transparent;
 
 // Texture
 @texture: url('../images/texture-otis-redding.png');

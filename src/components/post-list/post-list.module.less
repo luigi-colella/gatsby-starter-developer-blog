@@ -2,7 +2,8 @@
 
 .container {
     .flex-center();
-    justify-content: space-between;
+    justify-content: center;
+    flex-direction: column;
     @media @mobile {
         flex-direction: column;
     }
@@ -11,13 +12,10 @@
 .post {
     .flex-center();
     .frame-small();
-    margin-bottom: auto;
-    flex-direction: column;
-    max-width: 45%;
+    flex-wrap: initial;
+    flex-direction: row;
+    width: 100%;
     box-sizing: border-box;
-    box-shadow: @box-shadow;
-    background-color: @color-theme;
-    border-radius: @border-radius-small;
     &:hover {
         > div:first-child > a > div {
             transform: scale(1.1) !important
@@ -30,7 +28,9 @@
 
 .cover {
     overflow: hidden;
-    width: 100%;
+    margin: auto;
+    width: 40%;
+    min-width: 40%;
     box-shadow: @box-shadow-cover;
     & > a > div {
         transition: @transition-time transform;
@@ -45,5 +45,8 @@
     }
     h2 {
         text-shadow: @text-shadow-title;
+    }
+    p {
+        .frame-small();
     }
 }

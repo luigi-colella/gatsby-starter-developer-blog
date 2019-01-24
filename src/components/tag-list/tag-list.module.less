@@ -5,13 +5,14 @@
     a {
         margin: @margin-small @margin-small @margin-zero @margin-zero;
         padding: @padding-small / 2 @padding-medium;
-        border: @border-medium / 2 solid @color-transparent-darker;
-        border-radius: @border-radius-large;
+        border: @border-medium / 4 solid @color-text;
         text-transform: capitalize;
+        background-color: @color-label;
         transition: @transition-time background-color;
         &:hover {
             cursor: pointer;
-            background-color: @color-label;
+            background-color: @color-text;
+            color: @color-post-text;
         }
     }
 }
