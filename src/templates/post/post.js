@@ -1,11 +1,10 @@
 /* Vendor imports */
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
 /* App imports */
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
-import TagList from '../../components/tag-list'
+import Heading from './heading'
 import ArticleHeading from './article-heading'
 import Article from './article'
 import Comments from './comments'
@@ -36,16 +35,8 @@ const Post = ({ data, pageContext }) => {
         keywords={tags}
         translations={translations}
       />
-      <div>
-        <div className={style.header}>
-          <div className={style.title}>
-            <h1>{title}</h1>
-            <TagList tags={tags} />
-          </div>
-          <div className={style.cover}>
-            <Img fluid={img} title={title}/>
-          </div>
-        </div>
+      <div className={style.container}>
+        <Heading title={title} tags={tags} cover={img}/>
         <div className={style.content}>
           <ArticleHeading excerpt={excerpt} date={date} time={timeToRead} translations={translations}/>
           <Article html={html} />
@@ -73,7 +64,7 @@ export const pageQuery = graphql`
         excerpt
         cover {
           childImageSharp {
-            fluid (maxWidth: 700) {
+            fluid (maxWidth: 1000) {
               ...GatsbyImageSharpFluid_tracedSVG
             }
           }

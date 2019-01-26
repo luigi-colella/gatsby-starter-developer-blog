@@ -1,0 +1,33 @@
+@import (reference) '../../../style/variables.less';
+
+.header {
+    .flex-center();
+    .frame-small();
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+}
+
+.title {
+    margin: auto;
+    padding: @padding-small @padding-medium * 2 @padding-small @padding-small;
+    text-align: left;
+    h1 {
+        text-shadow: @text-shadow-title;
+    }
+    @media @mobile, @tablet {
+        padding: @padding-medium @padding-small;
+        h1 {
+            margin-top: @margin-zero;
+            margin-bottom: @margin-small;
+        }
+    }
+}
+
+.cover {
+    width: 80%;
+    box-shadow: @box-shadow-post;
+    margin: auto;
+    @media @mobile, @tablet {
+        width: 100%;
+    }
+}

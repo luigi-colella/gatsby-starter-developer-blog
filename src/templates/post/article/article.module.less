@@ -9,9 +9,18 @@
   h1, h2, h3 {
     color: @color-post-title;
     text-align: left;
+    text-shadow: @text-shadow-post-title;
   }
-  h1, h2 {
+  h1 {
+    font-size: @font-size * 2.7;
     border-bottom: 4px solid @color-post-title;
+  }
+  h2 {
+    font-size: @font-size * 2.3;
+    border-bottom: 4px solid @color-post-title;
+  }
+  h3 {
+    font-size: @font-size * 2;
   }
   p {
     code {
@@ -32,7 +41,7 @@
   }
   blockquote {
     font-size: @font-size * 1.6;
-    color: @color-label;
+    color: @color-post-highlight;
     font-style: italic;
     font-weight: 200;
     @media @mobile {
@@ -55,13 +64,13 @@
     border-spacing: 0px;
     td, th {
       padding: @padding-small @padding-medium;
-      border: 1px solid @color-label;
+      border: 1px solid @color-post-highlight;
     }
     th {
       text-align: center;
     }
     thead {
-      background-color: @color-label;
+      background-color: @color-post-highlight;
       th, td {
         border-width: 1px 1px 0px 0px;
         &:first-child {
@@ -86,8 +95,8 @@
   :not(pre) > code[class*="language-"] {
     font-family: 'Roboto-Mono';
     padding: .1em;
-    border-radius: 0px;
-    background-color: @color-label;
-    color: @color-text;
+    border-radius: @border-radius-small;
+    background-color: @color-post-highlight;
+    color: @color-post-text;
   }
 }

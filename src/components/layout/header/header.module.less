@@ -11,7 +11,8 @@
     justify-content: space-between;
     z-index: 2;
     padding: @padding-small @padding-medium;
-    background-color: @color-theme;
+    background-color: @color-header-theme;
+    color: @color-header-text;
     background-image: @texture;
     & + div {
         margin-top: @margin-medium * 5;
@@ -36,7 +37,7 @@
         font-size: @font-size * 1.75;
         margin: @margin-zero;
         padding: @padding-zero @padding-small;
-        color: @color-text;
+        color: inherit;
         transition: @transition-time color;
     }
     p {

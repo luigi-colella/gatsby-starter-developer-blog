@@ -23,17 +23,22 @@
     }
     @media @mobile {
         width: 100%;
+        flex-direction: column;
     }
 }
 
 .cover {
     overflow: hidden;
-    margin: auto;
+    margin: @margin-medium;
     width: 40%;
     min-width: 40%;
     box-shadow: @box-shadow-cover;
     & > a > div {
         transition: @transition-time transform;
+    }
+    @media @mobile {
+        min-width: 100%;
+        width: 100%;
     }
 }
 
