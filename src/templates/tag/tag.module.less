@@ -1,0 +1,22 @@
+@import (reference) '../../style/variables.less';
+
+.heading {
+    .flex-center();
+    margin: auto;
+    text-transform: capitalize;
+    h1 {
+        margin: @margin-zero;
+    }
+    @media @mobile {
+        flex-direction: column-reverse;
+    }
+}
+
+.cover {
+    width: 10%;
+    margin: @margin-medium @margin-medium @margin-medium @margin-medium * 2;
+    @media @mobile {
+        width: 25%;
+        margin: @margin-small;
+    }
+}
