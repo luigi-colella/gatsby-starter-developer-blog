@@ -47,7 +47,7 @@ class Header extends Component {
   }
 
   render = () => (
-    <div className={style.container}>
+    <div className={style.container} style={this.state.fixedHeader ? {backgroundImage: 'none'} : null}>
       <div className={style.titleContainer}>
         <div className={style.title}>
           <Link to={Utils.resolvePageUrl(Config.pages.home)}>

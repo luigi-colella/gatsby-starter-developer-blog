@@ -14,6 +14,7 @@
     background-color: @color-header-theme;
     color: @color-header-text;
     background-image: @texture;
+    font-family: "CustomBoldFont", sans-serif;
     font-size: @font-size;
     & + div {
         margin-top: @margin-medium * 5;
@@ -39,6 +40,7 @@
         padding: @padding-zero @padding-small;
         color: inherit;
         transition: @transition-time color;
+        text-transform: uppercase;
     }
     p {
         margin: @margin-zero;
@@ -83,7 +85,6 @@
             margin-top: @margin-small;
         }
         li {
-            font-family: "CustomBoldFont", sans-serif;
             margin: @margin-zero @margin-small;
             a {
                 text-transform: uppercase;
