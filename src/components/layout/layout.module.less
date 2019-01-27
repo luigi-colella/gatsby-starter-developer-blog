@@ -2,16 +2,19 @@
 
 .container {
   margin: auto;
+  @media @tablet, @desktop {
+    width: 97%;
+  }
 }
 
 .title {
   h1 {
     .frame-medium();
-    border-bottom: @border-medium solid @color-text;
-    font-weight: normal;
-    color: @color-text;
-    text-align: right;
+    border-bottom: @border-medium solid @color-title;
     text-transform: capitalize;
     text-shadow: 7px 7px @color-transparent;
+    @media @tablet, @desktop {
+      text-align: right;
+    }
   }
 }

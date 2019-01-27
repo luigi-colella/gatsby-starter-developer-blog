@@ -79,3 +79,18 @@
     padding: @padding-medium;
     margin: @margin-medium;
 }
+
+.heading (@selector, @size, @color: @color-title) {
+    @{selector} {
+        text-align: center;
+        font-size: @size;
+        font-weight: bold;
+        color: @color;
+        @media @mobile {
+            font-size: @size / 1.5;
+        }
+        @media @tablet {
+            font-size: @size / 1.2;
+        }
+    }
+}

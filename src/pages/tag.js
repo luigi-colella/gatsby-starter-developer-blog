@@ -22,7 +22,7 @@ const Tag = ({ data }) => {
         description="All present tags in the site"
         path={tagPage}
       />
-      <div className={style.container}>
+      <div>
         {tags.map(tag => (
           <Link to={Utils.resolvePageUrl(tagPage, tag)} className={style.card} key={tag}>
             <div className={style.cover}>

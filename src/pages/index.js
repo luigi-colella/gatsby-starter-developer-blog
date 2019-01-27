@@ -43,10 +43,8 @@ const IndexPage = () => (
           description={Config.siteDescription}
           path=''
         />
-        <div>
-          <PostList posts={data.allMarkdownRemark.edges} />
-          <ArchivePagination nextPage={2} />
-        </div>
+        <PostList posts={data.allMarkdownRemark.edges} />
+        <ArchivePagination nextPage={2} />
       </Layout>
     )}
   />

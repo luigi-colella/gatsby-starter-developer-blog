@@ -3,12 +3,11 @@
 .container {
     margin: auto;
     @media @desktop {
-        width: 85%;
+        width: 90%;
     }
 }
 
 .content {
-    border: @border-medium * 2 solid @color-text;
     background-color: @color-post-theme;
     box-shadow: @box-shadow-post;
     color: @color-post-text;
@@ -16,5 +15,6 @@
     padding: @padding-medium;
     @media @desktop {
         padding:  @padding-medium * 2 @padding-medium * 4;
+        border: @border-medium * 2 solid @color-text;
     }
 }

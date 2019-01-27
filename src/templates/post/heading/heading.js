@@ -20,10 +20,8 @@ const Heading = ({ title, tags, cover }) => (
 
 Heading.propTypes = {
   title: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  cover: PropTypes.shape({
-    fluid: PropTypes.object.isRequired
-  }).isRequired
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  cover: PropTypes.object.isRequired
 }
 
 export default Heading
