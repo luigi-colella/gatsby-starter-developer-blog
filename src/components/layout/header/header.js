@@ -51,7 +51,7 @@ class Header extends Component {
       <div className={style.titleContainer}>
         <div className={style.title}>
           <Link to={Utils.resolvePageUrl(Config.pages.home)}>
-            <h1>{Config.siteTitle}</h1>
+            <h4>{Config.siteTitle}</h4>
             <p className={this.state.fixedHeader ? style.hiddenDescription : style.visibleDescription}>{Config.siteDescription}</p>
           </Link>
         </div>

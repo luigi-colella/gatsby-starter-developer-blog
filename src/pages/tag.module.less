@@ -3,7 +3,7 @@
 .card {
     .flex-center();
     .frame-medium();
-    .heading(h2, @font-size * 2.5);
+    .heading(h2, @font-size * 1.8);
     justify-content: left;
     flex-wrap: nowrap;
     height: auto;
@@ -20,7 +20,7 @@
     margin: @margin-zero @margin-small;
     @width: 10%;
     min-width: @width;
-    margin-right: @margin-medium;
+    margin-right: @margin-medium * 2;
     @media @mobile {
         min-width: @width * 2.5;
     }
@@ -32,6 +32,7 @@
 .content {
     h2 {
         text-transform: capitalize;
+        font-family: "CustomBoldFont", sans-serif;
     }
     h2, p {
         margin-top: @margin-zero;
