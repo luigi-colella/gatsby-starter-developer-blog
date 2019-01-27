@@ -3,11 +3,11 @@ import React from 'react'
 import { graphql, Link } from 'gatsby'
 import Image from 'gatsby-image'
 /* App imports */
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import Config from '../../config'
-import Utils from '../utils'
-import * as style from './tag.module.less'
+import Layout from '../../components/layout'
+import SEO from '../../components/seo'
+import Config from '../../../config'
+import Utils from '../../utils'
+import style from './tag.module.less'
 
 const Tag = ({ data }) => {
 

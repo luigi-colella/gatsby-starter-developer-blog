@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 /* App imports */
-import * as style from './tag-list.module.less'
+import style from './tag-list.module.less'
 import Config from '../../../config'
 import Utils from '../../utils'
 

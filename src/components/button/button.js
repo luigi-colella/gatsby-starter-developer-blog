@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby'
 /* App imports */
-import * as style from './button.module.less'
+import style from './button.module.less'
 
 const Button = ({ children, to, buttonStyle }) => (
   <Link to={to} className={`${style.button} ${buttonStyle}`}>{children}</Link>

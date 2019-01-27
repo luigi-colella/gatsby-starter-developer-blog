@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Header from './header'
 import Footer from './footer'
 import '../../style/global.less'
-import * as style from './layout.module.less'
+import style from './layout.module.less'
 
 const Layout = ({ children, title }) => (
   <>

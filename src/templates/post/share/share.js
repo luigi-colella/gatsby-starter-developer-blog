@@ -22,7 +22,7 @@ import {
   FaWhatsappSquare,
   FaEnvelopeSquare
 } from 'react-icons/fa'
-import * as style from './share.module.less'
+import style from './share.module.less'
 
 const Share = ({ pageCanonicalUrl, title, description, tags, coverUrl }) => (
   <div>

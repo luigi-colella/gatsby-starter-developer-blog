@@ -3,12 +3,12 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 /* App imports */
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import Button from '../components/button'
-import * as style from './404.module.less'
-import Config from '../../config'
-import Utils from '../utils'
+import style from './404.module.less'
+import Layout from '../../components/layout'
+import SEO from '../../components/seo'
+import Button from '../../components/button'
+import Config from '../../../config'
+import Utils from '../../utils'
 
 const NotFoundPage = ({ data }) => (
   <Layout>

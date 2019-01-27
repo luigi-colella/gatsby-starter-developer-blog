@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Img from 'gatsby-image'
 /* App imports */
 import TagList from '../../../components/tag-list'
-import * as style from './heading.module.less'
+import style from './heading.module.less'
 
 const Heading = ({ title, tags, cover }) => (
   <div className={style.header}>

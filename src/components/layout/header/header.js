@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Link } from 'gatsby'
 import { FaBars, FaTimes, FaGithub, FaLinkedin, FaRss } from 'react-icons/fa'
 /* App imports */
-import * as style from './header.module.less'
+import style from './header.module.less'
 import Config from '../../../../config'
 import Utils from '../../../utils'
 

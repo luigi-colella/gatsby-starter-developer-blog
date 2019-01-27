@@ -12,7 +12,7 @@ import Share from './share'
 import SuggestedPosts from './suggested-posts'
 import Config from '../../../config'
 import Utils from '../../utils'
-import * as style from './post.module.less'
+import style from './post.module.less'
 
 const Post = ({ data, pageContext }) => {
 

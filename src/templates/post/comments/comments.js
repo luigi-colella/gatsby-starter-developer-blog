@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 /* App imports */
 import Config from '../../../../config'
-import * as style from './comments.module.less'
+import style from './comments.module.less'
 
 class Comments extends React.Component {
 

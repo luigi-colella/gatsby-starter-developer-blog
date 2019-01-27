@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 /* App imports */
 import PostList from '../../../components/post-list'
-import * as style from './suggested-posts.module.less'
+import style from './suggested-posts.module.less'
 
 const SuggestedPosts = ({ posts }) => (
   <div>

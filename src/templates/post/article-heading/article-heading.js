@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 import { FaRegCalendarAlt, FaRegClock } from 'react-icons/fa'
 import { MdTranslate } from 'react-icons/md'
 /* App imports */
-import * as style from './article-heading.module.less'
+import style from './article-heading.module.less'
 
 const ArticleHeading = ({ excerpt, date, time, translations }) => (
   <div className={style.container}>

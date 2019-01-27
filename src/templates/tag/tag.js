@@ -6,7 +6,7 @@ import Img from 'gatsby-image'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import PostList from '../../components/post-list'
-import styles from './tag.module.less'
+import style from './tag.module.less'
 import Config from '../../../config'
 import Utils from '../../utils'
 
@@ -25,9 +25,9 @@ const TagPage = ({ pageContext, data }) => {
         path={Utils.resolvePageUrl(tagPagePath, tagName)}
         keywords={[tagName]}
       />
-      <div className={styles.heading}>
+      <div className={style.heading}>
         <div><h1>{tagName}</h1></div>
-        <div className={styles.cover}><Img fluid={tagImage} /></div>
+        <div className={style.cover}><Img fluid={tagImage} /></div>
       </div>
       <PostList posts={posts} />
     </Layout>

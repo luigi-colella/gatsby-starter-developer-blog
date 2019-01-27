@@ -6,7 +6,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Button from '../../components/button'
 import Config from '../../../config'
 import Utils from '../../utils'
-import * as style from './archive-pagination.module.less'
+import style from './archive-pagination.module.less'
 
 const ArchivePagination = ({ prevPage, nextPage }) => (
   <div className={style.container}>

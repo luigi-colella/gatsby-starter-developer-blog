@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 /* App imports */
-import * as style from './post-list.module.less'
+import style from './post-list.module.less'
 import TagList from '../tag-list'
 import Utils from '../../utils'
 

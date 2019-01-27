@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import 'prismjs/themes/prism-solarizedlight.css';
 import './highlight-syntax.less'
 /* App imports */
-import * as style from './article.module.less'
+import style from './article.module.less'
 
 const Article = ({ html }) => (
   <div className={style.container}>

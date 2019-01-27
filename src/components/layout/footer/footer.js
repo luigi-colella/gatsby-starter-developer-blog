@@ -1,7 +1,7 @@
 /* Vendor imports */
 import React from 'react'
 /* App imports */
-import * as style from './footer.module.less'
+import style from './footer.module.less'
 
 const Footer = () => (
     <div className={style.container}>
