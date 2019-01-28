@@ -1,6 +1,7 @@
 <p align="center">
     <h1 align="center">Gatsby starter blog</h1>
     <p align="center">A file-driven generator made with Gatsby.js for creating a fast loading, customizable, scalable and SEO-friendly blogs</p>
+    <p align="center">If you are looking for a site ready to go in production and with most common features out of the box, you should give a change to this starter! Not every blog needs of a CMS or similar solutions. This blog is made for who want share its thoughs in minutes without care of SEO, databases or server concerns. It is mostly designed for blogs and portfolios. But despite the fact that it allows to automates the most common features of these types of site (ex. tags, SEO, archive...), it is high customizable and extensible.</p>
 </p>
 
 [![Build Status](https://travis-ci.org/lgcolella/gatsby-starter-blog.svg?branch=master)](https://travis-ci.org/lgcolella/gatsby-starter-blog)
@@ -12,11 +13,13 @@
 * [Features](#-features)
 * [Guide](#-guide)
 * [Credits](#-credits)
+* [Contribute](#-how-contribute)
 
 ## 🔧 Stack
 
 [![Gatsby JS](https://github.com/lgcolella/gatsby-starter-blog/raw/master/repository/gatsby.png "Gatsby JS")](https://www.gatsbyjs.org/)
 [![React JS](https://github.com/lgcolella/gatsby-starter-blog/raw/master/repository/react.png "React JS")](https://reactjs.org/)
+[![Less](https://github.com/lgcolella/gatsby-starter-blog/raw/master/repository/less.png "Less")](http://lesscss.org/)
 [![GraphQL](https://github.com/lgcolella/gatsby-starter-blog/raw/master/repository/graphql.png "GraphQL")](https://graphql.org/)
 [![TravisCI](https://github.com/lgcolella/gatsby-starter-blog/raw/master/repository/travis.png "TravisCI")](https://travis-ci.org/)
 
@@ -38,6 +41,7 @@
 * Style
     - Less styling
     - Responsive design
+    - Dark and Light themes
 * SEO
     - OpenGraph Tags
     - Twitter Tags for Twitter Cards
@@ -49,9 +53,46 @@
     - Prettier for code style
     - TravisCI support
 
-## Guide
+## 📓 Guide
 
+* [How add a post](#How-add-a-post)
+* [How edit post's metatags](#How-edit-metatags-of-a-post)
 * [How add a translated version of a post](#How-add-a-translated-version-of-a-post)
+
+### How add a post
+
+1. Create a folder in the ```content``` path. Since folder's name will not be used in any part of site, you can rename it as you want in order to organize better your contents (ex. ```2019-01-20-my-post```).
+2. In this folder create a file ```index.md```.
+3. At the beginning of file, insert two ```---```, one above of the other. They are separators to define post's metatags.
+4. Between above two separators, insert metatags. They are couples key/value to define additional info useful for process your post. Read [here](#How-edit-post's-metatags) for more info about them.
+5. Under the second separator ```---``` write your post using [Markdown syntax](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
+
+### How edit metatags of a post
+
+Metatags are additional informations that you provide in your posts to allow them to be processed correctly.
+Some metatags are used for some site's features and others for SEO purposes, but all are **mandatory**.
+Here a table for list them and explain how use each one.
+
+| **Metatag name** | **Description** | **Mandatory (Yes/No)** |
+| --- | --- | --- |
+| title | The title of your post | Y |
+| path | (Relative) url path of your post | Y |
+| date | Date of your post | Y |
+| tags | Tags to which your post belongs | Y |
+| excerpt | A brief summary of your post | Y |
+| cover | Relative path of post's image preview | Y |
+| coverAlt | Alt tag of image preview for SEO | Y |
+
+*Example*
+```
+title: My new blog post
+path: blog/my-new-blog-post
+date: 2019-01-20
+tags: [technology, seo, writing]
+excerpt: In this post we'll see a post example...
+cover: ./preview.png
+coverAlt: Image preview for blog post
+```
 
 ### How add a translated version of a post
 
@@ -66,3 +107,14 @@ Note that for ```index.md```, the ISO code used in metatags is taken from the ``
 ## 📃 Credits
 
 * 404 page's image by [Freepik](https://www.freepik.com/free-vector/404-error-web-template-with-bored-cat_2234126.htm)
+
+## 🤝 How contribute
+
+Everyone can contribute to enhance this starter! Here a not-exhaustive list of how to do.
+
+- If you are a *developer* you can improve the code.
+- If you are a *designer* you can propose new themes or enhance the UX.
+- If you are a *blogger* you can propose new features that you would have.
+- If you are a *human* you can improve the guide or give me a feedback.
+
+Even the smallest help is precious and matters to improve this project!
