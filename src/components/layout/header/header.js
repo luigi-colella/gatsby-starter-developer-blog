@@ -68,8 +68,8 @@ class Header extends Component {
           <li><Link to={Utils.resolvePageUrl(Config.pages.about)}>About</Link></li>
         </ul>
         <ul>
-          <li><a rel="nofollow" href={Config.social.github}><FaGithub size="30"/></a></li>
-          <li><a rel="nofollow" href={Config.social.linkedin}><FaLinkedin size="30"/></a></li>
+          <li><a target="_blank" rel="nofollow noopener noreferrer" href={Config.social.github}><FaGithub size="30"/></a></li>
+          <li><a target="_blank" rel="nofollow noopener noreferrer" href={Config.social.linkedin}><FaLinkedin size="30"/></a></li>
           <li><Link to={Utils.resolveUrl(Config.social.rss)}><FaRss size="30" /></Link></li>
         </ul>
       </div>

@@ -70,7 +70,7 @@
 ### How edit metatags of a post
 
 Metatags are additional informations that you provide in your posts to allow them to be processed correctly.
-Some metatags are used for some site's features and others for SEO purposes, but all are **mandatory**.
+Some metatags are used for some site's features and others for SEO purposes. You have to list all fields but you can omit values of non-mandatory ones.
 Here a table for list them and explain how use each one.
 
 | **Metatag name** | **Description** | **Mandatory (Yes/No)** |
@@ -79,7 +79,7 @@ Here a table for list them and explain how use each one.
 | path | (Relative) url path of your post | Y |
 | date | Date of your post | Y |
 | tags | Tags to which your post belongs | Y |
-| excerpt | A brief summary of your post | Y |
+| excerpt | A brief summary of your post | N |
 | cover | Relative path of post's image preview | Y |
 | coverAlt | Alt tag of image preview for SEO | Y |
 
