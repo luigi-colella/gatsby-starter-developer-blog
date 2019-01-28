@@ -1,7 +1,7 @@
 <p align="center">
     <h1 align="center">Gatsby starter blog</h1>
     <p align="center">A file-driven generator made with Gatsby.js for creating a fast loading, customizable, scalable and SEO-friendly blogs</p>
-    <p align="center">If you are looking for a site ready to go in production and with most common features out of the box, you should give a change to this starter! Not every blog needs of a CMS or similar solutions. This blog is made for who want share its thoughs in minutes without care of SEO, databases or server concerns. It is mostly designed for blogs and portfolios. But despite the fact that it allows to automates the most common features of these types of site (ex. tags, SEO, archive...), it is high customizable and extensible.</p>
+    <p align="center">If you are looking for a site <strong>ready to go in production</strong> and with <strong>most common features out of the box</strong>, you should give a change to this starter! Not every blog needs of a CMS or similar solutions. This blog is made for who want share its thoughs in minutes without care of SEO, databases or server concerns. It is <strong>mostly designed for blogs and portfolios</strong>. But despite the fact that it allows to automates the most common features of these types of site (ex. tags, SEO, archive...), it is high customizable and extensible.</p>
 </p>
 
 [![Build Status](https://travis-ci.org/lgcolella/gatsby-starter-blog.svg?branch=master)](https://travis-ci.org/lgcolella/gatsby-starter-blog)
@@ -56,7 +56,7 @@
 ## 📓 Guide
 
 * [How add a post](#How-add-a-post)
-* [How edit post's metatags](#How-edit-metatags-of-a-post)
+* [How edit metatags of a post](#How-edit-metatags-of-a-post)
 * [How add a translated version of a post](#How-add-a-translated-version-of-a-post)
 
 ### How add a post
@@ -64,7 +64,7 @@
 1. Create a folder in the ```content``` path. Since folder's name will not be used in any part of site, you can rename it as you want in order to organize better your contents (ex. ```2019-01-20-my-post```).
 2. In this folder create a file ```index.md```.
 3. At the beginning of file, insert two ```---```, one above of the other. They are separators to define post's metatags.
-4. Between above two separators, insert metatags. They are couples key/value to define additional info useful for process your post. Read [here](#How-edit-post's-metatags) for more info about them.
+4. Between above two separators, insert metatags. They are couples key/value to define additional info useful for process your post. Read [here](#How-edit-metatags-of-a-post) for more info about them.
 5. Under the second separator ```---``` write your post using [Markdown syntax](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
 
 ### How edit metatags of a post
