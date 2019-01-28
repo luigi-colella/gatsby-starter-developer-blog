@@ -1,0 +1,44 @@
+@import (reference) '../../style/variables.less';
+
+.container {
+    .flex-center();
+    .frame-medium();
+    @media @mobile {
+        flex-direction: column;
+        padding: @padding-small @padding-zero;
+    }
+}
+
+.photo {
+    width: 30%;
+    box-sizing: border-box;
+    margin-right: auto;
+    margin-bottom: auto;
+    border: 1px solid @color-title;
+    @media @mobile {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+.content {
+    width: 70%;
+    box-sizing: border-box;
+    h1, h2, p {
+        text-align: right;
+    }
+    h1 {
+        border-bottom: 1px solid @color-title;
+        padding-bottom: @padding-small;
+    }
+    h2, p {
+        padding-left: @padding-medium;
+    }
+    @media @mobile {
+        width: 100%;
+        h1, h2, p {
+            padding: @padding-small @padding-zero;
+            text-align: center;
+        }
+    }
+}
