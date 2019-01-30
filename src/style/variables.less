@@ -16,16 +16,12 @@
 @color-transparent: rgba(0,0,0,.2);
 @color-transparent-darker: rgba(0,0,0,.4);
 
-// Gradients
-@gradient-primary: linear-gradient(to bottom, #0f2027, @color-theme, #031c27);
-@gradient-secondary: linear-gradient(to bottom, #c31432, #240b36);
-
 // Device breakpoints
 @mobile: ~'only screen and (max-width : 480px)';
 @tablet: ~'screen and (min-device-width : 481px) and (max-device-width : 1024px)';
 @desktop: ~'only screen and (min-device-width : 1025px)';
 
-// Typographhy
+// Text
 @font-size: 1em;
 
 // Margin
@@ -46,9 +42,6 @@
 // Transition
 @transition-time: .5s;
 
-// Text
-@text-size-medium: 1em;
-
 // Text shadow
 @text-shadow-title: 5px 5px @color-transparent;
 @text-shadow-post-title: 0 5px 10px rgba(0,0,0,.3);
@@ -60,37 +53,3 @@
 
 // Texture
 @texture: url('../images/texture-otis-redding.png');
-
-// Mixins
-
-.flex-center () {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.frame-small () {
-    padding: @padding-small;
-    margin: @margin-small;
-}
-
-.frame-medium () {
-    padding: @padding-medium;
-    margin: @margin-medium;
-}
-
-.heading (@selector, @size, @color: @color-title) {
-    @{selector} {
-        text-align: center;
-        font-size: @size;
-        font-weight: bold;
-        color: @color;
-        @media @mobile {
-            font-size: @size / 1.5;
-        }
-        @media @tablet {
-            font-size: @size / 1.5;
-        }
-    }
-}

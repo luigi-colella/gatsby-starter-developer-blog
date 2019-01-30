@@ -1,5 +1,5 @@
 
-@import (reference) '../../../style/variables.less';
+@import (reference) '../../../style/index.less';
 
 .language-label-colors (@language, @background, @text: @color-text) {
     @selector: ~'.gatsby-highlight[data-language=@{language}]::before';
@@ -40,7 +40,7 @@
         border-radius: @border-radius-small;
         code {
             font-family: inherit;
-            line-height: @text-size-medium * 1.25;
+            line-height: 1.25em;
             background-color: inherit;
         }
     }
