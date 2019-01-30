@@ -1,6 +1,9 @@
 @import (reference) '../../../style/variables.less';
 
 .container {
+  .heading(h1, @font-size * 3, @color-post-title);
+  .heading(h2, @font-size * 2.4, @color-post-title);
+  .heading(h3, @font-size * 1.8, @color-post-title);
   article {
     overflow-x: auto;
     line-height: 1.6;
@@ -8,12 +11,12 @@
   h1, h2, h3, strong, th {
     font-family: "CustomBoldFont", sans-serif;
   }
+  h1, h2, h3, h4, h5, h6 {
+    text-align: left;
+  }
   h1, h2 {
     border-bottom: 1px solid @color-transparent;
   }
-  .heading(h1, @font-size * 3, @color-post-title);
-  .heading(h2, @font-size * 2.4, @color-post-title);
-  .heading(h3, @font-size * 1.8, @color-post-title);
   p {
     code {
       white-space: pre-wrap !important;

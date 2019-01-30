@@ -7,8 +7,8 @@ import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import * as style from './index.module.less'
 
-const About = ({ data: { file } }) => {
-  console.log(file)
+const About = ({ data: { profilePhoto, skillIcons, toolIcons } }) => {
+
   return (
     <Layout>
       <SEO
@@ -18,7 +18,7 @@ const About = ({ data: { file } }) => {
       />
       <div className={style.container}>
         <div className={style.photo}>
-          <Img fluid={file.childImageSharp.fluid} />
+          <Img fluid={profilePhoto.childImageSharp.fluid} />
         </div>
         <div className={style.content}>
           <h1>Hi, I'm Luigi!</h1>
@@ -31,25 +31,74 @@ const About = ({ data: { file } }) => {
             et molestie mauris aliquet. Proin non nibh libero. Fusce at nulla euismod, condimentum augue quis, convallis justo.
           </p>
           <br />
-          <p>
-            Aenean eget sollicitudin dui. Pellentesque tempus urna metus, non convallis metus malesuada et.
-            Donec dignissim nisl eget massa condimentum suscipit. Integer rhoncus turpis felis, ultrices rhoncus nunc lobortis a.
-            Nunc feugiat eget ante in aliquet. Donec ut felis vitae nunc mollis gravida. Suspendisse dapibus, lectus eget placerat cursus, ante arcu consectetur velit, at posuere justo nulla ac quam.
-            Sed sed feugiat lorem. Morbi velit elit, volutpat vitae scelerisque ac, faucibus sit amet quam. Vivamus dui nulla, sollicitudin
-            a pellentesque ut, consequat sit amet quam.
-          </p>
+          <h2>Skills</h2>
+          <ImageList edges={skillIcons.edges} />
+          <h2>Tools</h2>
+          <ImageList edges={toolIcons.edges} />
         </div>
       </div>
     </Layout>
   )
 }
 
+const ImageList = ({ edges }) => {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+  return (
+    <div className={style.iconsContainer}>
+      {
+        edges
+        .sort((edgeA, edgeB) => edgeA.node.name.toLowerCase() > edgeB.node.name.toLowerCase() ? 1 : -1)
+        .map(({ node: { name, childImageSharp } }) => (
+          <div className={style.iconWrapper} key={name}>
+            <Img fixed={childImageSharp.fixed} alt={name} title={name}/>
+            <label>{iconsNameMap[name] ? iconsNameMap[name] : capitalize(name)}</label>
+          </div>
+        ))
+      }
+    </div>
+  )
+}
+
+// Use to set specific icons names
+const iconsNameMap = {
+  'css': 'CSS',
+  'html': 'HTML',
+  'jquery': 'JQuery',
+  'nodejs': 'Node.js',
+  'vuejs': 'Vue.js',
+  'gruntjs': 'Grunt.js'
+}
+
 export const query = graphql`
 {
-  file (name: { eq: "profile-photo" }) {
+  profilePhoto: file (name: { eq: "profile-photo" }) {
     childImageSharp {
       fluid (maxWidth: 800) {
         ...GatsbyImageSharpFluid_tracedSVG
+      }
+    }
+  }
+  skillIcons: allFile ( filter: { dir: { regex: "/about/skills$/" } }) {
+    edges {
+      node {
+        name
+        childImageSharp {
+          fixed (width: 50) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+    }
+  }
+  toolIcons: allFile ( filter: { dir: { regex: "/about/tools$/" } }) {
+    edges {
+      node {
+        name
+        childImageSharp {
+          fixed (width: 50) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
       }
     }
   }
