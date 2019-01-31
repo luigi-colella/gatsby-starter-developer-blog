@@ -1,16 +1,36 @@
 
-// Colors palette
-@color-theme: #001135;
-@color-title: #74b1be;
-@color-text: #cccccc;
-@color-label: #2d5a6b;
-@color-header-theme: #001135b0;
-@color-header-text: @color-text;
-@color-post-theme: #f0f0f0;
-@color-post-text: #000000;
-@color-post-title: @color-theme;
-@color-post-highlight: @color-title;
-@color-post-code: #091729;
+// Theme
+@theme-color: #001135;
+@theme-title: #74b1be;
+@theme-text: #cccccc;
+
+// Label
+@label-theme: #2d5a6b;
+@label-text: @theme-text;
+@label-border: 1px solid @theme-text;
+@label-hover: @theme-text;
+@label-hover-text: @theme-color;
+@label-box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+
+// Label 2
+@label-theme-2: @theme-text;
+@label-text-2: @post-text;
+@label-border-2: 2px solid @label-theme;
+
+// Header
+@header-theme: #001135b0;
+@header-text: @theme-text;
+@header-border: 0px;
+
+// Post
+@post-theme: #f0f0f0;
+@post-text: #000000;
+@post-title: @theme-color;
+@post-highlight: #5a8a94;
+@post-highlight-text: @post-text;
+@post-code: #091729;
+@post-cover-box-shadow: 15px 0px 20px 4px @color-transparent, -15px 0px 20px 4px @color-transparent;
+@post-article-box-shadow: @post-cover-box-shadow;
 
 // Transparent colors
 @color-transparent: rgba(0,0,0,.2);
@@ -52,4 +72,4 @@
 @box-shadow-post: 15px 0px 20px 4px @color-transparent, -15px 0px 20px 4px @color-transparent;
 
 // Texture
-@texture: url('../images/texture-otis-redding.png');
+@texture: url('../textures/texture-otis-redding.png');

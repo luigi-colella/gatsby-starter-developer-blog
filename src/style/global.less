@@ -4,7 +4,7 @@
     @font-face {
         font-family: @font-family;
         font-weight: @font-weight;
-        src: url("./@{font-filename}/@{font-filename}-@{font-size}.ttf") format("opentype");
+        src: url("./fonts/@{font-filename}/@{font-filename}-@{font-size}.ttf") format("opentype");
     }
 }
 
@@ -20,9 +20,9 @@
 body {
     font-family: "CustomFont", sans-serif;
     font-size: @font-size * 1.2;
-    background-color: @color-theme;
+    background-color: @theme-color;
     background-image: @texture;
-    color: @color-text;
+    color: @theme-text;
     margin: @margin-zero;
 }
 

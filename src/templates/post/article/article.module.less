@@ -1,9 +1,9 @@
 @import (reference) '../../../style/index.less';
 
 .container {
-  .heading(h1, @font-size * 3, @color-post-title);
-  .heading(h2, @font-size * 2.4, @color-post-title);
-  .heading(h3, @font-size * 1.8, @color-post-title);
+  .heading(h1, @font-size * 3, @post-title);
+  .heading(h2, @font-size * 2.4, @post-title);
+  .heading(h3, @font-size * 1.8, @post-title);
   article {
     overflow-x: auto;
     line-height: 1.6;
@@ -23,7 +23,7 @@
     }
   }
   a {
-    color: @color-label;
+    color: @post-highlight;
     text-decoration: underline;
     word-break: break-all;
     code {
@@ -36,7 +36,7 @@
   }
   blockquote {
     font-size: @font-size * 1.6;
-    color: @color-post-highlight;
+    color: @post-highlight;
     font-style: italic;
     font-weight: 200;
     @media @mobile {
@@ -59,13 +59,14 @@
     border-spacing: 0px;
     td, th {
       padding: @padding-small @padding-medium;
-      border: 1px solid @color-post-highlight;
+      border: 1px solid @post-highlight;
     }
     th {
       text-align: center;
     }
     thead {
-      background-color: @color-post-highlight;
+      background-color: @post-highlight;
+      color: @post-highlight-text;
       th, td {
         border-width: 1px 1px 0px 0px;
         &:first-child {
@@ -91,7 +92,7 @@
     font-family: 'Roboto-Mono';
     padding: .1em;
     border-radius: @border-radius-small;
-    background-color: @color-post-highlight;
-    color: @color-post-text;
+    background-color: @post-highlight;
+    color: @post-highlight-text;
   }
 }

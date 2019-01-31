@@ -14,7 +14,7 @@
     box-sizing: border-box;
     margin-right: auto;
     margin-bottom: auto;
-    border: 1px solid @color-title;
+    border: 1px solid @theme-title;
     @media @mobile {
         width: 100%;
         margin: auto;
@@ -28,7 +28,7 @@
         text-align: center;
     }
     h1 {
-        border-bottom: 1px solid @color-title;
+        border-bottom: 1px solid @theme-title;
         padding-bottom: @padding-small;
     }
     h2 {
@@ -53,16 +53,10 @@
 .iconWrapper {
     .frame-medium();
     .flex-center();
+    .label-2();
     justify-content: space-evenly;
     flex-basis: 20%;
-    padding: @padding-small;
-    margin: @margin-small;
-    background-color: @color-text;
-    color: @color-post-text;
-    border: 2px solid @color-label;
-    box-shadow: @box-shadow-cover;
     label {
-        display: block;
         padding-left: @padding-small;
     }
     @media @mobile {

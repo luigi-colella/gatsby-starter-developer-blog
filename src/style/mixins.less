@@ -16,7 +16,7 @@
     margin: @margin-medium;
 }
 
-.heading (@selector, @size, @color: @color-title) {
+.heading (@selector, @size, @color: @theme-title) {
     @{selector} {
         text-align: center;
         font-size: @size;
@@ -29,4 +29,24 @@
             font-size: @size / 1.5;
         }
     }
+}
+
+.label (@background: @label-theme, @text: @label-text, @border: @label-border) {
+    background-color: @background;
+    color: @text;
+    border: @border;
+    margin: @margin-small;
+    padding: @padding-small / 2 @padding-medium;
+    box-shadow: @label-box-shadow;
+}
+
+.label-hover (@background: @label-hover, @text: @label-hover-text, @border: @label-border) {
+    transition: @transition-time background-color;
+    &:hover {
+        .label(@background, @text, @border);
+    }
+}
+
+.label-2 () {
+    .label(@label-theme-2, @label-text-2, @label-border-2);
 }

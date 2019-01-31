@@ -1,7 +1,7 @@
 
 @import (reference) '../../../style/index.less';
 
-.language-label-colors (@language, @background, @text: @color-text) {
+.language-label-colors (@language, @background, @text: @theme-text) {
     @selector: ~'.gatsby-highlight[data-language=@{language}]::before';
     @{selector} {
         background-color: @background;
@@ -19,8 +19,8 @@
         padding: @padding-small / 2 @padding-zero;
         content: attr(data-language);
         text-indent: 15px;
-        color: @color-text;
-        background: @color-label;
+        color: @theme-text;
+        background: @label-theme;
     }
     &[data-language="text"], &[data-language="none"] {
         &::before {
@@ -36,7 +36,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         padding-top: @padding-medium * 2.5;
-        background-color: @color-post-code;
+        background-color: @post-code;
         border-radius: @border-radius-small;
         code {
             font-family: inherit;

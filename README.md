@@ -58,6 +58,7 @@
 * [How add a post](#How-add-a-post)
 * [How edit metatags of a post](#How-edit-metatags-of-a-post)
 * [How add a translated version of a post](#How-add-a-translated-version-of-a-post)
+* [How change theme](#how-change-theme)
 
 ### How add a post
 
@@ -103,6 +104,10 @@ You've finished! Now in your post you'll get a link to translated version and vi
 
 Metatags for [SEO](https://support.google.com/webmasters/answer/189077) are automatically added in each version of post pages using the ISO code choosen for the filename. Tags will only be added for posts with translated versions.
 Note that for ```index.md```, the ISO code used in metatags is taken from the ```config.js```' variable ```defaultLanguage```.
+
+### How change theme
+
+Themes available with this starter are in ```src/style/themes```, but you can also create your own following these as example. Import what you prefer in ```src/style/index.less``` file.
 
 ## 📃 Credits
 

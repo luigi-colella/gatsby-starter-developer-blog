@@ -3,17 +3,11 @@
 .tags {
     .flex-center();
     a {
-        margin: @margin-small @margin-small @margin-zero @margin-zero;
-        padding: @padding-small / 2 @padding-medium;
-        border: @border-medium / 4 solid @color-text;
+        .label();       
         text-transform: capitalize;
-        background-color: @color-label;
-        transition: @transition-time background-color;
-        box-shadow: @box-shadow-cover;
         &:hover {
             cursor: pointer;
-            background-color: @color-text;
-            color: @color-post-text;
+            .label-hover();
         }
     }
 }
