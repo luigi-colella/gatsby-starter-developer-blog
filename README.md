@@ -50,6 +50,7 @@
     - Sitemap
     - Roboto.txt file
 * Development tools
+    - PropTypes for checking data passed to components
     - ESlint for linting
     - Prettier for code style
     - TravisCI support
@@ -119,6 +120,6 @@ Everyone can contribute to enhance this starter! Here a not-exhaustive list of h
 - If you are a *developer* you can improve the code.
 - If you are a *designer* you can propose new themes or enhance the UX.
 - If you are a *blogger* you can propose new features that you would have.
-- If you are a *human* you can improve the guide or give me a feedback.
+- If you are a *user* you can improve the guide or give me a feedback.
 
 Even the smallest help is precious and matters to improve this project!

@@ -9,8 +9,6 @@ const Button = ({ children, to, buttonStyle }) => (
   <Link to={to} className={`${style.button} ${buttonStyle}`}>{children}</Link>
 )
 
-export default Button
-
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   to: PropTypes.string.isRequired,
@@ -20,3 +18,5 @@ Button.propTypes = {
 Button.defaultProps = {
   buttonStyle: ''
 }
+
+export default Button

@@ -22,8 +22,8 @@ const TagList = ({ tags }) => (
   </div>
 )
 
-export default TagList;
-
 TagList.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string).isRequired
 }
+
+export default TagList;

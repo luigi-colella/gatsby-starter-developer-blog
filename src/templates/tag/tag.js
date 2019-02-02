@@ -1,5 +1,6 @@
 /* Vendor imports */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 /* App imports */
@@ -10,9 +11,8 @@ import style from './tag.module.less'
 import Config from '../../../config'
 import Utils from '../../utils'
 
-const TagPage = ({ pageContext, data }) => {
+const TagPage = ({ data, pageContext }) => {
 
-  const posts = data.allMarkdownRemark.edges
   const tagName = pageContext.tag
   const tagPagePath = Config.pages.tag;
   const tagImage = data.allFile.edges.find(edge => edge.node.name === tagName).node.childImageSharp.fluid;
@@ -29,12 +29,31 @@ const TagPage = ({ pageContext, data }) => {
         <div><h1>{tagName}</h1></div>
         <div className={style.cover}><Img fluid={tagImage} /></div>
       </div>
-      <PostList posts={posts} />
+      <PostList posts={data.allMarkdownRemark.edges} />
     </Layout>
   )
 }
 
-export default TagPage
+TagPage.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.object).isRequired
+    }).isRequired,
+    allFile: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          childImageSharp: PropTypes.shape({
+            fluid: PropTypes.object.isRequired
+          }).isRequired
+        }).isRequired
+      })).isRequired
+    }).isRequired
+  }).isRequired,
+  pageContext: PropTypes.shape({
+    tag: PropTypes.string.isRequired
+  }).isRequired
+}
 
 export const pageQuery = graphql`
   query($tag: String!) {
@@ -75,3 +94,5 @@ export const pageQuery = graphql`
     }
   }
 `
+
+export default TagPage

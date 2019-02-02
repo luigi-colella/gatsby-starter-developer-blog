@@ -41,8 +41,6 @@ const Share = ({ pageCanonicalUrl, title, description, tags, coverUrl }) => (
   </div>
 )
 
-export default Share
-
 Share.propTypes = {
   pageCanonicalUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -50,3 +48,5 @@ Share.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   coverUrl: PropTypes.string.isRequired
 }
+
+export default Share

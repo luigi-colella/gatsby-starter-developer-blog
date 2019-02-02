@@ -31,8 +31,6 @@ const PostList = ({ posts }) => (
   </div>
 )
 
-export default PostList;
-
 PostList.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
     node: PropTypes.shape({
@@ -42,10 +40,13 @@ PostList.propTypes = {
         path: PropTypes.string.isRequired,
         tags: PropTypes.arrayOf(PropTypes.string).isRequired,
         cover: PropTypes.shape({
-          fixed: PropTypes.object,
-          fluid: PropTypes.object
+          childImageSharp: PropTypes.shape({
+            fluid: PropTypes.object.isRequired
+          }).isRequired
         }).isRequired
       })
     })
   }))
 }
+
+export default PostList;

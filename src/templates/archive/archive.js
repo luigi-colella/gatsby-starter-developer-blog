@@ -1,5 +1,6 @@
 /* Vendor imports */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 /* App imports */
 import Layout from '../../components/layout'
@@ -27,7 +28,17 @@ const Archive = ({ data, pageContext }) => {
   )
 }
 
-export default Archive;
+Archive.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+    }).isRequired
+  }).isRequired,
+  pageContext: PropTypes.shape({
+    archivePage: PropTypes.number.isRequired,
+    lastArchivePage: PropTypes.number.isRequired
+  }).isRequired
+}
 
 export const query = graphql`
 query ($postPaths: [String!]) {
@@ -56,3 +67,5 @@ query ($postPaths: [String!]) {
   }
 }
 `
+
+export default Archive;

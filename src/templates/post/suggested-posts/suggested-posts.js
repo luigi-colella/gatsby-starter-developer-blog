@@ -12,8 +12,6 @@ const SuggestedPosts = ({ posts }) => (
   </div>
 )
 
-export default SuggestedPosts;
-
 SuggestedPosts.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.shape({
     edge: PropTypes.shape({
@@ -21,3 +19,5 @@ SuggestedPosts.propTypes = {
     })
   })).isRequired,
 }
+
+export default SuggestedPosts;

@@ -83,8 +83,6 @@ SEO.propTypes = {
   })),
 }
 
-export default SEO
-
 const detailsQuery = graphql`
   query DefaultSEOQuery {
     file (name: { eq: "facebook-logo" }) {
@@ -96,3 +94,4 @@ const detailsQuery = graphql`
     }
   }
 `
+export default SEO

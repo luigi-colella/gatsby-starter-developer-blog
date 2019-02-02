@@ -23,9 +23,9 @@ const ArchivePagination = ({ prevPage, nextPage }) => (
   </div>
 )
 
-export default ArchivePagination;
-
 ArchivePagination.propTypes = {
   prevPage: PropTypes.number,
   nextPage: PropTypes.number
 }
+
+export default ArchivePagination;

@@ -1,5 +1,6 @@
 /* Vendor imports */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 /* App imports */
@@ -30,7 +31,15 @@ const NotFoundPage = ({ data }) => (
   </Layout>
 )
 
-export default NotFoundPage
+NotFoundPage.propTypes = {
+  data: PropTypes.shape({
+    file: PropTypes.shape({
+      childImageSharp: PropTypes.shape({
+        fluid: PropTypes.object.isRequired
+      }).isRequired
+    }).isRequired
+  }).isRequired
+}
 
 export const query = graphql`
 {
@@ -43,3 +52,4 @@ export const query = graphql`
   }
 }
 `
+export default NotFoundPage

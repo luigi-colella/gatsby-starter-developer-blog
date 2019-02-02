@@ -12,8 +12,8 @@ const Article = ({ html }) => (
   </div>
 )
 
-export default Article;
-
 Article.propTypes = {
   html: PropTypes.string.isRequired
 }
+
+export default Article;

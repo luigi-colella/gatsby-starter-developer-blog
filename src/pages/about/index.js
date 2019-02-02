@@ -1,5 +1,6 @@
 /* Vendor imports */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 /* App imports */
@@ -41,6 +42,18 @@ const About = ({ data: { profilePhoto, skillIcons, toolIcons } }) => {
   )
 }
 
+About.propTypes = {
+  data: PropTypes.shape({
+    profilePhoto: PropTypes.shape({
+      childImageSharp: PropTypes.shape({
+        fluid: PropTypes.object.isRequired
+      }).isRequired
+    }).isRequired,
+    skillIcons: PropTypes.object.isRequired,
+    toolIcons: PropTypes.object.isRequired
+  })
+}
+
 const ImageList = ({ edges }) => {
   const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
   return (
@@ -50,7 +63,7 @@ const ImageList = ({ edges }) => {
         .sort((edgeA, edgeB) => edgeA.node.name.toLowerCase() > edgeB.node.name.toLowerCase() ? 1 : -1)
         .map(({ node: { name, childImageSharp } }) => (
           <div className={style.iconWrapper} key={name}>
-            <Img fixed={childImageSharp.fixed} alt={name} title={name}/>
+            <Img fixed={childImageSharp.fixed} alt={name + ' logo'} title={name}/>
             <label>{iconsNameMap[name] ? iconsNameMap[name] : capitalize(name)}</label>
           </div>
         ))
@@ -59,14 +72,15 @@ const ImageList = ({ edges }) => {
   )
 }
 
-// Use to set specific icons names
-const iconsNameMap = {
-  'css': 'CSS',
-  'html': 'HTML',
-  'jquery': 'JQuery',
-  'nodejs': 'Node.js',
-  'vuejs': 'Vue.js',
-  'gruntjs': 'Grunt.js'
+ImageList.propTypes = {
+  edges: PropTypes.arrayOf(PropTypes.shape({
+    node: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      childImageSharp: PropTypes.shape({
+        fixed: PropTypes.object.isRequired
+      }).isRequired
+    }).isRequired
+  })).isRequired
 }
 
 export const query = graphql`
@@ -104,5 +118,14 @@ export const query = graphql`
   }
 }
 `
+// Use to set specific icons names
+const iconsNameMap = {
+  'css': 'CSS',
+  'html': 'HTML',
+  'jquery': 'JQuery',
+  'nodejs': 'Node.js',
+  'vuejs': 'Vue.js',
+  'gruntjs': 'Grunt.js'
+}
 
 export default About

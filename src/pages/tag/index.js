@@ -1,5 +1,6 @@
 /* Vendor imports */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { graphql, Link } from 'gatsby'
 import Image from 'gatsby-image'
 /* App imports */
@@ -40,7 +41,29 @@ const Tag = ({ data }) => {
   )
 }
 
-export default Tag
+Tag.propTypes = {
+  data: PropTypes.shape({
+    allMarkdownRemark: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          frontmatter: PropTypes.shape({
+            tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+          }).isRequired
+        }).isRequired
+      }).isRequired).isRequired
+    }).isRequired,
+    allFile: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.shape({
+        node: PropTypes.shape({
+          name: PropTypes.string.isRequired,
+          childImageSharp: PropTypes.shape({
+            fluid: PropTypes.object.isRequired
+          }).isRequired
+        }).isRequired
+      }).isRequired).isRequired
+    }).isRequired
+  }).isRequired
+}
 
 export const query = graphql`
   {
@@ -85,3 +108,5 @@ const tagExcerpts = {
   react: 'React is an open source JavaScript library used for designing user interfaces.',
   vuejs: 'Vue.js is a JavaScript framework for building interactive web applications.'
 }
+
+export default Tag

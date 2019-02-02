@@ -49,8 +49,6 @@ const Post = ({ data, pageContext }) => {
   )
 }
 
-export default Post
-
 export const pageQuery = graphql`
   query($postPath: String!) {
     markdownRemark(frontmatter: { path: { eq: $postPath } }) {
@@ -94,3 +92,4 @@ export const pageQuery = graphql`
     }
   }
 `
+export default Post
