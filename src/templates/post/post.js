@@ -17,7 +17,7 @@ import style from './post.module.less'
 const Post = ({ data, pageContext }) => {
 
   const { html, frontmatter, timeToRead } = data.markdownRemark
-  const { title, date, tags, cover, coverAlt, path, excerpt } = frontmatter
+  const { title, date, tags, cover, path, excerpt } = frontmatter
   const translations = pageContext.translations.length > 1 ? pageContext.translations : null
   const img = cover.childImageSharp.fluid
   const canonicalUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
@@ -31,14 +31,14 @@ const Post = ({ data, pageContext }) => {
         description={excerpt}
         path={path}
         contentType="article"
-        image={{url: img.src, alt: coverAlt}}
+        imageUrl={img.src}
         keywords={tags}
         translations={translations}
       />
       <div className={style.container}>
-        <Heading title={title} tags={tags} cover={img}/>
+        <Heading title={title} tags={tags} cover={img} coverTitle={excerpt} />
         <div className={style.content}>
-          <ArticleHeading excerpt={excerpt} date={date} time={timeToRead} translations={translations}/>
+          <ArticleHeading excerpt={excerpt} date={date} time={timeToRead} translations={translations} />
           <Article html={html} />
           <Share pageCanonicalUrl={canonicalUrl} title={title} description={excerpt} tags={tags} coverUrl={coverUrl} />
         </div>
@@ -69,7 +69,6 @@ export const pageQuery = graphql`
             }
           }
         }
-        coverAlt
       }
     }
     allMarkdownRemark (

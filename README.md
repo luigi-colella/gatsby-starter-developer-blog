@@ -1,7 +1,7 @@
 <p align="center">
     <h1 align="center">Gatsby starter blog</h1>
-    <p align="center">A file-driven generator made with Gatsby.js for creating a fast loading, customizable, scalable and SEO-friendly blogs</p>
-    <p align="center">If you are looking for a site <strong>ready to go in production</strong> and with <strong>most common features out of the box</strong>, you should give a change to this starter! Not every blog needs of a CMS or similar solutions. This blog is made for who want share its thoughs in minutes without care of SEO, databases or server concerns. It is <strong>mostly designed for blogs and portfolios</strong>. But despite the fact that it allows to automates the most common features of these types of site (ex. tags, SEO, archive...), it is high customizable and extensible.</p>
+    <p align="center">A file-driven generator made with Gatsby.js for creating fast loading, customizable, scalable and SEO-friendly blogs.</p>
+    <p align="center">If you are looking for a site <strong>ready to go in production</strong> and with <strong>most common features out of the box</strong>, you should give a change to this starter! Not every blog needs of a CMS or other complex solutions. This blog is made for who want share its thoughs in minutes without care of SEO, server or database concerns. <strong>You can deploy it on the host you want at the cheapest price</strong> because it is built only with HTML, CSS, JS and it doesn't need of backend to work. It is <strong>mostly designed for blogs and portfolios</strong>. But despite the fact that it allows to automates the most common features of these types of site (ex. tags, SEO, archive...), it is high customizable and extensible.</p>
 </p>
 
 [![Build Status](https://travis-ci.org/lgcolella/gatsby-starter-blog.svg?branch=master)](https://travis-ci.org/lgcolella/gatsby-starter-blog)
@@ -45,6 +45,7 @@
 * SEO
     - OpenGraph Tags
     - Twitter Tags for Twitter Cards
+    - HTML title and alt attributes for post's cover
     - HTML hreflang attribute for multi-language versions posts
     - Sitemap
     - Roboto.txt file
@@ -82,7 +83,6 @@ Here a table for list them and explain how use each one.
 | tags | Tags to which your post belongs | Y |
 | excerpt | A brief summary of your post | N |
 | cover | Relative path of post's image preview | Y |
-| coverAlt | Alt tag of image preview for SEO | Y |
 
 *Example*
 ```
@@ -92,7 +92,6 @@ date: 2019-01-20
 tags: [technology, seo, writing]
 excerpt: In this post we'll see a post example...
 cover: ./preview.png
-coverAlt: Image preview for blog post
 ```
 
 ### How add a translated version of a post

@@ -3,7 +3,6 @@ title: "Pillole: Come usare SCSS in Angular CLI 6"
 path: blog/it/scss-in-angular-cli-6
 tags: [javascript, angular, sass]
 cover: ./preview.png
-coverAlt: angular cli and scss
 date: 2018-12-21
 excerpt: Configura SCSS per il tuo prossimo progetto Angular.
 ---

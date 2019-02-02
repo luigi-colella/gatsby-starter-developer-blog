@@ -4,7 +4,6 @@ date: 2018-11-12
 tags: [laravel, vuejs, typescript, javascript, nodejs]
 path: blog/setup-typescript-with-laravel-and-vue
 cover: ./preview.jpg
-coverAlt: test cover alt
 excerpt: In this post we'll see how setup the Typescript and how use it in a project built with Laravel and Vue.
 ---
 

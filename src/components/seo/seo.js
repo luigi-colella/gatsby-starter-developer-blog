@@ -7,39 +7,37 @@ import { StaticQuery, graphql } from 'gatsby'
 import Config from '../../../config'
 import Utils from '../../utils'
 
-function SEO({ title, description, path, lang, keywords, contentType, image, translations, meta }) {
+function SEO({ title, description, path, lang, keywords, contentType, imageUrl, translations, meta }) {
   return (
     <StaticQuery
       query={detailsQuery}
       render={data => {
 
-        const metaDescription = description
         const metaKeywords = (keywords && keywords.length > 0) ? { name: 'keywords', content: keywords.join(', ') } : []
         const pageUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
-        const metaImageUrl = Utils.resolveUrl(Config.siteUrl, (image ? image.url : data.file.childImageSharp.fixed.src))
-        const metaImageAlt = image ? image.alt : metaDescription
+        const metaImageUrl = Utils.resolveUrl(Config.siteUrl, (imageUrl ? imageUrl : data.file.childImageSharp.fixed.src))
 
         return (
           <Helmet
             title={title} // Page title
             titleTemplate={`%s | ${Config.siteTitle}`}
             meta={[
-              { name: 'description', content: metaDescription }, // Page description
+              { name: 'description', content: description }, // Page description
               /* Open Graph */
               { property: 'og:title', content: title },
               { property: 'og:type', content: contentType || 'website' },
               { property: 'og:url', content: pageUrl },
-              { property: 'og:description', content: metaDescription },
+              { property: 'og:description', content: description },
               { property: 'og:image', content: metaImageUrl },
-              { property: 'og:image:alt', content: metaImageAlt },
+              { property: 'og:image:alt', content: description },
               { property: 'og:site_name', content: Config.siteTitle },
               { property: 'og:locale', content: lang || 'en_US' },
               /* Twitter card */
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: title },
-              { name: 'twitter:description', content: metaDescription },
+              { name: 'twitter:description', content: description },
               { name: 'twitter:image', content: metaImageUrl },
-              { name: 'twitter:image:alt', content: metaImageAlt },
+              { name: 'twitter:image:alt', content: description },
               { name: 'twitter:site', content: Config.author },
               { name: 'twitter:creator', content: Config.author }
             ]
@@ -73,10 +71,7 @@ SEO.propTypes = {
   path: PropTypes.string.isRequired,
   lang: PropTypes.string,
   contentType: PropTypes.oneOf(['article', 'website']),
-  image: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired
-  }),
+  imageUrl: PropTypes.string,
   keywords: PropTypes.arrayOf(PropTypes.string),
   translations: PropTypes.arrayOf(PropTypes.shape({
     hreflang: PropTypes.string.isRequired,

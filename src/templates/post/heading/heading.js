@@ -6,14 +6,14 @@ import Img from 'gatsby-image'
 import TagList from '../../../components/tag-list'
 import style from './heading.module.less'
 
-const Heading = ({ title, tags, cover }) => (
+const Heading = ({ title, tags, cover, coverTitle }) => (
   <div className={style.header}>
     <div className={style.title}>
       <h1>{title}</h1>
       <TagList tags={tags} />
     </div>
     <div className={style.cover}>
-      <Img fluid={cover} title={title}/>
+      <Img fluid={cover} title={coverTitle} alt={title} />
     </div>
   </div>
 )
@@ -21,7 +21,8 @@ const Heading = ({ title, tags, cover }) => (
 Heading.propTypes = {
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  cover: PropTypes.object.isRequired
+  cover: PropTypes.object.isRequired,
+  coverTitle: PropTypes.string
 }
 
 export default Heading
