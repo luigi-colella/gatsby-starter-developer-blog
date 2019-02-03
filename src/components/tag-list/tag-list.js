@@ -15,7 +15,7 @@ const TagList = ({ tags }) => (
       .sort()
       .map(tag => (
         <Link to={Utils.resolvePageUrl(Config.pages.tag, tag)} key={tag}>
-          {tag}
+          {Config.tags[tag].name || Utils.capitalize(tag)}
         </Link>
       ))
     }

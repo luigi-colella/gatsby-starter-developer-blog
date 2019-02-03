@@ -13,16 +13,17 @@ import Utils from '../../utils'
 
 const TagPage = ({ data, pageContext }) => {
 
-  const tagName = pageContext.tag
+  const tag = pageContext.tag
+  const tagName = Config.tags[tag].name || Utils.capitalize(tag);
   const tagPagePath = Config.pages.tag;
-  const tagImage = data.allFile.edges.find(edge => edge.node.name === tagName).node.childImageSharp.fluid;
+  const tagImage = data.allFile.edges.find(edge => edge.node.name === tag).node.childImageSharp.fluid;
   
   return (
     <Layout>
       <SEO
         title={tagName}
         description={`All post about ${tagName}`}
-        path={Utils.resolvePageUrl(tagPagePath, tagName)}
+        path={Utils.resolvePageUrl(tagPagePath, tag)}
         keywords={[tagName]}
       />
       <div className={style.heading}>
@@ -80,7 +81,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allFile (filter: { name: { eq: $tag } }) {
+    allFile (filter: { name: { eq: $tag }, dir: { regex: "/tags$/" } }) {
       edges {
         node {
           name

@@ -6,6 +6,7 @@ import Img from 'gatsby-image'
 /* App imports */
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
+import Utils from '../../utils'
 import * as style from './index.module.less'
 
 const About = ({ data: { profilePhoto, skillIcons, toolIcons } }) => {
@@ -54,23 +55,20 @@ About.propTypes = {
   })
 }
 
-const ImageList = ({ edges }) => {
-  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
-  return (
-    <div className={style.iconsContainer}>
-      {
-        edges
-        .sort((edgeA, edgeB) => edgeA.node.name.toLowerCase() > edgeB.node.name.toLowerCase() ? 1 : -1)
-        .map(({ node: { name, childImageSharp } }) => (
-          <div className={style.iconWrapper} key={name}>
-            <Img fixed={childImageSharp.fixed} alt={name + ' logo'} title={name}/>
-            <label>{iconsNameMap[name] ? iconsNameMap[name] : capitalize(name)}</label>
-          </div>
-        ))
-      }
-    </div>
-  )
-}
+const ImageList = ({ edges }) => (
+  <div className={style.iconsContainer}>
+    {
+      edges
+      .sort((edgeA, edgeB) => edgeA.node.name.toLowerCase() > edgeB.node.name.toLowerCase() ? 1 : -1)
+      .map(({ node: { name, childImageSharp } }) => (
+        <div className={style.iconWrapper} key={name}>
+          <Img fixed={childImageSharp.fixed} alt={name + ' logo'} title={name}/>
+          <label>{iconsNameMap[name] ? iconsNameMap[name] : Utils.capitalize(name)}</label>
+        </div>
+      ))
+    }
+  </div>
+)
 
 ImageList.propTypes = {
   edges: PropTypes.arrayOf(PropTypes.shape({

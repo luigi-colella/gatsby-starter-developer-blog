@@ -67,7 +67,13 @@ const Utils = {
           path: Utils.resolvePageUrl(node.frontmatter.path)
         }
       })
-  }
+  },
+  /**
+   * Capitalize passed string
+   * @param {string} str string to capitalize
+   * @return {string} string with first letter to uppercase
+   */
+  capitalize: (str) => str[0].toUpperCase() + str.slice(1)
 }
 
 module.exports = Utils;
