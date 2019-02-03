@@ -13,11 +13,13 @@ const SuggestedPosts = ({ posts }) => (
 )
 
 SuggestedPosts.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.shape({
-    edge: PropTypes.shape({
-      node: PropTypes.object
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      edge: PropTypes.shape({
+        node: PropTypes.object,
+      }),
     })
-  })).isRequired,
+  ).isRequired,
 }
 
-export default SuggestedPosts;
+export default SuggestedPosts

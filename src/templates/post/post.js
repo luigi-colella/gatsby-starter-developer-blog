@@ -15,14 +15,22 @@ import Utils from '../../utils'
 import style from './post.module.less'
 
 const Post = ({ data, pageContext }) => {
-
   const { html, frontmatter, timeToRead } = data.markdownRemark
   const { title, date, tags, cover, path, excerpt } = frontmatter
-  const translations = pageContext.translations.length > 1 ? pageContext.translations : null
+  const translations =
+    pageContext.translations.length > 1 ? pageContext.translations : null
   const img = cover.childImageSharp.fluid
-  const canonicalUrl = Utils.resolvePageUrl(Config.siteUrl, Config.pathPrefix, path)
+  const canonicalUrl = Utils.resolvePageUrl(
+    Config.siteUrl,
+    Config.pathPrefix,
+    path
+  )
   const coverUrl = Utils.resolveUrl(Config.siteUrl, img.src)
-  const suggestedPosts = Utils.getSuggestedPosts(data.markdownRemark, data.allMarkdownRemark, 3)
+  const suggestedPosts = Utils.getSuggestedPosts(
+    data.markdownRemark,
+    data.allMarkdownRemark,
+    3
+  )
 
   return (
     <Layout>
@@ -38,9 +46,20 @@ const Post = ({ data, pageContext }) => {
       <div className={style.container}>
         <Heading title={title} tags={tags} cover={img} coverTitle={excerpt} />
         <div className={style.content}>
-          <ArticleHeading excerpt={excerpt} date={date} time={timeToRead} translations={translations} />
+          <ArticleHeading
+            excerpt={excerpt}
+            date={date}
+            time={timeToRead}
+            translations={translations}
+          />
           <Article html={html} />
-          <Share pageCanonicalUrl={canonicalUrl} title={title} description={excerpt} tags={tags} coverUrl={coverUrl} />
+          <Share
+            pageCanonicalUrl={canonicalUrl}
+            title={title}
+            description={excerpt}
+            tags={tags}
+            coverUrl={coverUrl}
+          />
         </div>
         <SuggestedPosts posts={suggestedPosts} />
         <Comments pageCanonicalUrl={canonicalUrl} pageId={title} />
@@ -56,21 +75,24 @@ export const pageQuery = graphql`
       timeToRead
       frontmatter {
         title
-        date (formatString: "DD MMM YYYY")
+        date(formatString: "DD MMM YYYY")
         tags
         path
         excerpt
         cover {
           childImageSharp {
-            fluid (maxWidth: 1000) {
+            fluid(maxWidth: 1000) {
               ...GatsbyImageSharpFluid_tracedSVG
             }
           }
         }
       }
     }
-    allMarkdownRemark (
-      filter: { frontmatter: { path: { ne: $postPath } }, fileAbsolutePath: { regex: "/index.md$/" } }
+    allMarkdownRemark(
+      filter: {
+        frontmatter: { path: { ne: $postPath } }
+        fileAbsolutePath: { regex: "/index.md$/" }
+      }
     ) {
       edges {
         node {
@@ -81,7 +103,7 @@ export const pageQuery = graphql`
             excerpt
             cover {
               childImageSharp {
-                fluid (maxWidth: 600) {
+                fluid(maxWidth: 600) {
                   ...GatsbyImageSharpFluid_tracedSVG
                 }
               }

@@ -1,4 +1,4 @@
-const Config = require('../config');
+const Config = require('../config')
 
 const Utils = {
   /**
@@ -8,9 +8,11 @@ const Utils = {
    */
   resolveUrl: (...paths) => {
     return paths.reduce((resolvedUrl, path) => {
-        let urlPath = path.toString().trim()
-        if (urlPath) resolvedUrl += (resolvedUrl === '' ? '' : '/') + urlPath.replace(/^\/|\/$/g, '')
-        return resolvedUrl;
+      let urlPath = path.toString().trim()
+      if (urlPath)
+        resolvedUrl +=
+          (resolvedUrl === '' ? '' : '/') + urlPath.replace(/^\/|\/$/g, '')
+      return resolvedUrl
     }, '')
   },
   /**
@@ -20,7 +22,7 @@ const Utils = {
    * @return {string} Resolved url with trailing slash.
    */
   resolvePageUrl: (...path) => {
-    let resolvedUrl = Utils.resolveUrl(...path);
+    let resolvedUrl = Utils.resolveUrl(...path)
     return resolvedUrl + '/'
   },
   /**
@@ -31,21 +33,20 @@ const Utils = {
    * @return {Array} The `postList` object sorted according to the best match with the `post` object
    */
   getSuggestedPosts: (post, postList, limit) => {
-
     // Get the number of common tags with provided post.
-    let getTagScore = (edge) => {
-      let commonTags = 0;
+    let getTagScore = edge => {
+      let commonTags = 0
       edge.node.frontmatter.tags.forEach(tag => {
-        commonTags += (post.frontmatter.tags.indexOf(tag) !== -1 ? 1 : 0 );
+        commonTags += post.frontmatter.tags.indexOf(tag) !== -1 ? 1 : 0
       })
-      return commonTags;
+      return commonTags
     }
 
     return postList.edges
       .sort((edgeA, edgeB) => {
-        return getTagScore(edgeB) - getTagScore(edgeA);
+        return getTagScore(edgeB) - getTagScore(edgeA)
       })
-      .slice(0, limit);
+      .slice(0, limit)
   },
   /**
    * Pass a post and retrieve a list of related translations.
@@ -54,17 +55,19 @@ const Utils = {
    * @return {Object} An array of objects with languages as keys (ISO 639-1) and translated post's paths as values.
    */
   getRelatedTranslations: (post, postList) => {
-
     return postList
       .filter(({ node }) => {
         // Get posts in the same folder of provided post
-        return node.fileAbsolutePath.split('/').slice(-2, -1)[0] === post.fileAbsolutePath.split('/').slice(-2, -1)[0]
+        return (
+          node.fileAbsolutePath.split('/').slice(-2, -1)[0] ===
+          post.fileAbsolutePath.split('/').slice(-2, -1)[0]
+        )
       })
       .map(({ node }) => {
         let lang = node.fileAbsolutePath.split('.').slice(-2, -1)[0]
         return {
           hreflang: lang.slice(-5) !== 'index' ? lang : Config.defaultLanguage,
-          path: Utils.resolvePageUrl(node.frontmatter.path)
+          path: Utils.resolvePageUrl(node.frontmatter.path),
         }
       })
   },
@@ -73,7 +76,7 @@ const Utils = {
    * @param {string} str string to capitalize
    * @return {string} string with first letter to uppercase
    */
-  capitalize: (str) => str[0].toUpperCase() + str.slice(1)
+  capitalize: str => str[0].toUpperCase() + str.slice(1),
 }
 
-module.exports = Utils;
+module.exports = Utils

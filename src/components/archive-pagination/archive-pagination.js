@@ -10,22 +10,30 @@ import style from './archive-pagination.module.less'
 
 const ArchivePagination = ({ prevPage, nextPage }) => (
   <div className={style.container}>
-    { prevPage ? 
-      <Button to={Utils.resolvePageUrl(Config.pages.archive, prevPage)} buttonStyle={style.buttonLeft}>
-        <FaArrowLeft /><span>Newer posts</span>
-      </Button> : null
-    }
-    { nextPage ?
-      <Button to={Utils.resolvePageUrl(Config.pages.archive, nextPage)} buttonStyle={style.buttonRight}>
-        <span>Older posts</span><FaArrowRight />
-      </Button> : null
-    }
+    {prevPage ? (
+      <Button
+        to={Utils.resolvePageUrl(Config.pages.archive, prevPage)}
+        buttonStyle={style.buttonLeft}
+      >
+        <FaArrowLeft />
+        <span>Newer posts</span>
+      </Button>
+    ) : null}
+    {nextPage ? (
+      <Button
+        to={Utils.resolvePageUrl(Config.pages.archive, nextPage)}
+        buttonStyle={style.buttonRight}
+      >
+        <span>Older posts</span>
+        <FaArrowRight />
+      </Button>
+    ) : null}
   </div>
 )
 
 ArchivePagination.propTypes = {
   prevPage: PropTypes.number,
-  nextPage: PropTypes.number
+  nextPage: PropTypes.number,
 }
 
-export default ArchivePagination;
+export default ArchivePagination

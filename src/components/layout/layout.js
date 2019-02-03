@@ -11,7 +11,11 @@ const Layout = ({ children, title }) => (
   <>
     <Header />
     <div className={style.container}>
-      { title ? <div className={style.title}><h1>{title}</h1></div> : null }
+      {title ? (
+        <div className={style.title}>
+          <h1>{title}</h1>
+        </div>
+      ) : null}
       {children}
     </div>
     <Footer />
@@ -20,11 +24,11 @@ const Layout = ({ children, title }) => (
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
 }
 
 Layout.defaultProps = {
-  title: ''
+  title: '',
 }
 
 export default Layout

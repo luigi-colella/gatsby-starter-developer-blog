@@ -8,69 +8,116 @@ import Config from '../../../../config'
 import Utils from '../../../utils'
 
 class Header extends Component {
-
-  constructor () {
+  constructor() {
     super()
     this.state = {
       lastScrollY: 0,
       fixedHeader: false,
-      collapsedMenu: true
+      collapsedMenu: true,
     }
     this.toggleFixedHeader = this.toggleFixedHeader.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     window.addEventListener('scroll', this.toggleFixedHeader)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.toggleFixedHeader)
   }
 
-  toggleFixedHeader () {
+  toggleFixedHeader() {
     if (!this.toggleFixedHeader.animationInProgress) {
-      this.toggleFixedHeader.animationInProgress = true;
+      this.toggleFixedHeader.animationInProgress = true
       setTimeout(() => {
-        this.setState({
-          lastScrollY: window.scrollY,
-          fixedHeader: window.scrollY > 100 && this.state.lastScrollY < window.scrollY
-        }, () => this.toggleFixedHeader.animationInProgress = false )
+        this.setState(
+          {
+            lastScrollY: window.scrollY,
+            fixedHeader:
+              window.scrollY > 100 && this.state.lastScrollY < window.scrollY,
+          },
+          () => (this.toggleFixedHeader.animationInProgress = false)
+        )
       }, 200)
     }
   }
 
-  toggleMenu () {
+  toggleMenu() {
     this.setState({
-      collapsedMenu: !this.state.collapsedMenu
+      collapsedMenu: !this.state.collapsedMenu,
     })
   }
 
   render = () => (
-    <div className={style.container} style={this.state.fixedHeader ? {backgroundImage: 'none'} : null}>
+    <div
+      className={style.container}
+      style={this.state.fixedHeader ? { backgroundImage: 'none' } : null}
+    >
       <div className={style.titleContainer}>
         <div className={style.title}>
           <Link to={Utils.resolvePageUrl(Config.pages.home)}>
             <h4>{Config.siteTitle}</h4>
-            <p className={this.state.fixedHeader ? style.hiddenDescription : style.visibleDescription}>{Config.siteDescription}</p>
+            <p
+              className={
+                this.state.fixedHeader
+                  ? style.hiddenDescription
+                  : style.visibleDescription
+              }
+            >
+              {Config.siteDescription}
+            </p>
           </Link>
         </div>
         <div className={style.menuButton}>
-          {this.state.collapsedMenu ? 
-            <FaBars size="30" onClick={this.toggleMenu}/> : <FaTimes size="30" onClick={this.toggleMenu}/>
-          }
+          {this.state.collapsedMenu ? (
+            <FaBars size="30" onClick={this.toggleMenu} />
+          ) : (
+            <FaTimes size="30" onClick={this.toggleMenu} />
+          )}
         </div>
       </div>
-      <div className={[style.list, ( this.state.collapsedMenu ? style.collapsedMenu : style.expandedMenu )].join(' ')}>
+      <div
+        className={[
+          style.list,
+          this.state.collapsedMenu ? style.collapsedMenu : style.expandedMenu,
+        ].join(' ')}
+      >
         <ul>
-          <li><Link to={Utils.resolvePageUrl(Config.pages.home)}>Home</Link></li>
-          <li><Link to={Utils.resolvePageUrl(Config.pages.tag)}>Tags</Link></li>
-          <li><Link to={Utils.resolvePageUrl(Config.pages.about)}>About</Link></li>
+          <li>
+            <Link to={Utils.resolvePageUrl(Config.pages.home)}>Home</Link>
+          </li>
+          <li>
+            <Link to={Utils.resolvePageUrl(Config.pages.tag)}>Tags</Link>
+          </li>
+          <li>
+            <Link to={Utils.resolvePageUrl(Config.pages.about)}>About</Link>
+          </li>
         </ul>
         <ul>
-          <li><a target="_blank" rel="nofollow noopener noreferrer" href={Config.social.github}><FaGithub size="30"/></a></li>
-          <li><a target="_blank" rel="nofollow noopener noreferrer" href={Config.social.linkedin}><FaLinkedin size="30"/></a></li>
-          <li><Link to={Utils.resolveUrl(Config.social.rss)}><FaRss size="30" /></Link></li>
+          <li>
+            <a
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              href={Config.social.github}
+            >
+              <FaGithub size="30" />
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              href={Config.social.linkedin}
+            >
+              <FaLinkedin size="30" />
+            </a>
+          </li>
+          <li>
+            <Link to={Utils.resolveUrl(Config.social.rss)}>
+              <FaRss size="30" />
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

@@ -11,11 +11,7 @@ import Config from '../../config'
 
 const IndexPage = ({ data }) => (
   <Layout>
-    <SEO
-      title="Home"
-      description={Config.siteDescription}
-      path=''
-    />
+    <SEO title="Home" description={Config.siteDescription} path="" />
     <PostList posts={data.allMarkdownRemark.edges} />
     <ArchivePagination nextPage={2} />
   </Layout>
@@ -24,28 +20,29 @@ const IndexPage = ({ data }) => (
 IndexPage.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
-    }).isRequired
-  }).isRequired
+      edges: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    }).isRequired,
+  }).isRequired,
 }
 
 export const query = graphql`
-{
-  allMarkdownRemark(
-    sort: { fields: [frontmatter___date], order: DESC }
-    filter: { fileAbsolutePath: { regex: "/index.md$/" }}
-  ) {
-    edges {
-      node {
-        frontmatter {
-          path
-          title
-          tags
-          excerpt
-          cover {
-            childImageSharp {
-              fluid (maxWidth: 600) {
-                ...GatsbyImageSharpFluid_tracedSVG
+  {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fileAbsolutePath: { regex: "/index.md$/" } }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            path
+            title
+            tags
+            excerpt
+            cover {
+              childImageSharp {
+                fluid(maxWidth: 600) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
               }
             }
           }
@@ -53,7 +50,6 @@ export const query = graphql`
       }
     }
   }
-}
 `
 
 export default IndexPage

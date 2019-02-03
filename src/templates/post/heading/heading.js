@@ -22,7 +22,7 @@ Heading.propTypes = {
   title: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   cover: PropTypes.object.isRequired,
-  coverTitle: PropTypes.string
+  coverTitle: PropTypes.string,
 }
 
 export default Heading

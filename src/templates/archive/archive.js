@@ -10,10 +10,9 @@ import ArchivePagination from '../../components/archive-pagination'
 import Config from '../../../config'
 
 const Archive = ({ data, pageContext }) => {
-
-  const { archivePage, lastArchivePage } = pageContext;
-  const prevPage = archivePage > 1 ? archivePage - 1 : null;
-  const nextPage = archivePage < lastArchivePage ? archivePage + 1 : null;
+  const { archivePage, lastArchivePage } = pageContext
+  const prevPage = archivePage > 1 ? archivePage - 1 : null
+  const nextPage = archivePage < lastArchivePage ? archivePage + 1 : null
 
   return (
     <Layout title="Archive">
@@ -31,33 +30,37 @@ const Archive = ({ data, pageContext }) => {
 Archive.propTypes = {
   data: PropTypes.shape({
     allMarkdownRemark: PropTypes.shape({
-      edges: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
-    }).isRequired
+      edges: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+    }).isRequired,
   }).isRequired,
   pageContext: PropTypes.shape({
     archivePage: PropTypes.number.isRequired,
-    lastArchivePage: PropTypes.number.isRequired
-  }).isRequired
+    lastArchivePage: PropTypes.number.isRequired,
+  }).isRequired,
 }
 
 export const query = graphql`
-query ($postPaths: [String!]) {
-  allMarkdownRemark(
-    filter: {frontmatter: {path: {in: $postPaths}}, fileAbsolutePath: { regex: "/index.md$/" }},
-    sort: {fields: [frontmatter___date], order: DESC}
-  ) {
-    edges {
-      node {
-        frontmatter {
-          path
-          title
-          tags
-          date(formatString: "MMMM DD, YYYY")
-          excerpt
-          cover {
-            childImageSharp {
-              fluid(maxWidth: 600) {
-                ...GatsbyImageSharpFluid_tracedSVG
+  query($postPaths: [String!]) {
+    allMarkdownRemark(
+      filter: {
+        frontmatter: { path: { in: $postPaths } }
+        fileAbsolutePath: { regex: "/index.md$/" }
+      }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            path
+            title
+            tags
+            date(formatString: "MMMM DD, YYYY")
+            excerpt
+            cover {
+              childImageSharp {
+                fluid(maxWidth: 600) {
+                  ...GatsbyImageSharpFluid_tracedSVG
+                }
               }
             }
           }
@@ -65,7 +68,6 @@ query ($postPaths: [String!]) {
       }
     }
   }
-}
 `
 
-export default Archive;
+export default Archive
