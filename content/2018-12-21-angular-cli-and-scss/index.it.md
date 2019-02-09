@@ -9,6 +9,8 @@ excerpt: Configura SCSS per il tuo prossimo progetto Angular.
 
 Se hai familiarità con SCSS in Angular CLI 1.x prima e ora ti stai chiedendo come usarlo nella versione 6, una nuova versione fornita con Angular 6, sono qui per aiutarti.
 
+![Sass logo](./sass-image.png "Il logo di Sass")
+
 Ecco come la configurazione dello stile in CLI v1.x è simile al file .angular-cli.json.
 
 ```

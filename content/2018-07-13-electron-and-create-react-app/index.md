@@ -135,6 +135,7 @@ And for steps 5 and 6:
 ```
 
 When you run the npm commands in step 7, you should see this:
+
 ![Electron + React](./image-1.png)
 
 ## Specifying the loadURL in Production and Dev
