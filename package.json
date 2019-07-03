@@ -26,7 +26,8 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
-    "react-share": "^2.4.0"
+    "react-share": "^2.4.0",
+    "snyk": "^1.189.0"
   },
   "keywords": [
     "gatsby"
@@ -38,9 +39,12 @@
     "start": "npm run dev",
     "serve": "gatsby serve",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "prettier": "^1.15.2"
-  }
+  },
+  "snyk": true
 }
