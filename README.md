@@ -112,6 +112,7 @@ Themes available with this starter are in ```src/style/themes```, but you can al
 ## 📃 Credits
 
 * 404 page's image by [Freepik](https://www.freepik.com/free-vector/404-error-web-template-with-bored-cat_2234126.htm)
+* Flag icons by [Freepik](https://www.flaticon.com/packs/countrys-flags)
 
 ## 🤝 How contribute
 

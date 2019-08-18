@@ -1,3 +1,4 @@
+const config = require('./config')
 const feedPlugin = require('./gatsby-config.plugins.feed')
 
 module.exports = [
@@ -47,6 +48,13 @@ module.exports = [
           },
           'gatsby-remark-prismjs'
         ]
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {        
+        langKeyDefault: config.defaultLanguage,
+        useLangKeyLayout: false
       }
     },
     feedPlugin,

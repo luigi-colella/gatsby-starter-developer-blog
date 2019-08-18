@@ -9,7 +9,7 @@ import SEO from '../../components/seo'
 import Utils from '../../utils'
 import * as style from './index.module.less'
 
-const About = ({ data: { profilePhoto, flagIt, skillIcons, toolIcons } }) => {
+const About = ({ data: { profilePhoto, flagEn, skillIcons, toolIcons } }) => {
   return (
     <Layout>
       <SEO
@@ -22,12 +22,12 @@ const About = ({ data: { profilePhoto, flagIt, skillIcons, toolIcons } }) => {
           <Img fluid={profilePhoto.childImageSharp.fluid} />
         </div>
         <div className={style.content}>
-          <h1>Hi, I'm Luigi!</h1>
+          <h1>Ciao, sono Luigi!</h1>
           <h2>Software Developer</h2>
-          <p>Per la versione italiana clicca qui
+          <p>For the English version click here
             <div>
-              <a href={Utils.resolvePageUrl('../', 'it', 'about')}>
-                <Img fixed={flagIt.childImageSharp.fixed} />
+              <a href={Utils.resolvePageUrl('../', '../', 'about')}>
+                <Img fixed={flagEn.childImageSharp.fixed} />
               </a>
             </div>
           </p>
@@ -43,9 +43,9 @@ const About = ({ data: { profilePhoto, flagIt, skillIcons, toolIcons } }) => {
             Fusce at nulla euismod, condimentum augue quis, convallis justo.
           </p>
           <br />
-          <h2>Skills</h2>
+          <h2>Competenze</h2>
           <ImageList edges={skillIcons.edges} />
-          <h2>Tools</h2>
+          <h2>Strumenti</h2>
           <ImageList edges={toolIcons.edges} />
         </div>
       </div>
@@ -60,7 +60,7 @@ About.propTypes = {
         fluid: PropTypes.object.isRequired,
       }).isRequired,
     }).isRequired,
-    flagIt: PropTypes.shape({
+    flagEn: PropTypes.shape({
       childImageSharp: PropTypes.shape({
         fixed: PropTypes.object.isRequired,
       }).isRequired,
@@ -113,7 +113,7 @@ export const query = graphql`
         }
       }
     }
-    flagIt: file(name: { eq: "flag-it" }) {
+    flagEn: file(name: { eq: "flag-en" }) {
       childImageSharp {
         fixed(width: 50) {
           ...GatsbyImageSharpFixed_tracedSVG
