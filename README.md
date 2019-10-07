@@ -5,7 +5,6 @@
 </p>
 
 [![Build Status](https://travis-ci.org/lgcolella/gatsby-starter-developer-blog.svg?branch=master)](https://travis-ci.org/lgcolella/gatsby-starter-developer-blog)
-[![Maintainability](https://api.codeclimate.com/v1/badges/a682a525a8c3f78b625f/maintainability)](https://codeclimate.com/github/lgcolella/gatsby-starter-developer-blog/maintainability)
 
 ## Summary
 
