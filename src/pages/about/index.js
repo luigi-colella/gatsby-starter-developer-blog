@@ -7,54 +7,9 @@ import Img from 'gatsby-image'
 import Layout from '../../components/layout'
 import SEO from '../../components/seo'
 import Utils from '../../utils'
-import * as style from './index.module.less'
+import style from './index.module.less'
 
-const About = ({ data: { profilePhoto, flagIt, skillIcons, toolIcons } }) => {
-  return (
-    <Layout>
-      <SEO
-        title="About"
-        description="A brief summary of this blog and my work"
-        path="about"
-      />
-      <div className={style.container}>
-        <div className={style.photo}>
-          <Img fluid={profilePhoto.childImageSharp.fluid} />
-        </div>
-        <div className={style.content}>
-          <h1>Hi, I'm Luigi!</h1>
-          <h2>Software Developer</h2>
-          <p>
-            Per la versione italiana clicca qui
-            <div>
-              <a href={Utils.resolvePageUrl('../', 'it', 'about')}>
-                <Img fixed={flagIt.childImageSharp.fixed} />
-              </a>
-            </div>
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            cursus venenatis arcu, cursus pretium enim lacinia nec. Duis viverra
-            sagittis neque. Fusce non luctus urna. Vivamus suscipit metus ac
-            posuere egestas. Nunc a pulvinar purus. Vivamus nisi mi, fringilla
-            quis lacus et, sagittis mollis massa. Cras tempus massa quis
-            lobortis laoreet. Pellentesque metus odio, sagittis nec venenatis
-            non, maximus congue eros. Suspendisse pellentesque purus sit amet
-            ante commodo, et molestie mauris aliquet. Proin non nibh libero.
-            Fusce at nulla euismod, condimentum augue quis, convallis justo.
-          </p>
-          <br />
-          <h2>Skills</h2>
-          <ImageList edges={skillIcons.edges} />
-          <h2>Tools</h2>
-          <ImageList edges={toolIcons.edges} />
-        </div>
-      </div>
-    </Layout>
-  )
-}
-
-About.propTypes = {
+export const aboutPropTypes = {
   data: PropTypes.shape({
     profilePhoto: PropTypes.shape({
       childImageSharp: PropTypes.shape({
@@ -64,35 +19,69 @@ About.propTypes = {
     flagIt: PropTypes.shape({
       childImageSharp: PropTypes.shape({
         fixed: PropTypes.object.isRequired,
-      }).isRequired,
-    }).isRequired,
+      }),
+    }),
+    flagEn: PropTypes.shape({
+      childImageSharp: PropTypes.shape({
+        fixed: PropTypes.object.isRequired,
+      }),
+    }),
     skillIcons: PropTypes.object.isRequired,
     toolIcons: PropTypes.object.isRequired,
   }),
 }
 
-const ImageList = ({ edges }) => (
-  <div className={style.iconsContainer}>
-    {edges
-      .sort((edgeA, edgeB) =>
-        edgeA.node.name.toLowerCase() > edgeB.node.name.toLowerCase() ? 1 : -1
-      )
-      .map(({ node: { name, childImageSharp } }) => (
-        <div className={style.iconWrapper} key={name}>
-          <Img
-            fixed={childImageSharp.fixed}
-            alt={name + ' logo'}
-            title={name}
-          />
-          <label>
-            {iconsNameMap[name] ? iconsNameMap[name] : Utils.capitalize(name)}
-          </label>
-        </div>
-      ))}
-  </div>
-)
+class About extends React.Component {
+  static propTypes = aboutPropTypes
 
-ImageList.propTypes = {
+  render() {
+    let { profilePhoto, flagIt, skillIcons, toolIcons } = this.props.data
+    return (
+      <Layout>
+        <SEO
+          title="About"
+          description="A brief summary of this blog"
+          path="about"
+        />
+        <div className={style.container}>
+          <div className={style.photo}>
+            <Img fluid={profilePhoto.childImageSharp.fluid} />
+          </div>
+          <div className={style.content}>
+            <h1>Hi, I'm Luigi!</h1>
+            <h2>Software Developer</h2>
+            <p>Per la versione italiana clicca qui</p>
+            <a href={Utils.resolvePageUrl('../', 'it', 'about')}>
+              <Img
+                fixed={flagIt.childImageSharp.fixed}
+                style={{ display: 'block', margin: 'auto' }}
+              />
+            </a>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+              cursus venenatis arcu, cursus pretium enim lacinia nec. Duis
+              viverra sagittis neque. Fusce non luctus urna. Vivamus suscipit
+              metus ac posuere egestas. Nunc a pulvinar purus. Vivamus nisi mi,
+              fringilla quis lacus et, sagittis mollis massa. Cras tempus massa
+              quis lobortis laoreet. Pellentesque metus odio, sagittis nec
+              venenatis non, maximus congue eros. Suspendisse pellentesque purus
+              sit amet ante commodo, et molestie mauris aliquet. Proin non nibh
+              libero. Fusce at nulla euismod, condimentum augue quis, convallis
+              justo.
+            </p>
+            <br />
+            <h2>Skills</h2>
+            <ImageList edges={skillIcons.edges} />
+            <h2>Tools</h2>
+            <ImageList edges={toolIcons.edges} />
+          </div>
+        </div>
+      </Layout>
+    )
+  }
+}
+
+export const imageListPropTypes = {
   edges: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
@@ -103,6 +92,31 @@ ImageList.propTypes = {
       }).isRequired,
     })
   ).isRequired,
+}
+
+class ImageList extends React.Component {
+  static propTypes = imageListPropTypes
+
+  render = () => (
+    <div className={style.iconsContainer}>
+      {this.props.edges
+        .sort((edgeA, edgeB) =>
+          edgeA.node.name.toLowerCase() > edgeB.node.name.toLowerCase() ? 1 : -1
+        )
+        .map(({ node: { name, childImageSharp } }) => (
+          <div className={style.iconWrapper} key={name}>
+            <Img
+              fixed={childImageSharp.fixed}
+              alt={name + ' logo'}
+              title={name}
+            />
+            <label>
+              {iconsNameMap[name] ? iconsNameMap[name] : Utils.capitalize(name)}
+            </label>
+          </div>
+        ))}
+    </div>
+  )
 }
 
 export const query = graphql`
@@ -148,7 +162,7 @@ export const query = graphql`
   }
 `
 // Use to set specific icons names
-const iconsNameMap = {
+export const iconsNameMap = {
   css: 'CSS',
   html: 'HTML',
   jquery: 'JQuery',
