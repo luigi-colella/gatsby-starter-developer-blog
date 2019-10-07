@@ -24,7 +24,8 @@ const About = ({ data: { profilePhoto, flagEn, skillIcons, toolIcons } }) => {
         <div className={style.content}>
           <h1>Ciao, sono Luigi!</h1>
           <h2>Software Developer</h2>
-          <p>For the English version click here
+          <p>
+            For the English version click here
             <div>
               <a href={Utils.resolvePageUrl('../', '../', 'about')}>
                 <Img fixed={flagEn.childImageSharp.fixed} />
