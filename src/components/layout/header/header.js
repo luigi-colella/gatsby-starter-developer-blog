@@ -1,58 +1,34 @@
-/* Vendor imports */
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { FaBars, FaTimes, FaGithub, FaLinkedin, FaRss } from 'react-icons/fa'
 /* App imports */
+import useEvent from '../../hooks/useEvent'
 import style from './header.module.less'
 import Config from '../../../../config'
 import Utils from '../../../utils'
 
-class Header extends Component {
-  constructor() {
-    super()
-    this.state = {
-      lastScrollY: 0,
-      fixedHeader: false,
-      collapsedMenu: true,
-    }
-    this.toggleFixedHeader = this.toggleFixedHeader.bind(this)
-    this.toggleMenu = this.toggleMenu.bind(this)
-  }
+const Header = () => {
+  const [isMenuCollapsed, setMenuCollapsed] = useState(false)
+  const [isHeaderCollapsed, setHeaderCollapsed] = useState(false)
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.toggleFixedHeader)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.toggleFixedHeader)
-  }
-
-  toggleFixedHeader() {
-    if (!this.toggleFixedHeader.animationInProgress) {
-      this.toggleFixedHeader.animationInProgress = true
-      setTimeout(() => {
-        this.setState(
-          {
-            lastScrollY: window.scrollY,
-            fixedHeader:
-              window.scrollY > 100 && this.state.lastScrollY < window.scrollY,
-          },
-          () => (this.toggleFixedHeader.animationInProgress = false)
-        )
-      }, 200)
+  function toggleFixedHeader() {
+    if (!isHeaderCollapsed && window.scrollY > 100) {
+      setHeaderCollapsed(true)
+    } else if (isHeaderCollapsed && window.scrollY < 100) {
+      setHeaderCollapsed(false)
     }
   }
 
-  toggleMenu() {
-    this.setState({
-      collapsedMenu: !this.state.collapsedMenu,
-    })
+  function toggleMenu() {
+    setMenuCollapsed(!isMenuCollapsed)
   }
 
-  render = () => (
+  useEvent('scroll', toggleFixedHeader)
+
+  return (
     <div
       className={style.container}
-      style={this.state.fixedHeader ? { backgroundImage: 'none' } : null}
+      style={isHeaderCollapsed ? { backgroundImage: 'none' } : null}
     >
       <div className={style.titleContainer}>
         <div className={style.title}>
@@ -60,7 +36,7 @@ class Header extends Component {
             <h4>{Config.siteTitle}</h4>
             <p
               className={
-                this.state.fixedHeader
+                isHeaderCollapsed
                   ? style.hiddenDescription
                   : style.visibleDescription
               }
@@ -70,17 +46,17 @@ class Header extends Component {
           </Link>
         </div>
         <div className={style.menuButton}>
-          {this.state.collapsedMenu ? (
-            <FaBars size="30" onClick={this.toggleMenu} />
+          {isMenuCollapsed ? (
+            <FaBars size="30" onClick={toggleMenu} />
           ) : (
-            <FaTimes size="30" onClick={this.toggleMenu} />
+            <FaTimes size="30" onClick={toggleMenu} />
           )}
         </div>
       </div>
       <div
         className={[
           style.list,
-          this.state.collapsedMenu ? style.collapsedMenu : style.expandedMenu,
+          isMenuCollapsed ? style.collapsedMenu : style.expandedMenu,
         ].join(' ')}
       >
         <ul>
