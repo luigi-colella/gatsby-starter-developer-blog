@@ -61,7 +61,7 @@
 * [How add a translated version of a post](#How-add-a-translated-version-of-a-post)
 * [How change theme](#how-change-theme)
 
-### How add a post
+### How to add a post
 
 1. Create a folder in the ```content``` path. Since folder's name will not be used in any part of site, you can rename it as you want in order to organize better your contents (ex. ```2019-01-20-my-post```).
 2. In this folder create a file ```index.md```.
@@ -69,7 +69,7 @@
 4. Between above two separators, insert metatags. They are couples key/value to define additional info useful for process your post. Read [here](#How-edit-metatags-of-a-post) for more info about them.
 5. Under the second separator ```---``` write your post using [Markdown syntax](https://help.github.com/articles/basic-writing-and-formatting-syntax/).
 
-### How edit metatags of a post
+### How to edit metatags of a post
 
 Metatags are additional informations that you provide in your posts to allow them to be processed correctly.
 Some metatags are used for some site's features and others for SEO purposes. You have to list all fields but you can omit values of non-mandatory ones.
@@ -94,7 +94,7 @@ excerpt: In this post we'll see a post example...
 cover: ./preview.png
 ```
 
-### How add a translated version of a post
+### How to add a translated version of a post
 
 1. Choose in the ```content``` path the folder of the post to translate.
 2. Place here the translated version of post and rename the file with the [ISO](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code according to its language (ex. ```index.it.md```, ```index.de.md```).
@@ -104,7 +104,7 @@ You've finished! Now in your post you'll get a link to translated version and vi
 Metatags for [SEO](https://support.google.com/webmasters/answer/189077) are automatically added in each version of post pages using the ISO code choosen for the filename. Tags will only be added for posts with translated versions.
 Note that for ```index.md```, the ISO code used in metatags is taken from the ```config.js```' variable ```defaultLanguage```.
 
-### How change theme
+### How to change themes
 
 Themes available with this starter are in ```src/style/themes```, but you can also create your own following these as example. Import what you prefer in ```src/style/index.less``` file.
 
@@ -113,7 +113,7 @@ Themes available with this starter are in ```src/style/themes```, but you can al
 * 404 page's image by [Freepik](https://www.freepik.com/free-vector/404-error-web-template-with-bored-cat_2234126.htm)
 * Flag icons by [Freepik](https://www.flaticon.com/packs/countrys-flags)
 
-## 🤝 How contribute
+## 🤝 How to contribute
 
 Everyone can contribute to enhance this starter! Here a not-exhaustive list of how to do.
 
