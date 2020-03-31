@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import Image from 'gatsby-image'
 /* App imports */
 import style from './404.module.less'
 import Layout from '../../components/layout'
@@ -21,7 +20,7 @@ const NotFoundPage = ({ data }) => (
     />
     <div className={style.container}>
       <div className={style.image}>
-        <Image fluid={data.file.childImageSharp.fluid} />
+        <img src={data.file.publicURL} alt="Gif for 404 error" />
       </div>
       <div className={style.message}>
         <h1>Page not found</h1>
@@ -36,21 +35,15 @@ const NotFoundPage = ({ data }) => (
 NotFoundPage.propTypes = {
   data: PropTypes.shape({
     file: PropTypes.shape({
-      childImageSharp: PropTypes.shape({
-        fluid: PropTypes.object.isRequired,
-      }).isRequired,
+      publicUrl: PropTypes.string.isRequired
     }).isRequired,
   }).isRequired,
 }
 
 export const query = graphql`
   {
-    file(base: { eq: "404.png" }) {
-      childImageSharp {
-        fluid(maxWidth: 400) {
-          ...GatsbyImageSharpFluid_tracedSVG
-        }
-      }
+    file (base: {eq: "404.gif"}) {
+      publicURL
     }
   }
 `
