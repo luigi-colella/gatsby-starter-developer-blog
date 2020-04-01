@@ -445,3 +445,5 @@ unsubscribe(); // dispose the resources
 ```
 
 The reason why we use Rx types like Observable, Observer, and Subscription is to get safety (such as the Observable Contract) and composability with Operators.
+
+<img src="./image.gif" alt="Image for the end of article" style="display:block;margin:auto">

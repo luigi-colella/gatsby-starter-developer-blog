@@ -46,7 +46,8 @@ module.exports = [
               linkImagesToOriginal: false
             },
           },
-          'gatsby-remark-prismjs'
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files'
         ]
       }
     },
