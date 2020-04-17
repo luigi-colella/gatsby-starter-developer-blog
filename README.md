@@ -56,10 +56,10 @@
 
 ## 📓 Guide
 
-* [How add a post](#How-add-a-post)
-* [How edit metatags of a post](#How-edit-metatags-of-a-post)
-* [How add a translated version of a post](#How-add-a-translated-version-of-a-post)
-* [How change theme](#how-change-theme)
+* [How to add a post](#How-to-add-a-post)
+* [How to edit metatags of a post](#How-to-edit-metatags-of-a-post)
+* [How to add a translated version of a post](#How-to-add-a-translated-version-of-a-post)
+* [How to change themes](#how-to-change-themes)
 
 ### How to add a post
 
