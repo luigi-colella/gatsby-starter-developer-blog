@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Luigi Colella RSS Feed]]></title><description><![CDATA[Logbook of a software developer]]></description><link>https://lgcolella.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 08 Aug 2020 00:35:00 GMT</lastBuildDate><item><title><![CDATA[What are and how to use Observables in RxJS]]></title><description><![CDATA[Learn all that you need to know about Observables.]]></description><link>https://lgcolella.github.io/gatsby-starter-developer-blog/blog/top-7-rxjs-patterns</link><guid isPermaLink="false">https://lgcolella.github.ioblog/top-7-rxjs-patternsWhat are and how to use Observables in RxJS</guid><dc:creator><![CDATA[lcolella]]></dc:creator><pubDate>Sun, 30 Dec 2018 05:25:44 GMT</pubDate><content:encoded>&lt;p&gt;Observables are lazy Push collections of multiple values. They fill the missing spot in the following table:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Single&lt;/th&gt;
+&lt;th&gt;Multiple&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pull&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Glossary/Function&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Function&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Iterator&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Push&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Promise&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Promise&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;../class/es6/Observable.js~Observable.html&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Observable&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Example.&lt;/strong&gt; The following is an Observable that pushes the values &lt;code class=&quot;language-text&quot;&gt;1&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;2&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;3&lt;/code&gt; immediately (synchronously) when subscribed, and the value &lt;code class=&quot;language-text&quot;&gt;4&lt;/code&gt; after one second has passed since the subscribe call, then completes:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To invoke the Observable and see these values, we need to &lt;em&gt;subscribe&lt;/em&gt; to it:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;just before subscribe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+observable&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;got value &apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;something wrong occurred: &apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;done&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;just after subscribe&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which executes as such on the console:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;just before subscribe
+got value 1
+got value 2
+got value 3
+just after subscribe
+got value 4
+done&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Pull versus Push&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Pull&lt;/em&gt; and &lt;em&gt;Push&lt;/em&gt; are two different protocols that describe how a data &lt;em&gt;Producer&lt;/em&gt; can communicate with a data &lt;em&gt;Consumer&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;What is Pull?&lt;/strong&gt; In Pull systems, the Consumer determines when it receives data from the data Producer. The Producer itself is unaware of when the data will be delivered to the Consumer.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Every JavaScript Function is a Pull system. The function is a Producer of data, and the code that calls the function is consuming it by &quot;pulling&quot; out a &lt;em&gt;single&lt;/em&gt; return value from its call.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;ES2015 introduced &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*&quot;&gt;generator functions and iterators&lt;/a&gt; (&lt;code class=&quot;language-text&quot;&gt;function*&lt;/code&gt;), another type of Pull system. Code that calls &lt;code class=&quot;language-text&quot;&gt;iterator.next()&lt;/code&gt; is the Consumer, &quot;pulling&quot; out &lt;em&gt;multiple&lt;/em&gt; values from the iterator (the Producer).&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Producer&lt;/th&gt;
+&lt;th&gt;Consumer&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pull&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Passive:&lt;/strong&gt; produces data when requested.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Active:&lt;/strong&gt; decides when data is requested.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Push&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Active:&lt;/strong&gt; produces data at its own pace.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Passive:&lt;/strong&gt; reacts to received data.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;What is Push?&lt;/strong&gt; In Push systems, the Producer determines when to send data to the Consumer. The Consumer is unaware of when it will receive that data.&lt;/p&gt;
+&lt;p&gt;Promises are the most common type of Push system in JavaScript today. A Promise (the Producer) delivers a resolved value to registered callbacks (the Consumers), but unlike functions, it is the Promise which is in charge of determining precisely when that value is &quot;pushed&quot; to the callbacks.&lt;/p&gt;
+&lt;p&gt;RxJS introduces Observables, a new Push system for JavaScript. An Observable is a Producer of multiple values, &quot;pushing&quot; them to Observers (Consumers).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A &lt;strong&gt;Function&lt;/strong&gt; is a lazily evaluated computation that synchronously returns a single value on invocation.&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;generator&lt;/strong&gt; is a lazily evaluated computation that synchronously returns zero to (potentially) infinite values on iteration.&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;Promise&lt;/strong&gt; is a computation that may (or may not) eventually return a single value.&lt;/li&gt;
+&lt;li&gt;An &lt;strong&gt;Observable&lt;/strong&gt; is a lazily evaluated computation that can synchronously or asynchronously return zero to (potentially) infinite values from the time it&apos;s invoked onwards.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Observables as generalizations of functions&lt;/h2&gt;
+&lt;p&gt;Contrary to popular claims, Observables are not like EventEmitters nor are they like Promises for multiple values. Observables &lt;em&gt;may act&lt;/em&gt; like EventEmitters in some cases, namely when they are multicasted using RxJS Subjects, but usually they don&apos;t act like EventEmitters.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;Observables are like functions with zero arguments, but generalize those to allow multiple values.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Consider the following:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Hello&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// same as foo()&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// same as foo()&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We expect to see as output:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;&quot;Hello&quot;
+42
+&quot;Hello&quot;
+42&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can write the same behavior above, but with Observables:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; foo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Hello&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;y&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And the output is the same:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;&quot;Hello&quot;
+42
+&quot;Hello&quot;
+42&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This happens because both functions and Observables are lazy computations. If you don&apos;t call the function, the &lt;code class=&quot;language-text&quot;&gt;console.log(&amp;#39;Hello&amp;#39;)&lt;/code&gt; won&apos;t happen. Also with Observables, if you don&apos;t &quot;call&quot; it (with &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt;), the &lt;code class=&quot;language-text&quot;&gt;console.log(&amp;#39;Hello&amp;#39;)&lt;/code&gt; won&apos;t happen. Plus, &quot;calling&quot; or &quot;subscribing&quot; is an isolated operation: two function calls trigger two separate side effects, and two Observable subscribes trigger two separate side effects. As opposed to EventEmitters which share the side effects and have eager execution regardless of the existence of subscribers, Observables have no shared execution and are lazy.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;Subscribing to an Observable is analogous to calling a Function.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Some people claim that Observables are asynchronous. That is not true. If you surround a function call with logs, like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;before&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;after&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You will see the output:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;&quot;before&quot;
+&quot;Hello&quot;
+42
+&quot;after&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And this is the same behavior with Observables:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;before&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;after&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And the output is:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;&quot;before&quot;
+&quot;Hello&quot;
+42
+&quot;after&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Which proves the subscription of &lt;code class=&quot;language-text&quot;&gt;foo&lt;/code&gt; was entirely synchronous, just like a function.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;Observables are able to deliver values either synchronously or asynchronously.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;What is the difference between an Observable and a function? &lt;strong&gt;Observables can &quot;return&quot; multiple values over time&lt;/strong&gt;, something which functions cannot. You can&apos;t do this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Hello&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// dead code. will never happen&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Functions can only return one value. Observables, however, can do this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; foo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Hello&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// &quot;return&quot; another value&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// &quot;return&quot; yet another&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;before&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;after&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With synchronous output:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;&quot;before&quot;
+&quot;Hello&quot;
+42
+100
+200
+&quot;after&quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But you can also &quot;return&quot; values asynchronously:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; foo &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Hello&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// happens asynchronously&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;before&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+foo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;after&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With output:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;&quot;before&quot;
+&quot;Hello&quot;
+42
+100
+200
+&quot;after&quot;
+300&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Conclusion:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;func.call()&lt;/code&gt; means &quot;&lt;em&gt;give me one value synchronously&lt;/em&gt;&quot;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;observable.subscribe()&lt;/code&gt; means &quot;&lt;em&gt;give me any amount of values, either synchronously or asynchronously&lt;/em&gt;&quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Anatomy of an Observable&lt;/h2&gt;
+&lt;p&gt;Observables are &lt;strong&gt;created&lt;/strong&gt; using &lt;code class=&quot;language-text&quot;&gt;new Observable&lt;/code&gt; or a creation operator, are &lt;strong&gt;subscribed&lt;/strong&gt; to with an Observer, &lt;strong&gt;execute&lt;/strong&gt; to deliver &lt;code class=&quot;language-text&quot;&gt;next&lt;/code&gt; / &lt;code class=&quot;language-text&quot;&gt;error&lt;/code&gt; / &lt;code class=&quot;language-text&quot;&gt;complete&lt;/code&gt; notifications to the Observer, and their execution may be &lt;strong&gt;disposed&lt;/strong&gt;. These four aspects are all encoded in an Observable instance, but some of these aspects are related to other types, like Observer and Subscription.&lt;/p&gt;
+&lt;p&gt;Core Observable concerns:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Creating&lt;/strong&gt; Observables&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Subscribing&lt;/strong&gt; to Observables&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Executing&lt;/strong&gt; the Observable&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Disposing&lt;/strong&gt; Observables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Creating Observables&lt;/h3&gt;
+&lt;p&gt;The &lt;code class=&quot;language-text&quot;&gt;Observable&lt;/code&gt; constructor takes one argument: the &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; function.&lt;/p&gt;
+&lt;p&gt;The following example creates an Observable to emit the string &lt;code class=&quot;language-text&quot;&gt;&amp;#39;hi&amp;#39;&lt;/code&gt; every second to a subscriber.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; id &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;hi&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;Observables can be created with &lt;code class=&quot;language-text&quot;&gt;new Observable&lt;/code&gt;. Most commonly, observables are created using creation functions, like &lt;code class=&quot;language-text&quot;&gt;of&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;from&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;interval&lt;/code&gt;, etc.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;In the example above, the &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; function is the most important piece to describe the Observable. Let&apos;s look at what subscribing means.&lt;/p&gt;
+&lt;h3&gt;Subscribing to Observables&lt;/h3&gt;
+&lt;p&gt;The Observable &lt;code class=&quot;language-text&quot;&gt;observable&lt;/code&gt; in the example can be &lt;em&gt;subscribed&lt;/em&gt; to, like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;observable&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is not a coincidence that &lt;code class=&quot;language-text&quot;&gt;observable.subscribe&lt;/code&gt; and &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; in &lt;code class=&quot;language-text&quot;&gt;new Observable(function subscribe(subscriber) {...})&lt;/code&gt; have the same name. In the library, they are different, but for practical purposes you can consider them conceptually equal.&lt;/p&gt;
+&lt;p&gt;This shows how &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; calls are not shared among multiple Observers of the same Observable. When calling &lt;code class=&quot;language-text&quot;&gt;observable.subscribe&lt;/code&gt; with an Observer, the function &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; in &lt;code class=&quot;language-text&quot;&gt;new Observable(function subscribe(subscriber) {...})&lt;/code&gt; is run for that given subscriber. Each call to &lt;code class=&quot;language-text&quot;&gt;observable.subscribe&lt;/code&gt; triggers its own independent setup for that given subscriber.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;Subscribing to an Observable is like calling a function, providing callbacks where the data will be delivered to.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;This is drastically different to event handler APIs like &lt;code class=&quot;language-text&quot;&gt;addEventListener&lt;/code&gt; / &lt;code class=&quot;language-text&quot;&gt;removeEventListener&lt;/code&gt;. With &lt;code class=&quot;language-text&quot;&gt;observable.subscribe&lt;/code&gt;, the given Observer is not registered as a listener in the Observable. The Observable does not even maintain a list of attached Observers.&lt;/p&gt;
+&lt;p&gt;A &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; call is simply a way to start an &quot;Observable execution&quot; and deliver values or events to an Observer of that execution.&lt;/p&gt;
+&lt;h3&gt;Executing Observables&lt;/h3&gt;
+&lt;p&gt;The code inside &lt;code class=&quot;language-text&quot;&gt;new Observable(function subscribe(subscriber) {...})&lt;/code&gt; represents an &quot;Observable execution&quot;, a lazy computation that only happens for each Observer that subscribes. The execution produces multiple values over time, either synchronously or asynchronously.&lt;/p&gt;
+&lt;p&gt;There are three types of values an Observable Execution can deliver:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&quot;Next&quot; notification: sends a value such as a Number, a String, an Object, etc.&lt;/li&gt;
+&lt;li&gt;&quot;Error&quot; notification: sends a JavaScript Error or exception.&lt;/li&gt;
+&lt;li&gt;&quot;Complete&quot; notification: does not send a value.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&quot;Next&quot; notifications are the most important and most common type: they represent actual data being delivered to an subscriber. Error and Complete notifications may happen only once during the Observable Execution, and there can only be either one of them.&lt;/p&gt;
+&lt;p&gt;These constraints are expressed best in the so-called &lt;em&gt;Observable Grammar&lt;/em&gt; or &lt;em&gt;Contract&lt;/em&gt;, written as a regular expression:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;none&quot;&gt;&lt;pre class=&quot;language-none&quot;&gt;&lt;code class=&quot;language-none&quot;&gt;next*(error|complete)?&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;In an Observable Execution, zero to infinite Next notifications may be delivered. If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The following is an example of an Observable execution that delivers three Next notifications, then completes:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Observables strictly adhere to the Observable Contract, so the following code would not deliver the Next notification &lt;code class=&quot;language-text&quot;&gt;4&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Is not delivered because it would violate the contract&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is a good idea to wrap any code in &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; with &lt;code class=&quot;language-text&quot;&gt;try&lt;/code&gt;/&lt;code class=&quot;language-text&quot;&gt;catch&lt;/code&gt; block that will deliver an Error notification if it catches an exception:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;complete&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;err&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// delivers an error if it caught one&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Disposing Observable Executions&lt;/h3&gt;
+&lt;p&gt;Because Observable Executions may be infinite, and it&apos;s common for an Observer to want to abort execution in finite time, we need an API for canceling an execution. Since each execution is exclusive to one Observer only, once the Observer is done receiving values, it has to have a way to stop the execution, in order to avoid wasting computation power or memory resources.&lt;/p&gt;
+&lt;p&gt;When &lt;code class=&quot;language-text&quot;&gt;observable.subscribe&lt;/code&gt; is called, the Observer gets attached to the newly created Observable execution. This call also returns an object, the &lt;code class=&quot;language-text&quot;&gt;Subscription&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; subscription &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; observable&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The Subscription represents the ongoing execution, and has a minimal API which allows you to cancel that execution. Read more about the &lt;a href=&quot;./subscription&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Subscription&lt;/code&gt; type here&lt;/a&gt;. With &lt;code class=&quot;language-text&quot;&gt;subscription.unsubscribe()&lt;/code&gt; you can cancel the ongoing execution:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Observable&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;rxjs&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; subscription &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; observable&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// Later:&lt;/span&gt;
+subscription&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;unsubscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&quot;informal&quot;&gt;When you subscribe, you get back a Subscription, which represents the ongoing execution. Just call &lt;code class=&quot;language-text&quot;&gt;unsubscribe()&lt;/code&gt; to cancel the execution.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Each Observable must define how to dispose resources of that execution when we create the Observable using &lt;code class=&quot;language-text&quot;&gt;create()&lt;/code&gt;. You can do that by returning a custom &lt;code class=&quot;language-text&quot;&gt;unsubscribe&lt;/code&gt; function from within &lt;code class=&quot;language-text&quot;&gt;function subscribe()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For instance, this is how we clear an interval execution set with &lt;code class=&quot;language-text&quot;&gt;setInterval&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; observable &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// Keep track of the interval resource&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; intervalId &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;hi&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// Provide a way of canceling and disposing the interval resource&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;unsubscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;clearInterval&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;intervalId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Just like &lt;code class=&quot;language-text&quot;&gt;observable.subscribe&lt;/code&gt; resembles &lt;code class=&quot;language-text&quot;&gt;new Observable(function subscribe() {...})&lt;/code&gt;, the &lt;code class=&quot;language-text&quot;&gt;unsubscribe&lt;/code&gt; we return from &lt;code class=&quot;language-text&quot;&gt;subscribe&lt;/code&gt; is conceptually equal to &lt;code class=&quot;language-text&quot;&gt;subscription.unsubscribe&lt;/code&gt;. In fact, if we remove the ReactiveX types surrounding these concepts, we&apos;re left with rather straightforward JavaScript.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;subscriber&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; intervalId &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;setInterval&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    subscriber&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;hi&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;unsubscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;clearInterval&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;intervalId&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; unsubscribe &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Later:&lt;/span&gt;
+&lt;span class=&quot;token function&quot;&gt;unsubscribe&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// dispose the resources&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The reason why we use Rx types like Observable, Observer, and Subscription is to get safety (such as the Observable Contract) and composability with Operators.&lt;/p&gt;
+&lt;img src=&quot;/gatsby-starter-developer-blog/18e736a993cb21d438fe487817abb042/image.gif&quot; alt=&quot;Image for the end of article&quot; style=&quot;display:block;margin:auto&quot;&gt;</content:encoded></item><item><title><![CDATA[Astuce: comment utiliser SCSS dans Angular CLI 6]]></title><description><![CDATA[Configurez SCSS pour votre prochain projet Angular.]]></description><link>https://lgcolella.github.io/gatsby-starter-developer-blog/blog/fr/scss-in-angular-cli-6</link><guid isPermaLink="false">https://lgcolella.github.ioblog/fr/scss-in-angular-cli-6Astuce: comment utiliser SCSS dans Angular CLI 6</guid><dc:creator><![CDATA[lcolella]]></dc:creator><pubDate>Fri, 21 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Si vous connaissez déjà SCSS dans Angular CLI 1.x et que vous vous demandez maintenant comment l’utiliser dans la version 6, une toute nouvelle version fournie avec Angular 6, je suis là pour vous aider.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1000px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 41.6%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAARlAAAEZQAGA43XUAAABC0lEQVQoz5WPT0sCURxF53NGoE0JBrWpRdHK1kZBaf6pSNBKTBeRhbmJIEpi5mnKVKQjRIpERB/hNO9JKPKMXPwYGO479x6jOpdk+MRsQn1tX4xacJ92tMz70S3NjSKjWd0ZOpjwx2gsZ+id2zTDReqLKbqnFR4XDhEzcaqBQfZPoLrAHtZUhN6Zxct6gdr8Ae52SS2UJRJoe4W/A0bBhq5FPngO5XF3SriRKzq5ilr4ee3Q2rr0wGmEGZ9A2QtLvbfUDd9Wm6/7Vz7KdTrZO5zVE5yV40mUk1jTUVqbF3QLDzytZWkspZW6MBNq/bDqv5RVyANLiO3b7UM0irqVxriQWmH2wWNLNf9/ABFwy0syfmBJAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Sass logo&quot;
+        title=&quot;Le logo de Sass&quot;
+        src=&quot;/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/332ff/sass-image.png&quot;
+        srcset=&quot;/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/3e256/sass-image.png 250w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/b30f8/sass-image.png 500w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/332ff/sass-image.png 1000w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/8537d/sass-image.png 1200w&quot;
+        sizes=&quot;(max-width: 1000px) 100vw, 1000px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Le logo de Sass&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Voici à quoi ressemble la configuration de style dans la CLI v1.x dans le fichier .angular-cli.json.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;quot;defaults&amp;quot;: {
+  &amp;quot;styleExt&amp;quot;: &amp;quot;scss&amp;quot;,
+  &amp;quot;component&amp;quot;: {}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Mais si vous examinez un schéma de configuration du fichier &lt;strong&gt;angular.json&lt;/strong&gt; dans la version 6, vous ne retrouverez plus cette configuration. Mais ne vous inquiétez pas, l’équipe Angular de la CLI l’a couvert beaucoup plus facilement. Pour utiliser SCSS, importez simplement vos fichiers scss (la valeur par défaut est &lt;code class=&quot;language-text&quot;&gt;src / styles.scss&lt;/code&gt;) au niveau de votre projet dans un fichier &lt;strong&gt;angular.json&lt;/strong&gt; comme celui-ci.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  ...
+  projects: {
+    [your_project_name]: {
+      ...
+      architect: {
+        build: {
+          ...
+          options: {
+            styles:{
+              &amp;quot;src/styles.scss&amp;quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;C’est tout, vous pouvez utiliser SCSS! Aucune autre configuration n’est nécessaire car l’équipe de la CLI vient juste de la couvrir, vous n’aurez donc pas à indiquer à la configuration le préprocesseur CSS qui sera utilisé. En approfondissant leur script de construction (&lt;code class=&quot;language-text&quot;&gt;node_modules / @ angular-devkit / build-angular / src / angular-cli-files / models / webpack-configs / styles.js&lt;/code&gt;), je suis sûr que vous pouvez inclure n&apos;importe quel type de &lt;em&gt;.css&lt;/em&gt;, &lt;em&gt;.sass&lt;/em&gt;, &lt;em&gt;.scss&lt;/em&gt;, &lt;em&gt;.less&lt;/em&gt; ou &lt;em&gt;.styl (stylet)&lt;/em&gt; et lancez immédiatement le codage de votre CSS. Je l’ai essayé très facilement!&lt;/p&gt;
+&lt;p&gt;De plus, ils permettent également de configurer facilement les navigateurs cibles pour le préfixe automatique. Vous pouvez trouver une liste de navigateurs de noms de fichiers dans le dossier src et modifier les navigateurs cibles de votre préfixe automatique. Je n’ai pas encore essayé, faites-moi savoir votre résultat si vous l’avez déjà essayé.&lt;/p&gt;
+&lt;p&gt;Ceci est juste un exemple de post. L&apos;original est ici:&lt;a href=&quot;https://medium.com/@vissanu_s/quick-tip-how-to-use-scss-in-angular-cli-6-63d263b3481c&quot;&gt;https://medium.com/@vissanu_s/quick-tip-how-to-use-scss-in-angular-cli-6-63d263b3481c&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Pillole: Come usare SCSS in Angular CLI 6]]></title><description><![CDATA[Configura SCSS per il tuo prossimo progetto Angular.]]></description><link>https://lgcolella.github.io/gatsby-starter-developer-blog/blog/it/scss-in-angular-cli-6</link><guid isPermaLink="false">https://lgcolella.github.ioblog/it/scss-in-angular-cli-6Pillole: Come usare SCSS in Angular CLI 6</guid><dc:creator><![CDATA[lcolella]]></dc:creator><pubDate>Fri, 21 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Se hai familiarità con SCSS in Angular CLI 1.x prima e ora ti stai chiedendo come usarlo nella versione 6, una nuova versione fornita con Angular 6, sono qui per aiutarti.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1000px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 41.6%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAARlAAAEZQAGA43XUAAABC0lEQVQoz5WPT0sCURxF53NGoE0JBrWpRdHK1kZBaf6pSNBKTBeRhbmJIEpi5mnKVKQjRIpERB/hNO9JKPKMXPwYGO479x6jOpdk+MRsQn1tX4xacJ92tMz70S3NjSKjWd0ZOpjwx2gsZ+id2zTDReqLKbqnFR4XDhEzcaqBQfZPoLrAHtZUhN6Zxct6gdr8Ae52SS2UJRJoe4W/A0bBhq5FPngO5XF3SriRKzq5ilr4ee3Q2rr0wGmEGZ9A2QtLvbfUDd9Wm6/7Vz7KdTrZO5zVE5yV40mUk1jTUVqbF3QLDzytZWkspZW6MBNq/bDqv5RVyANLiO3b7UM0irqVxriQWmH2wWNLNf9/ABFwy0syfmBJAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Sass logo&quot;
+        title=&quot;Il logo di Sass&quot;
+        src=&quot;/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/332ff/sass-image.png&quot;
+        srcset=&quot;/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/3e256/sass-image.png 250w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/b30f8/sass-image.png 500w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/332ff/sass-image.png 1000w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/8537d/sass-image.png 1200w&quot;
+        sizes=&quot;(max-width: 1000px) 100vw, 1000px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Il logo di Sass&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Ecco come la configurazione dello stile in CLI v1.x è simile al file .angular-cli.json.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;quot;defaults&amp;quot;: {
+  &amp;quot;styleExt&amp;quot;: &amp;quot;scss&amp;quot;,
+  &amp;quot;component&amp;quot;: {}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ma se dai un&apos;occhiata a al file di configurazione &lt;strong&gt;angular.json&lt;/strong&gt; nella versione 6, non troverai più questa configurazione. Ma non preoccuparti, il team di Angular CLI è riuscito a includerla in un modo molto più semplice. Per utilizzare SCSS, è sufficiente importare i file scss (il valore predefinito è &lt;code class=&quot;language-text&quot;&gt;src / styles.scss&lt;/code&gt;) a livello di progetto in un file &lt;strong&gt;angular.json&lt;/strong&gt; come questo.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  ...
+  projects: {
+    [your_project_name]: {
+      ...
+      architect: {
+        build: {
+          ...
+          options: {
+            styles:{
+              &amp;quot;src/styles.scss&amp;quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Questo è tutto, sei a posto con SCSS! Non sono necessarie altre configurazioni perché il CLI è già configurata, quindi non devi dire al file di configurazione quale CSS-preprocessore verrà usato più. Scavando più a fondo nel loro script di compilazione (&lt;code class=&quot;language-text&quot;&gt;node_modules / @ angular-devkit / build-angular / src / angular-cli-files / models / webpack-configs / styles.js&lt;/code&gt;), sono abbastanza sicuro che è possibile includere qualsiasi tipo di &lt;em&gt;.css&lt;/em&gt;, &lt;em&gt;.sass&lt;/em&gt;, &lt;em&gt;.scss&lt;/em&gt;, &lt;em&gt;.less&lt;/em&gt; o &lt;em&gt;.styl (stylus)&lt;/em&gt; e inizia subito la codifica CSS. L&apos;ho provato, molto facile!&lt;/p&gt;
+&lt;p&gt;Inoltre, forniscono anche il modo di configurare facilmente i browser di destinazione per applicare automaticamente i prefissi. È possibile trovare un elenco di nomi di browser nella cartella src e modificare i browser di destinazione per aggiungere i prefissi desiderati. Non l&apos;ho ancora provato, fammi sapere il risultato se lo hai già provato.&lt;/p&gt;
+&lt;p&gt;Questo è solo un esempio di un post. L&apos;originale è qui: &lt;a href=&quot;https://medium.com/@vissanu_s/quick-tip-how-to-use-scss-in-angular-cli-6-63d263b3481c&quot;&gt;https://medium.com/@vissanu_s/quick-tip-how-to-use-scss-in-angular-cli-6-63d263b3481c&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Quick Tip: How to use SCSS in Angular CLI 6]]></title><description><![CDATA[Configure SCSS for your next Angular project.]]></description><link>https://lgcolella.github.io/gatsby-starter-developer-blog/blog/scss-in-angular-cli-6</link><guid isPermaLink="false">https://lgcolella.github.ioblog/scss-in-angular-cli-6Quick Tip: How to use SCSS in Angular CLI 6</guid><dc:creator><![CDATA[lcolella]]></dc:creator><pubDate>Fri, 21 Dec 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;If you’re familiar working with SCSS in Angular CLI 1.x before and now you’re wondering how to use it in version 6, a brand new version that comes with Angular 6, I’m here to help.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1000px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 41.6%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAARlAAAEZQAGA43XUAAABC0lEQVQoz5WPT0sCURxF53NGoE0JBrWpRdHK1kZBaf6pSNBKTBeRhbmJIEpi5mnKVKQjRIpERB/hNO9JKPKMXPwYGO479x6jOpdk+MRsQn1tX4xacJ92tMz70S3NjSKjWd0ZOpjwx2gsZ+id2zTDReqLKbqnFR4XDhEzcaqBQfZPoLrAHtZUhN6Zxct6gdr8Ae52SS2UJRJoe4W/A0bBhq5FPngO5XF3SriRKzq5ilr4ee3Q2rr0wGmEGZ9A2QtLvbfUDd9Wm6/7Vz7KdTrZO5zVE5yV40mUk1jTUVqbF3QLDzytZWkspZW6MBNq/bDqv5RVyANLiO3b7UM0irqVxriQWmH2wWNLNf9/ABFwy0syfmBJAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Sass logo&quot;
+        title=&quot;The Sass logo&quot;
+        src=&quot;/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/332ff/sass-image.png&quot;
+        srcset=&quot;/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/3e256/sass-image.png 250w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/b30f8/sass-image.png 500w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/332ff/sass-image.png 1000w,
+/gatsby-starter-developer-blog/static/f24335a00696d1c6b03d7826cdc48942/8537d/sass-image.png 1200w&quot;
+        sizes=&quot;(max-width: 1000px) 100vw, 1000px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;The Sass logo&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;This is how the style config in the CLI v1.x looks like in .angular-cli.json file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;quot;defaults&amp;quot;: {
+  &amp;quot;styleExt&amp;quot;: &amp;quot;scss&amp;quot;,
+  &amp;quot;component&amp;quot;: {}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But if you take a look into a config schema of &lt;strong&gt;angular.json&lt;/strong&gt; file in version 6, you will no longer find this config anymore. But don’t worry, Angular CLI team got it cover in much easier way. To use SCSS, simply import you scss files (the default value is &lt;code class=&quot;language-text&quot;&gt;src/styles.scss&lt;/code&gt;) in your project level in an &lt;strong&gt;angular.json&lt;/strong&gt; file like this.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  ...
+  projects: {
+    [your_project_name]: {
+      ...
+      architect: {
+        build: {
+          ...
+          options: {
+            styles:{
+              &amp;quot;src/styles.scss&amp;quot;
+            }
+          }
+        }
+      }
+    }
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That’s it, you’re good to go with SCSS! No any other config needed because CLI team just got it covered so you don’t have to tell the config which CSS-preprocessor is gonna be used anymore. By dig deeper in their build script (&lt;code class=&quot;language-text&quot;&gt;node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/webpack-configs/styles.js&lt;/code&gt;), I’m pretty sure that you can include any type of &lt;em&gt;.css&lt;/em&gt;, &lt;em&gt;.sass&lt;/em&gt;, &lt;em&gt;.scss&lt;/em&gt;, &lt;em&gt;.less&lt;/em&gt; or &lt;em&gt;.styl (stylus)&lt;/em&gt; and start your CSS coding right away. I’ve tried it, very easy!&lt;/p&gt;
+&lt;p&gt;Plus, they also provide the way to config target browsers for autoprefixer easily. You can find a file name browserslist in src folder and change the target browsers for your autoprefixer. I haven’t tried that yet, let me know your result if you already tried it.&lt;/p&gt;
+&lt;p&gt;This is just an example of a post. The original is here: &lt;a href=&quot;https://medium.com/@vissanu_s/quick-tip-how-to-use-scss-in-angular-cli-6-63d263b3481c&quot;&gt;https://medium.com/@vissanu_s/quick-tip-how-to-use-scss-in-angular-cli-6-63d263b3481c&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How to setup TypeScript with Laravel and Vue]]></title><description><![CDATA[In this post we'll see how setup the Typescript and how use it in a project built with Laravel and Vue.]]></description><link>https://lgcolella.github.io/gatsby-starter-developer-blog/blog/setup-typescript-with-laravel-and-vue</link><guid isPermaLink="false">https://lgcolella.github.ioblog/setup-typescript-with-laravel-and-vueHow to setup TypeScript with Laravel and Vue</guid><dc:creator><![CDATA[lcolella]]></dc:creator><pubDate>Mon, 12 Nov 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;These last couple of weeks, I have been working on a Laravel project with a lot of dynamic interfaces that are heavily dependent on Vue. As the project started to get bigger and I was passing around many of the same data objects in different modules I felt that I wanted to secure myself from not accessing wrong properties or passing wrong arguments to functions that I might have written weeks ago.&lt;/p&gt;
+&lt;p&gt;For smaller projects I feel that TypeScript can be a bit overkill when you just want something up and running fast, however I do definitely see its use cases once the project gets bigger, as I did with this project. After doing a lot of research and watching tutorials on how to get Laravel and Vue up and running with TypeScript support, I felt that the setup process was very complicated and many of the tutorials didn’t use the Vue class component, which I feel is where the real power of TypeScript kicks in.&lt;/p&gt;
+&lt;p&gt;So, I decided to put together a guide that has as few steps as possible and that uses as few third-party dependencies as possible. This is the result of me banging my head against the wall for a day in frustration trying different setup methods which most of them failed miserably. Follow the steps below if you want to avoid this kind of a headache and stress while setting up TypeScript with Vue in Laravel. :)&lt;/p&gt;
+&lt;p&gt;First, start off by creating a new Laravel project.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;composer create-project --prefer-dist laravel/laravel laravel-typescript&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, add a &lt;code class=&quot;language-text&quot;&gt;tsconfig.json&lt;/code&gt; file in the root of your repository.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+    &amp;quot;compilerOptions&amp;quot;: {
+        &amp;quot;target&amp;quot;: &amp;quot;es5&amp;quot;,
+        &amp;quot;strict&amp;quot;: true,
+        &amp;quot;module&amp;quot;: &amp;quot;es2015&amp;quot;,
+        &amp;quot;moduleResolution&amp;quot;: &amp;quot;node&amp;quot;,
+        &amp;quot;experimentalDecorators&amp;quot;: true
+    },
+    &amp;quot;include&amp;quot;: [
+        &amp;quot;resources/assets/js/**/*&amp;quot;
+    ]
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Replace the script section in your resources/assets/js/components/ExampleComponent.vue file with the following&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;lt;script lang=&amp;quot;ts&amp;quot; src=&amp;quot;./ExampleComponent.vue.ts&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now add this resources/assets/js/components/ExampleComponent.vue.ts file that you are referencing in the script tag.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;typescript&quot;&gt;&lt;pre class=&quot;language-typescript&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Vue &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vue&apos;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; Component &lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;vue-class-component&apos;&lt;/span&gt;
+
+@Component
+&lt;span class=&quot;token keyword&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;ExampleComponent&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Vue&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;mounted&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token builtin&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;Component mounted.&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Add the necessary NPM dependencies, this setup will use the vue-loader that comes with Laravel Mix which will use the ts-loader and TypeScript to compile TypeScript down to JavaScript. The vue-class-component is there for class support with TypeScript in Vue components.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install vue-class-component ts-loader typescript --save-dev&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Install the rest of the NPM dependencies that comes with Laravel.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tweak the resources/views/welcome.blade.php template file to add Vue support and to render your component like so:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;html&quot;&gt;&lt;pre class=&quot;language-html&quot;&gt;&lt;code class=&quot;language-html&quot;&gt;&lt;span class=&quot;token doctype&quot;&gt;&amp;lt;!doctype html&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;html&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;{{ app()-&gt;getLocale() }}&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;utf-8&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;http-equiv&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;X-UA-Compatible&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;IE=edge&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;viewport&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;width=device-width, initial-scale=1&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;meta&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;csrf-token&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;{{ csrf_token() }}&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;link&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;rel&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;stylesheet&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;{{ mix(&apos;/css/app.css&apos;) }}&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;Laravel&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;title&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;head&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;div&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;app&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+            &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;example-component&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;example-component&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;div&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;script&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;token attr-value&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;{{ mix(&apos;/js/app.js&apos;) }}&lt;span class=&quot;token punctuation&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token script&quot;&gt;&lt;/span&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;script&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;body&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token tag&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;/&lt;/span&gt;html&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Lastly, generate a new JS bundle file by running the following NPM command&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;npm run dev&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now if you run php artisan serve to spin up a development server, open &lt;a href=&quot;http://127.0.0.1:8000&quot;&gt;http://127.0.0.1:8000&lt;/a&gt; in your browser and check-out the console you should see the message ‘Component mounted.’&lt;/p&gt;
+&lt;p&gt;Congratulations, you now have TypeScript support with Vue in your Laravel project!&lt;/p&gt;
+&lt;p&gt;I hope this was informative and that it will help someone out there trying to setup something similar to what I introduced in this article.&lt;/p&gt;
+&lt;p&gt;The full repository is located here:
+&lt;a href=&quot;https://github.com/oliverlundquist/laravel-vue-typescript-setup&quot;&gt;https://github.com/oliverlundquist/laravel-vue-typescript-setup&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you would like to read more about Vue and TypeScript, check out these references:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://vuejs.org/v2/guide/typescript.html&quot;&gt;https://vuejs.org/v2/guide/typescript.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/vuejs/vue-class-component&quot;&gt;https://github.com/vuejs/vue-class-component&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is just an example of a post. The original is here:
+&lt;a href=&quot;https://oliverlundquist.com/2018/01/17/typescript-easy-setup-with-laravel-and-vue.html&quot;&gt;https://oliverlundquist.com/2018/01/17/typescript-easy-setup-with-laravel-and-vue.html&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[How to build an Electron app using create-react-app. No webpack configuration or “ejecting” necessary.]]></title><description><![CDATA[Build a fantastic Electron app from scratch using create-react-app.]]></description><link>https://lgcolella.github.io/gatsby-starter-developer-blog/blog/build-electron-app-with-react</link><guid isPermaLink="false">https://lgcolella.github.ioblog/build-electron-app-with-reactHow to build an Electron app using create-react-app. No webpack configuration or “ejecting” necessary.</guid><dc:creator><![CDATA[lcolella]]></dc:creator><pubDate>Fri, 03 Aug 2018 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;I recently built an &lt;a href=&quot;https://electronjs.org/&quot; title=&quot;ElectronJS site&quot;&gt;Electron&lt;/a&gt; app using &lt;a href=&quot;https://github.com/facebook/create-react-app&quot; title=&quot;create-react-app repository&quot;&gt;create-react-app&lt;/a&gt;. I didn’t need to muck about with Webpack, or “eject” my app, either. I’ll walk you through how I accomplished this.&lt;/p&gt;
+&lt;p&gt;I was drawn to the idea of using create-react-app because it hides the webpack configuration details. But my search for existing guides for using Electron and create-react-app together didn’t bear any fruit, so I just dove in and figured it out myself.&lt;/p&gt;
+&lt;p&gt;If you’re feeling impatient, you can dive right in and look at my code. Here’s the &lt;a href=&quot;https://github.com/csepulv/electron-with-create-react-app&quot; title=&quot;Repository of this tutorial&quot;&gt;GitHub repo&lt;/a&gt; for my app.&lt;/p&gt;
+&lt;p&gt;Before we get started, let me tell you about Electron and React, and why create-react-app is such a great tool.&lt;/p&gt;
+&lt;h2&gt;Electron and React&lt;/h2&gt;
+&lt;p&gt;React is Facebook’s JavaScript view framework.
+And Electron is GitHub’s framework for building cross-platform desktop apps in JavaScript.&lt;/p&gt;
+&lt;p&gt;Most use webpack for the configuration necessary for React development. webpack is a configuration and build tool that most of the React community has adopted over alternatives like Gulp and Grunt.&lt;/p&gt;
+&lt;p&gt;The configuration overhead varies (more on this later), and there are many boilerplate and application generators available, but in July 2016 Facebook Incubator released a tool, create-react-app. It hides most of the configuration and lets the developer use simple commands, such as npm start and npm run build to run and build their apps.&lt;/p&gt;
+&lt;h3&gt;What is ejecting, and why do you want to avoid it?&lt;/h3&gt;
+&lt;p&gt;create-react-app makes certain assumptions about a typical React setup. If these assumptions aren’t for you, there is an option to &lt;em&gt;eject&lt;/em&gt; an application (&lt;code class=&quot;language-text&quot;&gt;npm run eject&lt;/code&gt;). Ejecting an application copies all the encapsulated configuration of create-react-app to the your project, providing a boilerplate configuration that you can change as you wish.&lt;/p&gt;
+&lt;p&gt;But this is a &lt;em&gt;one way&lt;/em&gt; trip. You can’t undo ejecting and go back. There have been 49 releases (as of this post) of &lt;code class=&quot;language-text&quot;&gt;create-react-app&lt;/code&gt;, each making improvements. But for an ejected application, you would have to either forgo these improvements or figure out how to apply them.&lt;/p&gt;
+&lt;p&gt;An ejected configuration is over 550 lines spanning 7 files (as of this post). I don’t understand it all (well, most of it, actually) and I don’t want to.&lt;/p&gt;
+&lt;h2&gt;Goals&lt;/h2&gt;
+&lt;p&gt;My goals are simple:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;avoid ejecting the React app&lt;/li&gt;
+&lt;li&gt;minimize glue to get React and Electron working together&lt;/li&gt;
+&lt;li&gt;preserve the defaults, assumptions and conventions made by Electron and create-react-app/React. (This can make it easier to use other tools that assume/require such conventions.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Basic Recipe&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;run &lt;code class=&quot;language-text&quot;&gt;create-react-app&lt;/code&gt; to generate a basic React application&lt;/li&gt;
+&lt;li&gt;run &lt;code class=&quot;language-text&quot;&gt;npm install --save-dev electron&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;add &lt;code class=&quot;language-text&quot;&gt;main.js&lt;/code&gt; from electron-quick-start (we’ll rename it to electron-starter.js, for clarity)&lt;/li&gt;
+&lt;li&gt;modify call to &lt;code class=&quot;language-text&quot;&gt;mainWindow.loadURL&lt;/code&gt; (in electron-starter.js) to use &lt;code class=&quot;language-text&quot;&gt;localhost:3000&lt;/code&gt; (webpack-dev-server)&lt;/li&gt;
+&lt;li&gt;add a main entry to &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt; for electron-starter.js&lt;/li&gt;
+&lt;li&gt;add a run target to start Electron to &lt;code class=&quot;language-text&quot;&gt;package.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;npm start&lt;/code&gt; followed by &lt;code class=&quot;language-text&quot;&gt;npm run electron&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Steps 1 and 2 are pretty straightforward. Here’s the code for steps 3 and 4:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; electron &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;electron&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// Module to control application life.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; app &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; electron&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;app&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// Module to create native browser window.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; BrowserWindow &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; electron&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;BrowserWindow&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; path &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;path&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;url&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Keep a global reference of the window object, if you don&apos;t, the window will&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// be closed automatically when the JavaScript object is garbage collected.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; mainWindow&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;createWindow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// Create the browser window.&lt;/span&gt;
+    mainWindow &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;BrowserWindow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;width&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;800&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; height&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;600&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// and load the index.html of the app.&lt;/span&gt;
+    mainWindow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;loadURL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;http://localhost:3000&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// Open the DevTools.&lt;/span&gt;
+    mainWindow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;webContents&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;openDevTools&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// Emitted when the window is closed.&lt;/span&gt;
+    mainWindow&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;closed&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// Dereference the window object, usually you would store windows&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// in an array if your app supports multi windows, this is the time&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// when you should delete the corresponding element.&lt;/span&gt;
+        mainWindow &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// This method will be called when Electron has finished&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// initialization and is ready to create browser windows.&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// Some APIs can only be used after this event occurs.&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;ready&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; createWindow&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Quit when all windows are closed.&lt;/span&gt;
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;window-all-closed&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// On OS X it is common for applications and their menu bar&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// to stay active until the user quits explicitly with Cmd + Q&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;process&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;platform &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;darwin&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;quit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+app&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;activate&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// On OS X it&apos;s common to re-create a window in the app when the&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// dock icon is clicked and there are no other windows open.&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;mainWindow &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token function&quot;&gt;createWindow&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// In this file you can include the rest of your app&apos;s specific main process&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;// code. You can also put them in separate files and require them here.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And for steps 5 and 6:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;electron-with-create-react-app&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;0.1.0&amp;quot;,
+  &amp;quot;private&amp;quot;: true,
+  &amp;quot;devDependencies&amp;quot;: {
+    &amp;quot;electron&amp;quot;: &amp;quot;^1.4.14&amp;quot;,
+    &amp;quot;react-scripts&amp;quot;: &amp;quot;0.8.5&amp;quot;
+  },
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;react&amp;quot;: &amp;quot;^15.4.2&amp;quot;,
+    &amp;quot;react-dom&amp;quot;: &amp;quot;^15.4.2&amp;quot;
+  },
+  &amp;quot;main&amp;quot;: &amp;quot;src/electron-starter.js&amp;quot;,
+  &amp;quot;scripts&amp;quot;: {
+    &amp;quot;start&amp;quot;: &amp;quot;react-scripts start&amp;quot;,
+    &amp;quot;build&amp;quot;: &amp;quot;react-scripts build&amp;quot;,
+    &amp;quot;test&amp;quot;: &amp;quot;react-scripts test --env=jsdom&amp;quot;,
+    &amp;quot;eject&amp;quot;: &amp;quot;react-scripts eject&amp;quot;,
+    &amp;quot;electron&amp;quot;: &amp;quot;electron .&amp;quot;
+  }
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When you run the npm commands in step 7, you should see this:&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 1000px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 59.199999999999996%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsSAAALEgHS3X78AAABlUlEQVQoz6WSO0/CUBTH79hWw8LkaFwcjBonBgIDgYRHiJKAA6KjxokvwCK0QCIQYpro4jcyIU4EAnEwDQ9ppQ0YuW2Pp+URiFv5J7/cxznnn3PbQz7e344/pe6L1OuLOqXidDoVFUURx+PxHFUVx9ZZHs33y/s1VFV9wprXbrd7Tu7vbtP5/APkcjkQBAHK5TIUi8UVAs8D/1gBvlYHoVCAYqm0EbdzsK5arUI2m30mDMsmOY4D5Jdl2RnDMBTXFbscS937B9R9eERdOxxlOW4jvuDH8sC1Qvx+fyoajUI4HDYikYiJwJJQKASxWAxuMhm4vkpDIpGAYDAI6zkLaDweh0AgUCPNZjMFKF3XDcREgFIKhmHAZDKB0dcIZEUB/EYgyzJommblbkCtApQkSTXSbrdtQ5SBmOBMtuFgMKiRVqu1MjTnAgfYhr1e77+hk/aWhv1+3zZMLu51DBgOmS06rJJOp3MJ28t+2XA4rJNGo3GBf3CGE68imkO+rYnA5krE4/G4cBZPfT7fNpygx5nX6937AxO1263wme+IAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;Electron + React&quot;
+        title=&quot;Electron + React&quot;
+        src=&quot;/gatsby-starter-developer-blog/static/6d63e60a8d7698486e59671c3bb6e28e/332ff/image-1.png&quot;
+        srcset=&quot;/gatsby-starter-developer-blog/static/6d63e60a8d7698486e59671c3bb6e28e/3e256/image-1.png 250w,
+/gatsby-starter-developer-blog/static/6d63e60a8d7698486e59671c3bb6e28e/b30f8/image-1.png 500w,
+/gatsby-starter-developer-blog/static/6d63e60a8d7698486e59671c3bb6e28e/332ff/image-1.png 1000w,
+/gatsby-starter-developer-blog/static/6d63e60a8d7698486e59671c3bb6e28e/de2df/image-1.png 1500w,
+/gatsby-starter-developer-blog/static/6d63e60a8d7698486e59671c3bb6e28e/7c3f6/image-1.png 1552w&quot;
+        sizes=&quot;(max-width: 1000px) 100vw, 1000px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Electron + React&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;h2&gt;Specifying the loadURL in Production and Dev&lt;/h2&gt;
+&lt;p&gt;In development, an environment variable can specify the url for mainWindow.loadURL (in electron-starter.js). If the env var exists, we’ll use it; else we’ll use the production static HTML file.&lt;/p&gt;
+&lt;p&gt;We’ll add a npm run target (to package.json) as follows:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;&amp;quot;electron-dev&amp;quot;: &amp;quot;ELECTRON_START_URL=http://localhost:3000 electron .&amp;quot;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is just an example of a post. The original is here: &lt;a href=&quot;https://medium.freecodecamp.org/building-an-electron-application-with-create-react-app-97945861647c&quot;&gt;https://medium.freecodecamp.org/building-an-electron-application-with-create-react-app-97945861647c&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

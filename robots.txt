@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://lgcolella.github.io/sitemap.xml
+Host: https://lgcolella.github.io
